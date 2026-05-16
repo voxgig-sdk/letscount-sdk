@@ -1,0 +1,334 @@
+# Letscount Python SDK Reference
+
+Complete API reference for the Letscount Python SDK.
+
+
+## LetscountSDK
+
+### Constructor
+
+```python
+from letscount_sdk import LetscountSDK
+
+client = LetscountSDK(options)
+```
+
+Create a new SDK client instance.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `options` | `dict` | SDK configuration options. |
+| `options["apikey"]` | `str` | API key for authentication. |
+| `options["base"]` | `str` | Base URL for API requests. |
+| `options["prefix"]` | `str` | URL prefix appended after base. |
+| `options["suffix"]` | `str` | URL suffix appended after path. |
+| `options["headers"]` | `dict` | Custom headers for all requests. |
+| `options["feature"]` | `dict` | Feature configuration. |
+| `options["system"]` | `dict` | System overrides (e.g. custom fetch). |
+
+
+### Static Methods
+
+#### `LetscountSDK.test(testopts=None, sdkopts=None)`
+
+Create a test client with mock features active. Both arguments may be `None`.
+
+```python
+client = LetscountSDK.test()
+```
+
+
+### Instance Methods
+
+#### `CreateOrUpdateCounter(data=None)`
+
+Create a new `CreateOrUpdateCounterEntity` instance. Pass `None` for no initial data.
+
+#### `DecrementCounter(data=None)`
+
+Create a new `DecrementCounterEntity` instance. Pass `None` for no initial data.
+
+#### `GetCounter(data=None)`
+
+Create a new `GetCounterEntity` instance. Pass `None` for no initial data.
+
+#### `IncrementCounter(data=None)`
+
+Create a new `IncrementCounterEntity` instance. Pass `None` for no initial data.
+
+#### `options_map() -> dict`
+
+Return a deep copy of the current SDK options.
+
+#### `get_utility() -> Utility`
+
+Return a copy of the SDK utility object.
+
+#### `direct(fetchargs=None) -> tuple`
+
+Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `fetchargs["path"]` | `str` | URL path with optional `{param}` placeholders. |
+| `fetchargs["method"]` | `str` | HTTP method (default: `"GET"`). |
+| `fetchargs["params"]` | `dict` | Path parameter values. |
+| `fetchargs["query"]` | `dict` | Query string parameters. |
+| `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
+| `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
+
+**Returns:** `(result_dict, err)`
+
+#### `prepare(fetchargs=None) -> tuple`
+
+Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+
+
+---
+
+## CreateOrUpdateCounterEntity
+
+```python
+create_or_update_counter = client.CreateOrUpdateCounter()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `created_at` | ``$STRING`` | No |  |
+| `key` | ``$STRING`` | No |  |
+| `namespace` | ``$STRING`` | No |  |
+| `updated_at` | ``$STRING`` | No |  |
+| `value` | ``$NUMBER`` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | list | create | update | remove |
+| --- | --- | --- | --- | --- | --- |
+| `created_at` | - | - | - | - | - |
+| `key` | - | - | - | - | - |
+| `namespace` | - | - | - | - | - |
+| `updated_at` | - | - | - | - | - |
+| `value` | - | - | Yes | - | - |
+
+### Operations
+
+#### `create(reqdata, ctrl=None) -> tuple`
+
+Create a new entity with the given data.
+
+```python
+result, err = client.CreateOrUpdateCounter().create({
+})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `CreateOrUpdateCounterEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## DecrementCounterEntity
+
+```python
+decrement_counter = client.DecrementCounter()
+```
+
+### Operations
+
+#### `remove(reqmatch, ctrl=None) -> tuple`
+
+Remove the entity matching the given criteria.
+
+```python
+result, err = client.DecrementCounter().remove({"id": "decrement_counter_id"})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `DecrementCounterEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## GetCounterEntity
+
+```python
+get_counter = client.GetCounter()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `created_at` | ``$STRING`` | No |  |
+| `key` | ``$STRING`` | No |  |
+| `namespace` | ``$STRING`` | No |  |
+| `updated_at` | ``$STRING`` | No |  |
+| `value` | ``$NUMBER`` | No |  |
+
+### Operations
+
+#### `load(reqmatch, ctrl=None) -> tuple`
+
+Load a single entity matching the given criteria.
+
+```python
+result, err = client.GetCounter().load({"id": "get_counter_id"})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `GetCounterEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## IncrementCounterEntity
+
+```python
+increment_counter = client.IncrementCounter()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `amount` | ``$NUMBER`` | No |  |
+| `created_at` | ``$STRING`` | No |  |
+| `key` | ``$STRING`` | No |  |
+| `namespace` | ``$STRING`` | No |  |
+| `updated_at` | ``$STRING`` | No |  |
+| `value` | ``$NUMBER`` | No |  |
+
+### Operations
+
+#### `update(reqdata, ctrl=None) -> tuple`
+
+Update an existing entity. The data must include the entity `id`.
+
+```python
+result, err = client.IncrementCounter().update({
+    "id": "increment_counter_id",
+    # Fields to update
+})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `IncrementCounterEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## Features
+
+| Feature | Version | Description |
+| --- | --- | --- |
+| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
+
+
+Features are activated via the `feature` option:
+
+```python
+client = LetscountSDK({
+    "feature": {
+        "test": {"active": True},
+    },
+})
+```
+

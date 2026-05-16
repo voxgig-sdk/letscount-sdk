@@ -1,0 +1,33 @@
+# BasicGetCounterFlow
+
+main: kit: flow: BasicGetCounterFlow:
+{
+  entity: "get_counter",
+  kind: "basic",
+  name: "BasicGetCounterFlow",
+  step: [
+    {
+      input: {
+        ref: "get_counter_ref01",
+        srcdatavar: "get_counter_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "get_counter01",
+        namespace: "namespace01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-get_counter_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGetCounterFlow"
+}

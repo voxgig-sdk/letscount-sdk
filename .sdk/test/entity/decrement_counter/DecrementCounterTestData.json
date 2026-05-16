@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "decrement_counter": {
+      "DECREMENT_COUNTER00": {
+        "key": "KEY01",
+        "namespace": "NAMESPACE01",
+        "id": "DECREMENT_COUNTER00"
+      },
+      "DECREMENT_COUNTER01": {
+        "key": "KEY01",
+        "namespace": "NAMESPACE01",
+        "id": "DECREMENT_COUNTER01"
+      },
+      "DECREMENT_COUNTER02": {
+        "key": "KEY01",
+        "namespace": "NAMESPACE01",
+        "id": "DECREMENT_COUNTER02"
+      }
+    }
+  },
+  "new": {
+    "decrement_counter": {
+      "decrement_counter_ref01": {}
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "get_counter": {
+      "GET_COUNTER00": {
+        "created_at": "s32",
+        "key": "s33",
+        "namespace": "s34",
+        "updated_at": "s35",
+        "value": 54,
+        "id": "GET_COUNTER00"
+      },
+      "GET_COUNTER01": {
+        "created_at": "s64",
+        "key": "s65",
+        "namespace": "s66",
+        "updated_at": "s67",
+        "value": 104,
+        "id": "GET_COUNTER01"
+      },
+      "GET_COUNTER02": {
+        "created_at": "s96",
+        "key": "s97",
+        "namespace": "s98",
+        "updated_at": "s99",
+        "value": 154,
+        "id": "GET_COUNTER02"
+      }
+    }
+  },
+  "new": {
+    "get_counter": {
+      "get_counter_ref01": {
+        "created_at": "sc8",
+        "key": "sc9",
+        "namespace": "sca",
+        "updated_at": "scb",
+        "value": 204
+      }
+    }
+  }
+}

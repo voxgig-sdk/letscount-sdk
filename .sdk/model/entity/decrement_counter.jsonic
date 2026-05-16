@@ -1,0 +1,54 @@
+# Entity: decrement_counter
+
+main: kit: entity: decrement_counter: {
+
+  alias: field: {}
+
+  name: "decrement_counter"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "key"
+                orig: "key"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "param"
+                name: "namespace"
+                orig: "namespace"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/{namespace}/{key}"
+          parts: [
+            "{namespace}"
+            "{key}"
+          ]
+          select: {
+            exist: [
+              "key"
+              "namespace"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

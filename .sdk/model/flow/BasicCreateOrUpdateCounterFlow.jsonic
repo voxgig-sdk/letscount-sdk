@@ -1,0 +1,23 @@
+# BasicCreateOrUpdateCounterFlow
+
+main: kit: flow: BasicCreateOrUpdateCounterFlow:
+{
+  entity: "create_or_update_counter",
+  kind: "basic",
+  name: "BasicCreateOrUpdateCounterFlow",
+  step: [
+    {
+      input: {
+        ref: "create_or_update_counter_ref01"
+      }
+
+      match: {
+        key: "key01",
+        namespace: "namespace01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicCreateOrUpdateCounterFlow"
+}

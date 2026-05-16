@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://letscountapi.com/"
+      }
+      description: "The LetsCount API allows users to create, retrieve, update, increment, and decrement counters identified by a unique namespace and key. It is designed for easy tracking of numerical values in a completely free manner."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://api.letscountapi.com"
+        }
+      ]
+      title: "LetsCount API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

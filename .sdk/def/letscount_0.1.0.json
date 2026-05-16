@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "LetsCount API",
+    "description": "The LetsCount API allows users to create, retrieve, update, increment, and decrement counters identified by a unique namespace and key. It is designed for easy tracking of numerical values in a completely free manner.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://letscountapi.com/"
+    }
+  },
+  "externalDocs": {
+    "description": "API Documentation",
+    "url": "https://letscountapi.com/"
+  },
+  "servers": [
+    {
+      "url": "https://api.letscountapi.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/{namespace}/{key}": {
+      "get": {
+        "summary": "Get counter value",
+        "description": "Retrieves the current value of a counter identified by namespace and key",
+        "operationId": "getCounter",
+        "tags": [
+          "Counters"
+        ],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "description": "The unique namespace identifier for the counter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The unique key identifier for the counter within the namespace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved counter value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Counter not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create or update counter",
+        "description": "Creates a new counter or updates an existing counter with a specific value",
+        "operationId": "createOrUpdateCounter",
+        "tags": [
+          "Counters"
+        ],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "description": "The unique namespace identifier for the counter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The unique key identifier for the counter within the namespace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Counter value to set",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "description": "The value to set for the counter"
+                  }
+                },
+                "required": [
+                  "value"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Counter successfully created or updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Increment counter",
+        "description": "Increments the counter value by a specified amount (default: 1)",
+        "operationId": "incrementCounter",
+        "tags": [
+          "Counters"
+        ],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "description": "The unique namespace identifier for the counter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The unique key identifier for the counter within the namespace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Amount to increment (optional, defaults to 1)",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "description": "The amount to increment the counter by",
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Counter successfully incremented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Counter not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Decrement counter",
+        "description": "Decrements the counter value by a specified amount (default: 1)",
+        "operationId": "decrementCounter",
+        "tags": [
+          "Counters"
+        ],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "description": "The unique namespace identifier for the counter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The unique key identifier for the counter within the namespace",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Amount to decrement (optional, defaults to 1)",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "description": "The amount to decrement the counter by",
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Counter successfully decremented",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Counter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Counter not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Counter": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "description": "The namespace of the counter"
+          },
+          "key": {
+            "type": "string",
+            "description": "The key of the counter"
+          },
+          "value": {
+            "type": "number",
+            "description": "The current value of the counter"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the counter was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the counter was last updated"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailed error description"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Counters",
+      "description": "Operations for managing counters"
+    }
+  ]
+}

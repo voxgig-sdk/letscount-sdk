@@ -1,0 +1,32 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 1
+  metrics: count: method: 4
+
+  entity: create_or_update_counter: {
+    path: "/{namespace}/{key}": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: decrement_counter: {
+    path: "/{namespace}/{key}": {
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: get_counter: {
+    path: "/{namespace}/{key}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: increment_counter: {
+    path: "/{namespace}/{key}": {
+      op: update: method: *PUT
+    }
+  }
+
+}
