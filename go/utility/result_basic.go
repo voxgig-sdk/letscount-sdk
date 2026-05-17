@@ -3,7 +3,7 @@ package utility
 import (
 	"fmt"
 
-	"github.com/voxgig-sdk/letscount-sdk/core"
+	"github.com/voxgig-sdk/letscount-sdk/go/core"
 )
 
 func resultBasicUtil(ctx *core.Context) *core.Result {

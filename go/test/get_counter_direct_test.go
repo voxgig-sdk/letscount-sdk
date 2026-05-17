@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/letscount-sdk"
-	"github.com/voxgig-sdk/letscount-sdk/core"
+	sdk "github.com/voxgig-sdk/letscount-sdk/go"
+	"github.com/voxgig-sdk/letscount-sdk/go/core"
 )
 
 func TestGetCounterDirect(t *testing.T) {

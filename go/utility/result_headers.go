@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/letscount-sdk/core"
+import "github.com/voxgig-sdk/letscount-sdk/go/core"
 
 func resultHeadersUtil(ctx *core.Context) *core.Result {
 	response := ctx.Response

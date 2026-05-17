@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/letscount-sdk"
-	"github.com/voxgig-sdk/letscount-sdk/core"
+	sdk "github.com/voxgig-sdk/letscount-sdk/go"
+	"github.com/voxgig-sdk/letscount-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/letscount-sdk/go/utility/struct"
 )
 
 func TestGetCounterEntity(t *testing.T) {

@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/letscount-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/letscount-sdk/core"
+	"github.com/voxgig-sdk/letscount-sdk/go/core"
 )
 
 func preparePathUtil(ctx *core.Context) string {

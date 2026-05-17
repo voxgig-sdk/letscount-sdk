@@ -106,7 +106,7 @@ class TestFeature extends BaseFeature {
           return respond(200, out)
         }
       }
-      else if ('update' === op.name) { console.log('DBGU args=', JSON.stringify(self.buildArgs(ctx, op, ctx.reqdata))); console.log('DBGUPD', JSON.stringify({reqdata:ctx.reqdata,reqmatch:ctx.reqmatch,keys:Object.keys(entmap||{}),op:op.name}));
+      else if ('update' === op.name) {
         const args = self.buildArgs(ctx, op, ctx.reqdata)
         const found = select(entmap, args)
         const ent = getelem(found, 0)

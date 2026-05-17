@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/letscount-sdk/core"
+	"github.com/voxgig-sdk/letscount-sdk/go/core"
 )
 
 type BaseFeature struct {

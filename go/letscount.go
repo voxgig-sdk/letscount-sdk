@@ -1,10 +1,10 @@
 package voxgigletscountsdk
 
 import (
-	"github.com/voxgig-sdk/letscount-sdk/core"
-	"github.com/voxgig-sdk/letscount-sdk/entity"
-	"github.com/voxgig-sdk/letscount-sdk/feature"
-	_ "github.com/voxgig-sdk/letscount-sdk/utility"
+	"github.com/voxgig-sdk/letscount-sdk/go/core"
+	"github.com/voxgig-sdk/letscount-sdk/go/entity"
+	"github.com/voxgig-sdk/letscount-sdk/go/feature"
+	_ "github.com/voxgig-sdk/letscount-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
