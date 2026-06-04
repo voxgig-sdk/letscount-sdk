@@ -73,14 +73,12 @@ function get_counter_direct_setup(mockres)
   local env = runner.env_override({
     ["LETSCOUNT_TEST_GET_COUNTER_ENTID"] = {},
     ["LETSCOUNT_TEST_LIVE"] = "FALSE",
-    ["LETSCOUNT_APIKEY"] = "NONE",
   })
 
   local live = env["LETSCOUNT_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["LETSCOUNT_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

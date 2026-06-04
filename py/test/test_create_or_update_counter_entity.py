@@ -89,7 +89,6 @@ def _create_or_update_counter_basic_setup(extra):
         "LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID": idmap,
         "LETSCOUNT_TEST_LIVE": "FALSE",
         "LETSCOUNT_TEST_EXPLAIN": "FALSE",
-        "LETSCOUNT_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -100,7 +99,6 @@ def _create_or_update_counter_basic_setup(extra):
     if env.get("LETSCOUNT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LETSCOUNT_APIKEY"),
             },
             extra or {},
         ])

@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.letscountapi.com',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

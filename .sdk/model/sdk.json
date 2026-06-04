@@ -16,7 +16,18 @@
           }
         ],
         "title": "LetsCount API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Track simple numeric counters by namespace and key, with create, get, increment, and decrement operations",
+        "homepage": "https://api.letscountapi.com",
+        "license_md": "- The LetsCount API is offered free of charge.\n- No explicit licence or terms-of-service text is published alongside the API.\n- No authentication is required to use the service.\n- Treat values as public: any client that knows the namespace and key can read or modify the counter.",
+        "about_md": "[LetsCount API](https://api.letscountapi.com) is a small, free-to-use service for tracking numeric counters. Each counter is identified by a `{namespace}/{key}` pair, so callers can group counters under their own namespace without coordinating with the API operator.\n\nWhat you get from the API:\n\n- Create or initialise a counter under a given namespace and key.\n- Read the current value of a counter.\n- Increment a counter (typically by one, or by a supplied amount).\n- Decrement a counter in the same way.\n\nOperational notes: the service is HTTP-based and returns JSON. There is no documented authentication step, so counters are effectively public to anyone who knows the namespace and key. No rate-limit policy is published, and CORS is reported as disabled on the community catalogue page, which may matter for in-browser usage.",
+        "entity_desc": {
+          "create_or_update_counter": "Creates a new counter or updates the value of an existing one under a given `{namespace}/{key}` pair.",
+          "decrement_counter": "Decreases the value of the counter at `{namespace}/{key}`.",
+          "get_counter": "Reads the current numeric value of a counter identified by its `{namespace}/{key}` pair.",
+          "increment_counter": "Increases the value of the counter at `{namespace}/{key}`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +35,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "create_or_update_counter": {
