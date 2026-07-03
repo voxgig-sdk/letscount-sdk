@@ -129,6 +129,7 @@ func increment_counterBasicSetup(extra map[string]any) *entityTestSetup {
 		"LETSCOUNT_TEST_INCREMENT_COUNTER_ENTID": idmap,
 		"LETSCOUNT_TEST_LIVE":      "FALSE",
 		"LETSCOUNT_TEST_EXPLAIN":   "FALSE",
+		"LETSCOUNT_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["LETSCOUNT_TEST_INCREMENT_COUNTER_ENTID"])
@@ -143,6 +144,7 @@ func increment_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["LETSCOUNT_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["LETSCOUNT_APIKEY"],
 			},
 			extra,
 		})

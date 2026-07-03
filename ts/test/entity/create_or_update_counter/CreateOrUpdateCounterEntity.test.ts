@@ -115,6 +115,7 @@ function basicSetup(extra?: any) {
     'LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID': idmap,
     'LETSCOUNT_TEST_LIVE': 'FALSE',
     'LETSCOUNT_TEST_EXPLAIN': 'FALSE',
+    'LETSCOUNT_APIKEY': 'NONE',
   })
 
   idmap = env['LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID']
@@ -124,6 +125,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new LetscountSDK(merge([
       {
+        apikey: env.LETSCOUNT_APIKEY,
       },
       extra
     ]))

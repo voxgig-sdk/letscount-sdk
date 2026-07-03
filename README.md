@@ -1,21 +1,8 @@
 # Letscount SDK
 
-Track simple numeric counters by namespace and key, with create, get, increment, and decrement operations
+LetsCount API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About LetsCount API
-
-[LetsCount API](https://api.letscountapi.com) is a small, free-to-use service for tracking numeric counters. Each counter is identified by a `{namespace}/{key}` pair, so callers can group counters under their own namespace without coordinating with the API operator.
-
-What you get from the API:
-
-- Create or initialise a counter under a given namespace and key.
-- Read the current value of a counter.
-- Increment a counter (typically by one, or by a supplied amount).
-- Decrement a counter in the same way.
-
-Operational notes: the service is HTTP-based and returns JSON. There is no documented authentication step, so counters are effectively public to anyone who knows the namespace and key. No rate-limit policy is published, and CORS is reported as disabled on the community catalogue page, which may matter for in-browser usage.
 
 ## Try it
 
@@ -49,27 +36,28 @@ gem install letscount-sdk
 luarocks install letscount-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { LetscountSDK } from 'letscount'
 
-const client = new LetscountSDK({})
+const client = new LetscountSDK({
+  apikey: process.env.LETSCOUNT_APIKEY,
+})
 
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,10 +87,10 @@ The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **CreateOrUpdateCounter** | Creates a new counter or updates the value of an existing one under a given `{namespace}/{key}` pair. | `/{namespace}/{key}` |
-| **DecrementCounter** | Decreases the value of the counter at `{namespace}/{key}`. | `/{namespace}/{key}` |
-| **GetCounter** | Reads the current numeric value of a counter identified by its `{namespace}/{key}` pair. | `/{namespace}/{key}` |
-| **IncrementCounter** | Increases the value of the counter at `{namespace}/{key}`. | `/{namespace}/{key}` |
+| **CreateOrUpdateCounter** |  | `/{namespace}/{key}` |
+| **DecrementCounter** |  | `/{namespace}/{key}` |
+| **GetCounter** |  | `/{namespace}/{key}` |
+| **IncrementCounter** |  | `/{namespace}/{key}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -112,9 +100,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from letscount_sdk import LetscountSDK
 
-client = LetscountSDK({})
+client = LetscountSDK({
+    "apikey": os.environ.get("LETSCOUNT_APIKEY"),
+})
 
 ```
 
@@ -124,7 +115,9 @@ client = LetscountSDK({})
 <?php
 require_once 'letscount_sdk.php';
 
-$client = new LetscountSDK([]);
+$client = new LetscountSDK([
+    "apikey" => getenv("LETSCOUNT_APIKEY"),
+]);
 
 ```
 
@@ -133,7 +126,9 @@ $client = new LetscountSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/letscount-sdk/go"
 
-client := sdk.NewLetscountSDK(map[string]any{})
+client := sdk.NewLetscountSDK(map[string]any{
+    "apikey": os.Getenv("LETSCOUNT_APIKEY"),
+})
 
 ```
 
@@ -142,7 +137,9 @@ client := sdk.NewLetscountSDK(map[string]any{})
 ```ruby
 require_relative "Letscount_sdk"
 
-client = LetscountSDK.new({})
+client = LetscountSDK.new({
+  "apikey" => ENV["LETSCOUNT_APIKEY"],
+})
 
 ```
 
@@ -151,7 +148,9 @@ client = LetscountSDK.new({})
 ```lua
 local sdk = require("letscount_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("LETSCOUNT_APIKEY"),
+})
 
 ```
 
@@ -171,25 +170,21 @@ const result = await client.CreateOrUpdateCounter().load({ id: 'test01' })
 ### Python
 
 ```python
-client = LetscountSDK.test(None, None)
-result, err = client.CreateOrUpdateCounter(None).load(
-    {"id": "test01"}, None
-)
+client = LetscountSDK.test()
+result, err = client.CreateOrUpdateCounter().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = LetscountSDK::test(null, null);
-[$result, $err] = $client->CreateOrUpdateCounter(null)->load(
-    ["id" => "test01"], null
-);
+$client = LetscountSDK::test();
+[$result, $err] = $client->CreateOrUpdateCounter()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.CreateOrUpdateCounter(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -198,19 +193,15 @@ result, err := client.CreateOrUpdateCounter(nil).Load(
 ### Ruby
 
 ```ruby
-client = LetscountSDK.test(nil, nil)
-result, err = client.CreateOrUpdateCounter(nil).load(
-  { "id" => "test01" }, nil
-)
+client = LetscountSDK.test
+result, err = client.CreateOrUpdateCounter().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:CreateOrUpdateCounter(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:CreateOrUpdateCounter():load({ id = "test01" })
 ```
 
 ## How it works
@@ -314,15 +305,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the LetsCount API
-
-- Upstream: [https://api.letscountapi.com](https://api.letscountapi.com)
-
-- The LetsCount API is offered free of charge.
-- No explicit licence or terms-of-service text is published alongside the API.
-- No authentication is required to use the service.
-- Treat values as public: any client that knows the namespace and key can read or modify the counter.
 
 ---
 

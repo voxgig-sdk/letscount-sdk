@@ -70,12 +70,14 @@ def _get_counter_direct_setup(mockres):
     env = runner.env_override({
         "LETSCOUNT_TEST_GET_COUNTER_ENTID": {},
         "LETSCOUNT_TEST_LIVE": "FALSE",
+        "LETSCOUNT_APIKEY": "NONE",
     })
 
     live = env.get("LETSCOUNT_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("LETSCOUNT_APIKEY"),
         }
         client = LetscountSDK(merged_opts)
         return {

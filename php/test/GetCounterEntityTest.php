@@ -85,6 +85,7 @@ function get_counter_basic_setup($extra)
         "LETSCOUNT_TEST_GET_COUNTER_ENTID" => $idmap,
         "LETSCOUNT_TEST_LIVE" => "FALSE",
         "LETSCOUNT_TEST_EXPLAIN" => "FALSE",
+        "LETSCOUNT_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -96,6 +97,7 @@ function get_counter_basic_setup($extra)
     if ($env["LETSCOUNT_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["LETSCOUNT_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -82,12 +82,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'LETSCOUNT_TEST_GET_COUNTER_ENTID': {},
     'LETSCOUNT_TEST_LIVE': 'FALSE',
+    'LETSCOUNT_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.LETSCOUNT_TEST_LIVE
 
   if (live) {
     const client = new LetscountSDK({
+      apikey: env.LETSCOUNT_APIKEY,
     })
 
     let idmap: any = env['LETSCOUNT_TEST_GET_COUNTER_ENTID']
