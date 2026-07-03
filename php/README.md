@@ -10,7 +10,7 @@ The PHP SDK for the Letscount API — an entity-oriented client using PHP conven
 
 ## Install
 ```bash
-composer require voxgig/letscount-sdk
+composer require voxgig-sdk/letscount
 ```
 
 

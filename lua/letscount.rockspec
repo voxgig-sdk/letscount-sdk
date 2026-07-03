@@ -8,12 +8,14 @@ source = {
   dir = "letscount-sdk/lua"
 }
 description = {
-  summary = "Letscount SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the LetsCount public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/letscount-sdk",
+  issues_url = "https://github.com/voxgig-sdk/letscount-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "letscount" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

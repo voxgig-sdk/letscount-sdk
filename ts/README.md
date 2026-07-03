@@ -10,7 +10,7 @@ The TypeScript SDK for the Letscount API — a type-safe, entity-oriented client
 
 ## Install
 ```bash
-npm install letscount
+npm install @voxgig-sdk/letscount
 ```
 ## Tutorial: your first API call
 

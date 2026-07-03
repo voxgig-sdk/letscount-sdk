@@ -10,7 +10,7 @@ The Python SDK for the Letscount API — an entity-oriented client following Pyt
 
 ## Install
 ```bash
-pip install letscount-sdk
+pip install voxgig-sdk-letscount
 ```
 
 Or install from source:

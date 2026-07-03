@@ -10,13 +10,13 @@ The Ruby SDK for the Letscount API — an entity-oriented client using idiomatic
 
 ## Install
 ```bash
-gem install letscount-sdk
+gem install voxgig-sdk-letscount
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "letscount-sdk"
+gem "voxgig-sdk-letscount"
 ```
 
 Then run:
