@@ -31,8 +31,8 @@ const client = new LetscountSDK()
 ### 4. Create, update, and remove
 
 ```ts
-// Create
-const created = await client.createorupdatecounter.create({
+// Create — returns the created CreateOrUpdateCounter
+const created = await client.CreateOrUpdateCounter().create({
   name: 'Example',
 })
 
@@ -52,6 +52,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -80,9 +83,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LetscountSDK.test()
 
-const result = await client.createorupdatecounter.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const createorupdatecounter = await client.CreateOrUpdateCounter().load({ id: 'test01' })
+// createorupdatecounter is a bare entity populated with mock response data
+console.log(createorupdatecounter)
 ```
 
 You can also use the instance method:
@@ -97,7 +100,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.createorupdatecounter
+const entity = client.CreateOrUpdateCounter()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -178,7 +181,7 @@ new LetscountSDK(options?: {
 | `CreateOrUpdateCounter(data?)` | `CreateOrUpdateCounterEntity` | Create a CreateOrUpdateCounter entity instance. |
 | `DecrementCounter(data?)` | `DecrementCounterEntity` | Create a DecrementCounter entity instance. |
 | `GetCounter(data?)` | `GetCounterEntity` | Create a GetCounter entity instance. |
-| `IncrementCounter(data?)` | `IncrementCounterEntity` | Create a IncrementCounter entity instance. |
+| `IncrementCounter(data?)` | `IncrementCounterEntity` | Create an IncrementCounter entity instance. |
 | `tester(testopts?, sdkopts?)` | `LetscountSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -195,29 +198,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): LetscountSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -308,7 +312,7 @@ API path: `/{namespace}/{key}`
 
 ### CreateOrUpdateCounter
 
-Create an instance: `const create_or_update_counter = client.create_or_update_counter`
+Create an instance: `const create_or_update_counter = client.CreateOrUpdateCounter()`
 
 #### Operations
 
@@ -329,14 +333,14 @@ Create an instance: `const create_or_update_counter = client.create_or_update_co
 #### Example: Create
 
 ```ts
-const create_or_update_counter = await client.create_or_update_counter.create({
+const create_or_update_counter = await client.CreateOrUpdateCounter().create({
 })
 ```
 
 
 ### DecrementCounter
 
-Create an instance: `const decrement_counter = client.decrement_counter`
+Create an instance: `const decrement_counter = client.DecrementCounter()`
 
 #### Operations
 
@@ -347,7 +351,7 @@ Create an instance: `const decrement_counter = client.decrement_counter`
 
 ### GetCounter
 
-Create an instance: `const get_counter = client.get_counter`
+Create an instance: `const get_counter = client.GetCounter()`
 
 #### Operations
 
@@ -368,13 +372,13 @@ Create an instance: `const get_counter = client.get_counter`
 #### Example: Load
 
 ```ts
-const get_counter = await client.get_counter.load({ id: 'get_counter_id' })
+const get_counter = await client.GetCounter().load({ id: 'get_counter_id' })
 ```
 
 
 ### IncrementCounter
 
-Create an instance: `const increment_counter = client.increment_counter`
+Create an instance: `const increment_counter = client.IncrementCounter()`
 
 #### Operations
 
@@ -461,7 +465,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const createorupdatecounter = client.createorupdatecounter
+const createorupdatecounter = client.CreateOrUpdateCounter()
 await createorupdatecounter.load({ id: "example_id" })
 
 // createorupdatecounter.data() now returns the loaded createorupdatecounter data

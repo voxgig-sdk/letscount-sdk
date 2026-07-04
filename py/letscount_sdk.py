@@ -220,73 +220,33 @@ class LetscountSDK:
         }
 
 
-    @property
-    def create_or_update_counter(self):
-        """Idiomatic facade: client.create_or_update_counter.list() / client.create_or_update_counter.load({"id": ...})."""
-        from entity.create_or_update_counter_entity import CreateOrUpdateCounterEntity
-        cached = getattr(self, "_create_or_update_counter", None)
-        if cached is None:
-            cached = CreateOrUpdateCounterEntity(self, None)
-            self._create_or_update_counter = cached
-        return cached
-
-    def CreateOrUpdateCounter(self, data=None):
-        # Deprecated: use client.create_or_update_counter instead.
+    def CreateOrUpdateCounter(self, data=None) -> "CreateOrUpdateCounterEntity":
+        """Entity factory: client.CreateOrUpdateCounter().list({}) / client.CreateOrUpdateCounter().load({"id": ...})."""
         from entity.create_or_update_counter_entity import CreateOrUpdateCounterEntity
         return CreateOrUpdateCounterEntity(self, data)
 
 
-    @property
-    def decrement_counter(self):
-        """Idiomatic facade: client.decrement_counter.list() / client.decrement_counter.load({"id": ...})."""
-        from entity.decrement_counter_entity import DecrementCounterEntity
-        cached = getattr(self, "_decrement_counter", None)
-        if cached is None:
-            cached = DecrementCounterEntity(self, None)
-            self._decrement_counter = cached
-        return cached
-
-    def DecrementCounter(self, data=None):
-        # Deprecated: use client.decrement_counter instead.
+    def DecrementCounter(self, data=None) -> "DecrementCounterEntity":
+        """Entity factory: client.DecrementCounter().list({}) / client.DecrementCounter().load({"id": ...})."""
         from entity.decrement_counter_entity import DecrementCounterEntity
         return DecrementCounterEntity(self, data)
 
 
-    @property
-    def get_counter(self):
-        """Idiomatic facade: client.get_counter.list() / client.get_counter.load({"id": ...})."""
-        from entity.get_counter_entity import GetCounterEntity
-        cached = getattr(self, "_get_counter", None)
-        if cached is None:
-            cached = GetCounterEntity(self, None)
-            self._get_counter = cached
-        return cached
-
-    def GetCounter(self, data=None):
-        # Deprecated: use client.get_counter instead.
+    def GetCounter(self, data=None) -> "GetCounterEntity":
+        """Entity factory: client.GetCounter().list({}) / client.GetCounter().load({"id": ...})."""
         from entity.get_counter_entity import GetCounterEntity
         return GetCounterEntity(self, data)
 
 
-    @property
-    def increment_counter(self):
-        """Idiomatic facade: client.increment_counter.list() / client.increment_counter.load({"id": ...})."""
-        from entity.increment_counter_entity import IncrementCounterEntity
-        cached = getattr(self, "_increment_counter", None)
-        if cached is None:
-            cached = IncrementCounterEntity(self, None)
-            self._increment_counter = cached
-        return cached
-
-    def IncrementCounter(self, data=None):
-        # Deprecated: use client.increment_counter instead.
+    def IncrementCounter(self, data=None) -> "IncrementCounterEntity":
+        """Entity factory: client.IncrementCounter().list({}) / client.IncrementCounter().load({"id": ...})."""
         from entity.increment_counter_entity import IncrementCounterEntity
         return IncrementCounterEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "LetscountSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -306,3 +266,12 @@ class LetscountSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.create_or_update_counter_entity import CreateOrUpdateCounterEntity
+    from entity.decrement_counter_entity import DecrementCounterEntity
+    from entity.get_counter_entity import GetCounterEntity
+    from entity.increment_counter_entity import IncrementCounterEntity

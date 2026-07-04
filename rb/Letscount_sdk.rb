@@ -208,52 +208,28 @@ class LetscountSDK
   end
 
 
-  # Idiomatic facade: client.create_or_update_counter.list / client.create_or_update_counter.load({ "id" => ... })
-  def create_or_update_counter
-    require_relative 'entity/create_or_update_counter_entity'
-    @create_or_update_counter ||= CreateOrUpdateCounterEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.create_or_update_counter instead.
+  # Canonical facade: client.CreateOrUpdateCounter.list / client.CreateOrUpdateCounter.load({ "id" => ... })
   def CreateOrUpdateCounter(data = nil)
     require_relative 'entity/create_or_update_counter_entity'
     CreateOrUpdateCounterEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.decrement_counter.list / client.decrement_counter.load({ "id" => ... })
-  def decrement_counter
-    require_relative 'entity/decrement_counter_entity'
-    @decrement_counter ||= DecrementCounterEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.decrement_counter instead.
+  # Canonical facade: client.DecrementCounter.list / client.DecrementCounter.load({ "id" => ... })
   def DecrementCounter(data = nil)
     require_relative 'entity/decrement_counter_entity'
     DecrementCounterEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.get_counter.list / client.get_counter.load({ "id" => ... })
-  def get_counter
-    require_relative 'entity/get_counter_entity'
-    @get_counter ||= GetCounterEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.get_counter instead.
+  # Canonical facade: client.GetCounter.list / client.GetCounter.load({ "id" => ... })
   def GetCounter(data = nil)
     require_relative 'entity/get_counter_entity'
     GetCounterEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.increment_counter.list / client.increment_counter.load({ "id" => ... })
-  def increment_counter
-    require_relative 'entity/increment_counter_entity'
-    @increment_counter ||= IncrementCounterEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.increment_counter instead.
+  # Canonical facade: client.IncrementCounter.list / client.IncrementCounter.load({ "id" => ... })
   def IncrementCounter(data = nil)
     require_relative 'entity/increment_counter_entity'
     IncrementCounterEntity.new(self, data)

@@ -35,7 +35,8 @@ local client = sdk.new()
 
 ```lua
 -- Create
-local created, _ = client:createorupdatecounter():create({ name = "Example" })
+local created, err = client:CreateOrUpdateCounter():create({ name = "Example" })
+if err then error(err) end
 
 ```
 
@@ -82,8 +83,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:createorupdatecounter():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:CreateOrUpdateCounter():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -164,7 +165,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `CreateOrUpdateCounter` | `(data) -> CreateOrUpdateCounterEntity` | Create a CreateOrUpdateCounter entity instance. |
 | `DecrementCounter` | `(data) -> DecrementCounterEntity` | Create a DecrementCounter entity instance. |
 | `GetCounter` | `(data) -> GetCounterEntity` | Create a GetCounter entity instance. |
-| `IncrementCounter` | `(data) -> IncrementCounterEntity` | Create a IncrementCounter entity instance. |
+| `IncrementCounter` | `(data) -> IncrementCounterEntity` | Create an IncrementCounter entity instance. |
 
 ### Entity interface
 
@@ -186,17 +187,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local create_or_update_counter, err = client:CreateOrUpdateCounter():load({ id = "example_id" })
+    if err then error(err) end
+    -- create_or_update_counter is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -259,7 +265,7 @@ API path: `/{namespace}/{key}`
 
 ### CreateOrUpdateCounter
 
-Create an instance: `const create_or_update_counter = client.create_or_update_counter`
+Create an instance: `local create_or_update_counter = client:CreateOrUpdateCounter(nil)`
 
 #### Operations
 
@@ -279,15 +285,15 @@ Create an instance: `const create_or_update_counter = client.create_or_update_co
 
 #### Example: Create
 
-```ts
-const create_or_update_counter = await client.create_or_update_counter.create({
+```lua
+local create_or_update_counter, err = client:CreateOrUpdateCounter():create({
 })
 ```
 
 
 ### DecrementCounter
 
-Create an instance: `const decrement_counter = client.decrement_counter`
+Create an instance: `local decrement_counter = client:DecrementCounter(nil)`
 
 #### Operations
 
@@ -298,7 +304,7 @@ Create an instance: `const decrement_counter = client.decrement_counter`
 
 ### GetCounter
 
-Create an instance: `const get_counter = client.get_counter`
+Create an instance: `local get_counter = client:GetCounter(nil)`
 
 #### Operations
 
@@ -318,14 +324,14 @@ Create an instance: `const get_counter = client.get_counter`
 
 #### Example: Load
 
-```ts
-const get_counter = await client.get_counter.load({ id: 'get_counter_id' })
+```lua
+local get_counter, err = client:GetCounter():load({ id = "get_counter_id" })
 ```
 
 
 ### IncrementCounter
 
-Create an instance: `const increment_counter = client.increment_counter`
+Create an instance: `local increment_counter = client:IncrementCounter(nil)`
 
 #### Operations
 
@@ -416,7 +422,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local createorupdatecounter = client:createorupdatecounter()
+local createorupdatecounter = client:CreateOrUpdateCounter()
 createorupdatecounter:load({ id = "example_id" })
 
 -- createorupdatecounter:data_get() now returns the loaded createorupdatecounter data

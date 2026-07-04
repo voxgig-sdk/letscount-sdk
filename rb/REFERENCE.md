@@ -98,7 +98,7 @@ same parameters as `direct()`. Raises on error.
 ## CreateOrUpdateCounterEntity
 
 ```ruby
-create_or_update_counter = client.create_or_update_counter
+create_or_update_counter = client.CreateOrUpdateCounter
 ```
 
 ### Fields
@@ -128,7 +128,7 @@ create_or_update_counter = client.create_or_update_counter
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.create_or_update_counter.create({
+result = client.CreateOrUpdateCounter.create({
 })
 ```
 
@@ -165,7 +165,7 @@ Return the entity name.
 ## DecrementCounterEntity
 
 ```ruby
-decrement_counter = client.decrement_counter
+decrement_counter = client.DecrementCounter
 ```
 
 ### Operations
@@ -175,7 +175,7 @@ decrement_counter = client.decrement_counter
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.decrement_counter.remove({ "id" => "decrement_counter_id" })
+result = client.DecrementCounter.remove({ "id" => "decrement_counter_id" })
 ```
 
 ### Common Methods
@@ -211,7 +211,7 @@ Return the entity name.
 ## GetCounterEntity
 
 ```ruby
-get_counter = client.get_counter
+get_counter = client.GetCounter
 ```
 
 ### Fields
@@ -231,7 +231,7 @@ get_counter = client.get_counter
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.get_counter.load({ "id" => "get_counter_id" })
+result = client.GetCounter.load({ "id" => "get_counter_id" })
 ```
 
 ### Common Methods
@@ -267,7 +267,7 @@ Return the entity name.
 ## IncrementCounterEntity
 
 ```ruby
-increment_counter = client.increment_counter
+increment_counter = client.IncrementCounter
 ```
 
 ### Fields
@@ -288,7 +288,7 @@ increment_counter = client.increment_counter
 Update an existing entity. The data must include the entity `id`. Raises on error.
 
 ```ruby
-result = client.increment_counter.update({
+result = client.IncrementCounter.update({
   "id" => "increment_counter_id",
   # Fields to update
 })

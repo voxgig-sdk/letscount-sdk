@@ -34,8 +34,8 @@ client = LetscountSDK()
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.createorupdatecounter.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.CreateOrUpdateCounter().create({"name": "Example"})
 
 ```
 
@@ -82,8 +82,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = LetscountSDK.test()
 
-result = client.createorupdatecounter.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+createorupdatecounter = client.CreateOrUpdateCounter().load({"id": "test01"})
+# createorupdatecounter contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -162,7 +163,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `CreateOrUpdateCounter` | `(data) -> CreateOrUpdateCounterEntity` | Create a CreateOrUpdateCounter entity instance. |
 | `DecrementCounter` | `(data) -> DecrementCounterEntity` | Create a DecrementCounter entity instance. |
 | `GetCounter` | `(data) -> GetCounterEntity` | Create a GetCounter entity instance. |
-| `IncrementCounter` | `(data) -> IncrementCounterEntity` | Create a IncrementCounter entity instance. |
+| `IncrementCounter` | `(data) -> IncrementCounterEntity` | Create an IncrementCounter entity instance. |
 
 ### Entity interface
 
@@ -261,7 +262,7 @@ API path: `/{namespace}/{key}`
 
 ### CreateOrUpdateCounter
 
-Create an instance: `const create_or_update_counter = client.create_or_update_counter`
+Create an instance: `create_or_update_counter = client.CreateOrUpdateCounter()`
 
 #### Operations
 
@@ -281,15 +282,15 @@ Create an instance: `const create_or_update_counter = client.create_or_update_co
 
 #### Example: Create
 
-```ts
-const create_or_update_counter = await client.create_or_update_counter.create({
+```python
+create_or_update_counter = client.CreateOrUpdateCounter().create({
 })
 ```
 
 
 ### DecrementCounter
 
-Create an instance: `const decrement_counter = client.decrement_counter`
+Create an instance: `decrement_counter = client.DecrementCounter()`
 
 #### Operations
 
@@ -300,7 +301,7 @@ Create an instance: `const decrement_counter = client.decrement_counter`
 
 ### GetCounter
 
-Create an instance: `const get_counter = client.get_counter`
+Create an instance: `get_counter = client.GetCounter()`
 
 #### Operations
 
@@ -320,14 +321,14 @@ Create an instance: `const get_counter = client.get_counter`
 
 #### Example: Load
 
-```ts
-const get_counter = await client.get_counter.load({ id: 'get_counter_id' })
+```python
+get_counter = client.GetCounter().load({"id": "get_counter_id"})
 ```
 
 
 ### IncrementCounter
 
-Create an instance: `const increment_counter = client.increment_counter`
+Create an instance: `increment_counter = client.IncrementCounter()`
 
 #### Operations
 
@@ -417,7 +418,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-createorupdatecounter = client.createorupdatecounter
+createorupdatecounter = client.CreateOrUpdateCounter()
 createorupdatecounter.load({"id": "example_id"})
 
 # createorupdatecounter.data_get() now returns the loaded createorupdatecounter data

@@ -145,7 +145,7 @@ Alias for `LetscountSDK.test()`.
 ## CreateOrUpdateCounterEntity
 
 ```ts
-const create_or_update_counter = client.create_or_update_counter
+const create_or_update_counter = client.CreateOrUpdateCounter()
 ```
 
 ### Fields
@@ -175,7 +175,7 @@ const create_or_update_counter = client.create_or_update_counter
 Create a new entity with the given data.
 
 ```ts
-const result = await client.create_or_update_counter.create({
+const result = await client.CreateOrUpdateCounter().create({
 })
 ```
 
@@ -210,7 +210,7 @@ Return a copy of the entity options.
 ## DecrementCounterEntity
 
 ```ts
-const decrement_counter = client.decrement_counter
+const decrement_counter = client.DecrementCounter()
 ```
 
 ### Operations
@@ -220,7 +220,7 @@ const decrement_counter = client.decrement_counter
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.decrement_counter.remove({ id: 'decrement_counter_id' })
+const result = await client.DecrementCounter().remove({ id: 'decrement_counter_id' })
 ```
 
 ### Common Methods
@@ -254,7 +254,7 @@ Return a copy of the entity options.
 ## GetCounterEntity
 
 ```ts
-const get_counter = client.get_counter
+const get_counter = client.GetCounter()
 ```
 
 ### Fields
@@ -274,7 +274,7 @@ const get_counter = client.get_counter
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.get_counter.load({ id: 'get_counter_id' })
+const result = await client.GetCounter().load({ id: 'get_counter_id' })
 ```
 
 ### Common Methods
@@ -308,7 +308,7 @@ Return a copy of the entity options.
 ## IncrementCounterEntity
 
 ```ts
-const increment_counter = client.increment_counter
+const increment_counter = client.IncrementCounter()
 ```
 
 ### Fields
@@ -329,7 +329,7 @@ const increment_counter = client.increment_counter
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.increment_counter.update({
+const result = await client.IncrementCounter().update({
   id: 'increment_counter_id',
   // Fields to update
 })

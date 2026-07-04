@@ -4,66 +4,62 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class CreateOrUpdateCounter:
-    created_at: Optional[str] = None
-    key: Optional[str] = None
-    namespace: Optional[str] = None
-    updated_at: Optional[str] = None
-    value: Optional[float] = None
+class CreateOrUpdateCounter(TypedDict, total=False):
+    created_at: str
+    key: str
+    namespace: str
+    updated_at: str
+    value: float
 
 
-@dataclass
-class CreateOrUpdateCounterCreateData:
+class CreateOrUpdateCounterCreateData(TypedDict):
     key: str
     namespace: str
 
 
-@dataclass
-class DecrementCounter:
+class DecrementCounter(TypedDict):
     pass
 
 
-@dataclass
-class DecrementCounterRemoveMatch:
+class DecrementCounterRemoveMatch(TypedDict):
     key: str
     namespace: str
 
 
-@dataclass
-class GetCounter:
-    created_at: Optional[str] = None
-    key: Optional[str] = None
-    namespace: Optional[str] = None
-    updated_at: Optional[str] = None
-    value: Optional[float] = None
+class GetCounter(TypedDict, total=False):
+    created_at: str
+    key: str
+    namespace: str
+    updated_at: str
+    value: float
 
 
-@dataclass
-class GetCounterLoadMatch:
+class GetCounterLoadMatch(TypedDict):
     key: str
     namespace: str
 
 
-@dataclass
-class IncrementCounter:
-    amount: Optional[float] = None
-    created_at: Optional[str] = None
-    key: Optional[str] = None
-    namespace: Optional[str] = None
-    updated_at: Optional[str] = None
-    value: Optional[float] = None
-
-
-@dataclass
-class IncrementCounterUpdateData:
+class IncrementCounter(TypedDict, total=False):
+    amount: float
+    created_at: str
     key: str
     namespace: str
+    updated_at: str
+    value: float
 
+
+class IncrementCounterUpdateData(TypedDict):
+    key: str
+    namespace: str

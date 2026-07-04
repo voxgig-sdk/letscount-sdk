@@ -233,10 +233,10 @@ class LetscountSDK
 
     private $_create_or_update_counter = null;
 
-    // Idiomatic facade: $client->create_or_update_counter()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias CreateOrUpdateCounter() (PHP method
-    // names are case-insensitive).
-    public function create_or_update_counter($data = null)
+    // Canonical facade: $client->CreateOrUpdateCounter()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->create_or_update_counter()
+    // resolves here too.
+    public function CreateOrUpdateCounter($data = null)
     {
         require_once __DIR__ . '/entity/create_or_update_counter_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class LetscountSDK
 
     private $_decrement_counter = null;
 
-    // Idiomatic facade: $client->decrement_counter()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias DecrementCounter() (PHP method
-    // names are case-insensitive).
-    public function decrement_counter($data = null)
+    // Canonical facade: $client->DecrementCounter()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->decrement_counter()
+    // resolves here too.
+    public function DecrementCounter($data = null)
     {
         require_once __DIR__ . '/entity/decrement_counter_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class LetscountSDK
 
     private $_get_counter = null;
 
-    // Idiomatic facade: $client->get_counter()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias GetCounter() (PHP method
-    // names are case-insensitive).
-    public function get_counter($data = null)
+    // Canonical facade: $client->GetCounter()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->get_counter()
+    // resolves here too.
+    public function GetCounter($data = null)
     {
         require_once __DIR__ . '/entity/get_counter_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class LetscountSDK
 
     private $_increment_counter = null;
 
-    // Idiomatic facade: $client->increment_counter()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias IncrementCounter() (PHP method
-    // names are case-insensitive).
-    public function increment_counter($data = null)
+    // Canonical facade: $client->IncrementCounter()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->increment_counter()
+    // resolves here too.
+    public function IncrementCounter($data = null)
     {
         require_once __DIR__ . '/entity/increment_counter_entity.php';
         if ($data === null) {

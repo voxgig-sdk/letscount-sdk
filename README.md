@@ -131,22 +131,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = LetscountSDK.test()
-const result = await client.createorupdatecounter.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const createorupdatecounter = await client.CreateOrUpdateCounter().load({ id: 'test01' })
+// createorupdatecounter is a bare CreateOrUpdateCounter populated with mock data
+console.log(createorupdatecounter)
 ```
 
 ### Python
 
 ```python
 client = LetscountSDK.test()
-result = client.createorupdatecounter.load({"id": "test01"})
+createorupdatecounter = client.CreateOrUpdateCounter().load({"id": "test01"})
+print(createorupdatecounter)
 ```
 
 ### PHP
 
 ```php
-$client = LetscountSDK::test();
-$result = $client->createorupdatecounter()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = LetscountSDK::test([
+    "entity" => ["createorupdatecounter" => ["test01" => ["id" => "test01"]]],
+]);
+$createorupdatecounter = $client->CreateOrUpdateCounter()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -161,15 +166,18 @@ result, err := client.CreateOrUpdateCounter(nil).Load(
 ### Ruby
 
 ```ruby
-client = LetscountSDK.test
-result = client.createorupdatecounter.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = LetscountSDK.test({
+  "entity" => { "createorupdatecounter" => { "test01" => { "id" => "test01" } } },
+})
+createorupdatecounter = client.CreateOrUpdateCounter.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:createorupdatecounter():load({ id = "test01" })
+local result, err = client:CreateOrUpdateCounter():load({ id = "test01" })
 ```
 
 ## How it works
@@ -217,6 +225,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 
