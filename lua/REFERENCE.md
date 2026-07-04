@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -96,7 +95,7 @@ same parameters as `direct()`.
 ## CreateOrUpdateCounterEntity
 
 ```lua
-local create_or_update_counter = client:CreateOrUpdateCounter(nil)
+local create_or_update_counter = client:create_or_update_counter(nil)
 ```
 
 ### Fields
@@ -126,7 +125,7 @@ local create_or_update_counter = client:CreateOrUpdateCounter(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:CreateOrUpdateCounter():create({
+local result, err = client:create_or_update_counter():create({
 })
 ```
 
@@ -163,7 +162,7 @@ Return the entity name.
 ## DecrementCounterEntity
 
 ```lua
-local decrement_counter = client:DecrementCounter(nil)
+local decrement_counter = client:decrement_counter(nil)
 ```
 
 ### Operations
@@ -173,7 +172,7 @@ local decrement_counter = client:DecrementCounter(nil)
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:DecrementCounter():remove({ id = "decrement_counter_id" })
+local result, err = client:decrement_counter():remove({ id = "decrement_counter_id" })
 ```
 
 ### Common Methods
@@ -209,7 +208,7 @@ Return the entity name.
 ## GetCounterEntity
 
 ```lua
-local get_counter = client:GetCounter(nil)
+local get_counter = client:get_counter(nil)
 ```
 
 ### Fields
@@ -229,7 +228,7 @@ local get_counter = client:GetCounter(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetCounter():load({ id = "get_counter_id" })
+local result, err = client:get_counter():load({ id = "get_counter_id" })
 ```
 
 ### Common Methods
@@ -265,7 +264,7 @@ Return the entity name.
 ## IncrementCounterEntity
 
 ```lua
-local increment_counter = client:IncrementCounter(nil)
+local increment_counter = client:increment_counter(nil)
 ```
 
 ### Fields
@@ -286,7 +285,7 @@ local increment_counter = client:IncrementCounter(nil)
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:IncrementCounter():update({
+local result, err = client:increment_counter():update({
   id = "increment_counter_id",
   -- Fields to update
 })

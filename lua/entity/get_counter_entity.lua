@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch GetCounterLoadMatch
+---@param ctrl? table
+---@return GetCounter
+---@return string? err
 function GetCounterEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

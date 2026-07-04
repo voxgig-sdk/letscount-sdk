@@ -38,8 +38,7 @@ class CreateOrUpdateCounterEntityTest < Minitest::Test
     create_or_update_counter_ref01_data["key"] = setup[:idmap]["key01"]
     create_or_update_counter_ref01_data["namespace"] = setup[:idmap]["namespace01"]
 
-    create_or_update_counter_ref01_data_result, err = create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, nil)
-    assert_nil err
+    create_or_update_counter_ref01_data_result = create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, nil)
     create_or_update_counter_ref01_data = Helpers.to_map(create_or_update_counter_ref01_data_result)
     assert !create_or_update_counter_ref01_data.nil?
 
@@ -79,7 +78,6 @@ def create_or_update_counter_basic_setup(extra)
     "LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID" => idmap,
     "LETSCOUNT_TEST_LIVE" => "FALSE",
     "LETSCOUNT_TEST_EXPLAIN" => "FALSE",
-    "LETSCOUNT_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -91,7 +89,6 @@ def create_or_update_counter_basic_setup(extra)
   if env["LETSCOUNT_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LETSCOUNT_APIKEY"],
       },
       extra || {},
     ])

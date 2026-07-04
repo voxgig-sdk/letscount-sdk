@@ -42,8 +42,7 @@ class GetCounterEntityTest < Minitest::Test
     # LOAD
     get_counter_ref01_ent = client.GetCounter(nil)
     get_counter_ref01_match_dt0 = {}
-    get_counter_ref01_data_dt0_loaded, err = get_counter_ref01_ent.load(get_counter_ref01_match_dt0, nil)
-    assert_nil err
+    get_counter_ref01_data_dt0_loaded = get_counter_ref01_ent.load(get_counter_ref01_match_dt0, nil)
     assert !get_counter_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def get_counter_basic_setup(extra)
     "LETSCOUNT_TEST_GET_COUNTER_ENTID" => idmap,
     "LETSCOUNT_TEST_LIVE" => "FALSE",
     "LETSCOUNT_TEST_EXPLAIN" => "FALSE",
-    "LETSCOUNT_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def get_counter_basic_setup(extra)
   if env["LETSCOUNT_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LETSCOUNT_APIKEY"],
       },
       extra || {},
     ])

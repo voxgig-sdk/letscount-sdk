@@ -56,9 +56,7 @@ class TestIncrementCounterEntity:
         increment_counter_ref01_markdef_up0_value = "Mark01-increment_counter_ref01_" + str(setup["now"])
         increment_counter_ref01_data_up0_up[increment_counter_ref01_markdef_up0_name] = increment_counter_ref01_markdef_up0_value
 
-        increment_counter_ref01_resdata_up0_result, err = increment_counter_ref01_ent.update(increment_counter_ref01_data_up0_up, None)
-        assert err is None
-        increment_counter_ref01_resdata_up0 = helpers.to_map(increment_counter_ref01_resdata_up0_result)
+        increment_counter_ref01_resdata_up0 = helpers.to_map(increment_counter_ref01_ent.update(increment_counter_ref01_data_up0_up, None))
         assert increment_counter_ref01_resdata_up0 is not None
         assert increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0_name] == increment_counter_ref01_markdef_up0_value
 
@@ -100,7 +98,6 @@ def _increment_counter_basic_setup(extra):
         "LETSCOUNT_TEST_INCREMENT_COUNTER_ENTID": idmap,
         "LETSCOUNT_TEST_LIVE": "FALSE",
         "LETSCOUNT_TEST_EXPLAIN": "FALSE",
-        "LETSCOUNT_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _increment_counter_basic_setup(extra):
     if env.get("LETSCOUNT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LETSCOUNT_APIKEY"),
             },
             extra or {},
         ])

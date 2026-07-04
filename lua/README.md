@@ -9,12 +9,9 @@ The Lua SDK for the Letscount API — an entity-oriented client using Lua conven
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-letscount
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/letscount-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,16 +28,14 @@ loading a specific record.
 ```lua
 local sdk = require("letscount_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("LETSCOUNT_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:CreateOrUpdateCounter():create({ name = "Example" })
+local created, _ = client:createorupdatecounter():create({ name = "Example" })
 
 ```
 
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Letscount():load({ id = "test01" })
+local result, err = client:createorupdatecounter():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -121,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 LETSCOUNT_TEST_LIVE=TRUE
-LETSCOUNT_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -266,7 +259,7 @@ API path: `/{namespace}/{key}`
 
 ### CreateOrUpdateCounter
 
-Create an instance: `const create_or_update_counter = client.CreateOrUpdateCounter()`
+Create an instance: `const create_or_update_counter = client.create_or_update_counter`
 
 #### Operations
 
@@ -287,14 +280,14 @@ Create an instance: `const create_or_update_counter = client.CreateOrUpdateCount
 #### Example: Create
 
 ```ts
-const create_or_update_counter = await client.CreateOrUpdateCounter().create({
+const create_or_update_counter = await client.create_or_update_counter.create({
 })
 ```
 
 
 ### DecrementCounter
 
-Create an instance: `const decrement_counter = client.DecrementCounter()`
+Create an instance: `const decrement_counter = client.decrement_counter`
 
 #### Operations
 
@@ -305,7 +298,7 @@ Create an instance: `const decrement_counter = client.DecrementCounter()`
 
 ### GetCounter
 
-Create an instance: `const get_counter = client.GetCounter()`
+Create an instance: `const get_counter = client.get_counter`
 
 #### Operations
 
@@ -326,13 +319,13 @@ Create an instance: `const get_counter = client.GetCounter()`
 #### Example: Load
 
 ```ts
-const get_counter = await client.GetCounter().load({ id: 'get_counter_id' })
+const get_counter = await client.get_counter.load({ id: 'get_counter_id' })
 ```
 
 
 ### IncrementCounter
 
-Create an instance: `const increment_counter = client.IncrementCounter()`
+Create an instance: `const increment_counter = client.increment_counter`
 
 #### Operations
 
@@ -423,11 +416,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local createorupdatecounter = client:createorupdatecounter()
+createorupdatecounter:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- createorupdatecounter:data_get() now returns the loaded createorupdatecounter data
+-- createorupdatecounter:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  IncrementCounter,
+  IncrementCounterUpdateData,
+} from '../LetscountTypes'
 
 // TODO: needs Entity superclass
-class IncrementCounterEntity extends LetscountEntityBase {
+class IncrementCounterEntity extends LetscountEntityBase<IncrementCounter> {
 
   constructor(client: LetscountSDK, entopts: any) {
     super(client, entopts)
@@ -35,7 +39,7 @@ class IncrementCounterEntity extends LetscountEntityBase {
 
 
 
-  async update(this: any, reqdata?: any, ctrl?: Control) {
+  async update(this: any, reqdata?: IncrementCounterUpdateData, ctrl?: Control): Promise<IncrementCounter> {
 
     const utility = this._utility
 
@@ -140,7 +144,9 @@ class IncrementCounterEntity extends LetscountEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<IncrementCounter> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

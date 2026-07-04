@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `$options` | `array` | SDK configuration options. |
-| `$options["apikey"]` | `string` | API key for authentication. |
 | `$options["base"]` | `string` | Base URL for API requests. |
 | `$options["prefix"]` | `string` | URL prefix appended after base. |
 | `$options["suffix"]` | `string` | URL suffix appended after path. |
@@ -68,7 +67,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -82,11 +84,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -94,7 +97,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## CreateOrUpdateCounterEntity
 
 ```php
-$create_or_update_counter = $client->CreateOrUpdateCounter();
+$create_or_update_counter = $client->create_or_update_counter();
 ```
 
 ### Fields
@@ -119,12 +122,12 @@ $create_or_update_counter = $client->CreateOrUpdateCounter();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->CreateOrUpdateCounter()->create([
+$result = $client->create_or_update_counter()->create([
 ]);
 ```
 
@@ -161,17 +164,17 @@ Return the entity name.
 ## DecrementCounterEntity
 
 ```php
-$decrement_counter = $client->DecrementCounter();
+$decrement_counter = $client->decrement_counter();
 ```
 
 ### Operations
 
-#### `remove(array $reqmatch, ?array $ctrl = null): array`
+#### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->DecrementCounter()->remove(["id" => "decrement_counter_id"]);
+$result = $client->decrement_counter()->remove(["id" => "decrement_counter_id"]);
 ```
 
 ### Common Methods
@@ -207,7 +210,7 @@ Return the entity name.
 ## GetCounterEntity
 
 ```php
-$get_counter = $client->GetCounter();
+$get_counter = $client->get_counter();
 ```
 
 ### Fields
@@ -222,12 +225,12 @@ $get_counter = $client->GetCounter();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->GetCounter()->load(["id" => "get_counter_id"]);
+$result = $client->get_counter()->load(["id" => "get_counter_id"]);
 ```
 
 ### Common Methods
@@ -263,7 +266,7 @@ Return the entity name.
 ## IncrementCounterEntity
 
 ```php
-$increment_counter = $client->IncrementCounter();
+$increment_counter = $client->increment_counter();
 ```
 
 ### Fields
@@ -279,12 +282,12 @@ $increment_counter = $client->IncrementCounter();
 
 ### Operations
 
-#### `update(array $reqdata, ?array $ctrl = null): array`
+#### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Throws on error.
 
 ```php
-[$result, $err] = $client->IncrementCounter()->update([
+$result = $client->increment_counter()->update([
   "id" => "increment_counter_id",
   // Fields to update
 ]);

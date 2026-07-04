@@ -49,8 +49,7 @@ class GetCounterEntityTest extends TestCase
         // LOAD
         $get_counter_ref01_ent = $client->GetCounter(null);
         $get_counter_ref01_match_dt0 = [];
-        [$get_counter_ref01_data_dt0_loaded, $err] = $get_counter_ref01_ent->load($get_counter_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $get_counter_ref01_data_dt0_loaded = $get_counter_ref01_ent->load($get_counter_ref01_match_dt0, null);
         $this->assertNotNull($get_counter_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function get_counter_basic_setup($extra)
         "LETSCOUNT_TEST_GET_COUNTER_ENTID" => $idmap,
         "LETSCOUNT_TEST_LIVE" => "FALSE",
         "LETSCOUNT_TEST_EXPLAIN" => "FALSE",
-        "LETSCOUNT_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function get_counter_basic_setup($extra)
     if ($env["LETSCOUNT_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LETSCOUNT_APIKEY"],
             ],
             $extra ?? [],
         ]);

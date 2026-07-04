@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  DecrementCounter,
+  DecrementCounterRemoveMatch,
+} from '../LetscountTypes'
 
 // TODO: needs Entity superclass
-class DecrementCounterEntity extends LetscountEntityBase {
+class DecrementCounterEntity extends LetscountEntityBase<DecrementCounter> {
 
   constructor(client: LetscountSDK, entopts: any) {
     super(client, entopts)
@@ -36,7 +40,7 @@ class DecrementCounterEntity extends LetscountEntityBase {
 
 
 
-  async remove(this: any, reqmatch?: any, ctrl?: Control) {
+  async remove(this: any, reqmatch?: DecrementCounterRemoveMatch, ctrl?: Control): Promise<DecrementCounter> {
 
     const utility = this._utility
 
@@ -141,7 +145,9 @@ class DecrementCounterEntity extends LetscountEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<DecrementCounter> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

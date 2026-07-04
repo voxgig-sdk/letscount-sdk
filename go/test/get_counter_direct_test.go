@@ -121,14 +121,12 @@ func get_counterDirectSetup(mockres any) *get_counterDirectSetupResult {
 	env := envOverride(map[string]any{
 		"LETSCOUNT_TEST_GET_COUNTER_ENTID": map[string]any{},
 		"LETSCOUNT_TEST_LIVE":    "FALSE",
-		"LETSCOUNT_APIKEY":       "NONE",
 	})
 
 	live := env["LETSCOUNT_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["LETSCOUNT_APIKEY"],
 		}
 		client := sdk.NewLetscountSDK(mergedOpts)
 

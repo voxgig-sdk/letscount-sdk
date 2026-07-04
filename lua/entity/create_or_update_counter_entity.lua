@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata CreateOrUpdateCounterCreateData
+---@param ctrl? table
+---@return CreateOrUpdateCounter
+---@return string? err
 function CreateOrUpdateCounterEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

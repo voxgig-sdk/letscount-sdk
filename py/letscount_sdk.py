@@ -144,16 +144,23 @@ class LetscountSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class LetscountSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,30 +212,74 @@ class LetscountSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def create_or_update_counter(self):
+        """Idiomatic facade: client.create_or_update_counter.list() / client.create_or_update_counter.load({"id": ...})."""
+        from entity.create_or_update_counter_entity import CreateOrUpdateCounterEntity
+        cached = getattr(self, "_create_or_update_counter", None)
+        if cached is None:
+            cached = CreateOrUpdateCounterEntity(self, None)
+            self._create_or_update_counter = cached
+        return cached
 
     def CreateOrUpdateCounter(self, data=None):
+        # Deprecated: use client.create_or_update_counter instead.
         from entity.create_or_update_counter_entity import CreateOrUpdateCounterEntity
         return CreateOrUpdateCounterEntity(self, data)
 
 
+    @property
+    def decrement_counter(self):
+        """Idiomatic facade: client.decrement_counter.list() / client.decrement_counter.load({"id": ...})."""
+        from entity.decrement_counter_entity import DecrementCounterEntity
+        cached = getattr(self, "_decrement_counter", None)
+        if cached is None:
+            cached = DecrementCounterEntity(self, None)
+            self._decrement_counter = cached
+        return cached
+
     def DecrementCounter(self, data=None):
+        # Deprecated: use client.decrement_counter instead.
         from entity.decrement_counter_entity import DecrementCounterEntity
         return DecrementCounterEntity(self, data)
 
 
+    @property
+    def get_counter(self):
+        """Idiomatic facade: client.get_counter.list() / client.get_counter.load({"id": ...})."""
+        from entity.get_counter_entity import GetCounterEntity
+        cached = getattr(self, "_get_counter", None)
+        if cached is None:
+            cached = GetCounterEntity(self, None)
+            self._get_counter = cached
+        return cached
+
     def GetCounter(self, data=None):
+        # Deprecated: use client.get_counter instead.
         from entity.get_counter_entity import GetCounterEntity
         return GetCounterEntity(self, data)
 
 
+    @property
+    def increment_counter(self):
+        """Idiomatic facade: client.increment_counter.list() / client.increment_counter.load({"id": ...})."""
+        from entity.increment_counter_entity import IncrementCounterEntity
+        cached = getattr(self, "_increment_counter", None)
+        if cached is None:
+            cached = IncrementCounterEntity(self, None)
+            self._increment_counter = cached
+        return cached
+
     def IncrementCounter(self, data=None):
+        # Deprecated: use client.increment_counter instead.
         from entity.increment_counter_entity import IncrementCounterEntity
         return IncrementCounterEntity(self, data)
 

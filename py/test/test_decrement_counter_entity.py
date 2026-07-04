@@ -51,8 +51,7 @@ class TestDecrementCounterEntity:
         decrement_counter_ref01_match_rm0 = {
             "id": decrement_counter_ref01_data["id"],
         }
-        _, err = decrement_counter_ref01_ent.remove(decrement_counter_ref01_match_rm0, None)
-        assert err is None
+        decrement_counter_ref01_ent.remove(decrement_counter_ref01_match_rm0, None)
 
 
 
@@ -92,7 +91,6 @@ def _decrement_counter_basic_setup(extra):
         "LETSCOUNT_TEST_DECREMENT_COUNTER_ENTID": idmap,
         "LETSCOUNT_TEST_LIVE": "FALSE",
         "LETSCOUNT_TEST_EXPLAIN": "FALSE",
-        "LETSCOUNT_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _decrement_counter_basic_setup(extra):
     if env.get("LETSCOUNT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LETSCOUNT_APIKEY"),
             },
             extra or {},
         ])

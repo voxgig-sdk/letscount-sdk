@@ -26,7 +26,7 @@ class GetCounterDirectTest < Minitest::Test
       params["namespace"] = "direct02"
     end
 
-    result, err = client.direct({
+    result = client.direct({
       "path" => "{namespace}/{key}",
       "method" => "GET",
       "params" => params,
@@ -36,8 +36,8 @@ class GetCounterDirectTest < Minitest::Test
       # Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
       # than fail when the load endpoint isn't reachable with the IDs
       # we can construct from setup.idmap.
-      if !err.nil?
-        skip("load call failed (likely synthetic IDs against live API): #{err}")
+      if !result["err"].nil?
+        skip("load call failed (likely synthetic IDs against live API): #{result["err"]}")
         return
       end
       unless result["ok"]
@@ -50,7 +50,7 @@ class GetCounterDirectTest < Minitest::Test
         return
       end
     else
-      assert_nil err
+      assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
       assert !result["data"].nil?
@@ -72,14 +72,12 @@ def get_counter_direct_setup(mockres)
   env = Runner.env_override({
     "LETSCOUNT_TEST_GET_COUNTER_ENTID" => {},
     "LETSCOUNT_TEST_LIVE" => "FALSE",
-    "LETSCOUNT_APIKEY" => "NONE",
   })
 
   live = env["LETSCOUNT_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["LETSCOUNT_APIKEY"],
     }
     client = LetscountSDK.new(merged_opts)
     return {

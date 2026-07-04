@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Letscount_types'
+
 
 class LetscountSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class LetscountSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class LetscountSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue LetscountError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = LetscountHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class LetscountSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,34 +198,62 @@ class LetscountSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.create_or_update_counter.list / client.create_or_update_counter.load({ "id" => ... })
+  def create_or_update_counter
+    require_relative 'entity/create_or_update_counter_entity'
+    @create_or_update_counter ||= CreateOrUpdateCounterEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.create_or_update_counter instead.
   def CreateOrUpdateCounter(data = nil)
     require_relative 'entity/create_or_update_counter_entity'
     CreateOrUpdateCounterEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.decrement_counter.list / client.decrement_counter.load({ "id" => ... })
+  def decrement_counter
+    require_relative 'entity/decrement_counter_entity'
+    @decrement_counter ||= DecrementCounterEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.decrement_counter instead.
   def DecrementCounter(data = nil)
     require_relative 'entity/decrement_counter_entity'
     DecrementCounterEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.get_counter.list / client.get_counter.load({ "id" => ... })
+  def get_counter
+    require_relative 'entity/get_counter_entity'
+    @get_counter ||= GetCounterEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.get_counter instead.
   def GetCounter(data = nil)
     require_relative 'entity/get_counter_entity'
     GetCounterEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.increment_counter.list / client.increment_counter.load({ "id" => ... })
+  def increment_counter
+    require_relative 'entity/increment_counter_entity'
+    @increment_counter ||= IncrementCounterEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.increment_counter instead.
   def IncrementCounter(data = nil)
     require_relative 'entity/increment_counter_entity'
     IncrementCounterEntity.new(self, data)

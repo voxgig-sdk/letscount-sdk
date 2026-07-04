@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  GetCounter,
+  GetCounterLoadMatch,
+} from '../LetscountTypes'
 
 // TODO: needs Entity superclass
-class GetCounterEntity extends LetscountEntityBase {
+class GetCounterEntity extends LetscountEntityBase<GetCounter> {
 
   constructor(client: LetscountSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class GetCounterEntity extends LetscountEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: GetCounterLoadMatch, ctrl?: Control): Promise<GetCounter> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class GetCounterEntity extends LetscountEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<GetCounter> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

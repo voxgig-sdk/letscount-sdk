@@ -9,9 +9,12 @@ The TypeScript SDK for the Letscount API — a type-safe, entity-oriented client
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/letscount
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/letscount-sdk/releases](https://github.com/voxgig-sdk/letscount-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,18 +23,16 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { LetscountSDK } from 'letscount'
+import { LetscountSDK } from '@voxgig-sdk/letscount'
 
-const client = new LetscountSDK({
-  apikey: process.env.LETSCOUNT_APIKEY,
-})
+const client = new LetscountSDK()
 ```
 
 ### 4. Create, update, and remove
 
 ```ts
 // Create
-const created = await client.CreateOrUpdateCounter().create({
+const created = await client.createorupdatecounter.create({
   name: 'Example',
 })
 
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LetscountSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.createorupdatecounter.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new LetscountSDK({ apikey: '...' })
+const client = new LetscountSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.createorupdatecounter
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new LetscountSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -134,7 +134,6 @@ Create a `.env.local` file at the project root:
 
 ```
 LETSCOUNT_TEST_LIVE=TRUE
-LETSCOUNT_APIKEY=<your-key>
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new LetscountSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new LetscountSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -311,7 +308,7 @@ API path: `/{namespace}/{key}`
 
 ### CreateOrUpdateCounter
 
-Create an instance: `const create_or_update_counter = client.CreateOrUpdateCounter()`
+Create an instance: `const create_or_update_counter = client.create_or_update_counter`
 
 #### Operations
 
@@ -332,14 +329,14 @@ Create an instance: `const create_or_update_counter = client.CreateOrUpdateCount
 #### Example: Create
 
 ```ts
-const create_or_update_counter = await client.CreateOrUpdateCounter().create({
+const create_or_update_counter = await client.create_or_update_counter.create({
 })
 ```
 
 
 ### DecrementCounter
 
-Create an instance: `const decrement_counter = client.DecrementCounter()`
+Create an instance: `const decrement_counter = client.decrement_counter`
 
 #### Operations
 
@@ -350,7 +347,7 @@ Create an instance: `const decrement_counter = client.DecrementCounter()`
 
 ### GetCounter
 
-Create an instance: `const get_counter = client.GetCounter()`
+Create an instance: `const get_counter = client.get_counter`
 
 #### Operations
 
@@ -371,13 +368,13 @@ Create an instance: `const get_counter = client.GetCounter()`
 #### Example: Load
 
 ```ts
-const get_counter = await client.GetCounter().load({ id: 'get_counter_id' })
+const get_counter = await client.get_counter.load({ id: 'get_counter_id' })
 ```
 
 
 ### IncrementCounter
 
-Create an instance: `const increment_counter = client.IncrementCounter()`
+Create an instance: `const increment_counter = client.increment_counter`
 
 #### Operations
 
@@ -454,7 +451,7 @@ letscount/
 Import the SDK from the package root:
 
 ```ts
-import { LetscountSDK } from 'letscount'
+import { LetscountSDK } from '@voxgig-sdk/letscount'
 ```
 
 ### Entity state
@@ -464,11 +461,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const createorupdatecounter = client.createorupdatecounter
+await createorupdatecounter.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// createorupdatecounter.data() now returns the loaded createorupdatecounter data
+// createorupdatecounter.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

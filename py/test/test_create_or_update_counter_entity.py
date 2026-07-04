@@ -46,9 +46,7 @@ class TestCreateOrUpdateCounterEntity:
         create_or_update_counter_ref01_data["key"] = setup["idmap"]["key01"]
         create_or_update_counter_ref01_data["namespace"] = setup["idmap"]["namespace01"]
 
-        create_or_update_counter_ref01_data_result, err = create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, None)
-        assert err is None
-        create_or_update_counter_ref01_data = helpers.to_map(create_or_update_counter_ref01_data_result)
+        create_or_update_counter_ref01_data = helpers.to_map(create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, None))
         assert create_or_update_counter_ref01_data is not None
 
 
@@ -89,7 +87,6 @@ def _create_or_update_counter_basic_setup(extra):
         "LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID": idmap,
         "LETSCOUNT_TEST_LIVE": "FALSE",
         "LETSCOUNT_TEST_EXPLAIN": "FALSE",
-        "LETSCOUNT_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -100,7 +97,6 @@ def _create_or_update_counter_basic_setup(extra):
     if env.get("LETSCOUNT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LETSCOUNT_APIKEY"),
             },
             extra or {},
         ])

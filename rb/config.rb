@@ -15,9 +15,6 @@ module LetscountConfig
       },
       "options" => {
         "base" => "https://api.letscountapi.com",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -90,6 +87,7 @@ module LetscountConfig
                         "orig" => "key",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -98,6 +96,7 @@ module LetscountConfig
                         "orig" => "namespace",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 1,
                       },
                     ],
                   },
@@ -146,6 +145,7 @@ module LetscountConfig
                         "orig" => "key",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -154,6 +154,7 @@ module LetscountConfig
                         "orig" => "namespace",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 1,
                       },
                     ],
                   },
@@ -238,6 +239,7 @@ module LetscountConfig
                         "orig" => "key",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -246,6 +248,7 @@ module LetscountConfig
                         "orig" => "namespace",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 1,
                       },
                     ],
                   },
@@ -337,6 +340,7 @@ module LetscountConfig
                         "orig" => "key",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -345,6 +349,7 @@ module LetscountConfig
                         "orig" => "namespace",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 1,
                       },
                     ],
                   },

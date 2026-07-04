@@ -103,7 +103,7 @@ class LetscountSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class LetscountSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class LetscountSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,45 +216,89 @@ class LetscountSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function CreateOrUpdateCounter($data = null)
+    private $_create_or_update_counter = null;
+
+    // Idiomatic facade: $client->create_or_update_counter()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias CreateOrUpdateCounter() (PHP method
+    // names are case-insensitive).
+    public function create_or_update_counter($data = null)
     {
         require_once __DIR__ . '/entity/create_or_update_counter_entity.php';
+        if ($data === null) {
+            if ($this->_create_or_update_counter === null) {
+                $this->_create_or_update_counter = new CreateOrUpdateCounterEntity($this, null);
+            }
+            return $this->_create_or_update_counter;
+        }
         return new CreateOrUpdateCounterEntity($this, $data);
     }
 
 
-    public function DecrementCounter($data = null)
+    private $_decrement_counter = null;
+
+    // Idiomatic facade: $client->decrement_counter()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias DecrementCounter() (PHP method
+    // names are case-insensitive).
+    public function decrement_counter($data = null)
     {
         require_once __DIR__ . '/entity/decrement_counter_entity.php';
+        if ($data === null) {
+            if ($this->_decrement_counter === null) {
+                $this->_decrement_counter = new DecrementCounterEntity($this, null);
+            }
+            return $this->_decrement_counter;
+        }
         return new DecrementCounterEntity($this, $data);
     }
 
 
-    public function GetCounter($data = null)
+    private $_get_counter = null;
+
+    // Idiomatic facade: $client->get_counter()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias GetCounter() (PHP method
+    // names are case-insensitive).
+    public function get_counter($data = null)
     {
         require_once __DIR__ . '/entity/get_counter_entity.php';
+        if ($data === null) {
+            if ($this->_get_counter === null) {
+                $this->_get_counter = new GetCounterEntity($this, null);
+            }
+            return $this->_get_counter;
+        }
         return new GetCounterEntity($this, $data);
     }
 
 
-    public function IncrementCounter($data = null)
+    private $_increment_counter = null;
+
+    // Idiomatic facade: $client->increment_counter()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias IncrementCounter() (PHP method
+    // names are case-insensitive).
+    public function increment_counter($data = null)
     {
         require_once __DIR__ . '/entity/increment_counter_entity.php';
+        if ($data === null) {
+            if ($this->_increment_counter === null) {
+                $this->_increment_counter = new IncrementCounterEntity($this, null);
+            }
+            return $this->_increment_counter;
+        }
         return new IncrementCounterEntity($this, $data);
     }
 

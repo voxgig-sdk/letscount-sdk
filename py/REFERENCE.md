@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -66,9 +65,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -81,11 +80,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -93,7 +92,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## CreateOrUpdateCounterEntity
 
 ```python
-create_or_update_counter = client.CreateOrUpdateCounter()
+create_or_update_counter = client.create_or_update_counter
 ```
 
 ### Fields
@@ -118,12 +117,12 @@ create_or_update_counter = client.CreateOrUpdateCounter()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.CreateOrUpdateCounter().create({
+result = client.create_or_update_counter.create({
 })
 ```
 
@@ -159,17 +158,17 @@ Return the entity name.
 ## DecrementCounterEntity
 
 ```python
-decrement_counter = client.DecrementCounter()
+decrement_counter = client.decrement_counter
 ```
 
 ### Operations
 
-#### `remove(reqmatch, ctrl=None) -> tuple`
+#### `remove(reqmatch, ctrl=None) -> dict`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result, err = client.DecrementCounter().remove({"id": "decrement_counter_id"})
+result = client.decrement_counter.remove({"id": "decrement_counter_id"})
 ```
 
 ### Common Methods
@@ -204,7 +203,7 @@ Return the entity name.
 ## GetCounterEntity
 
 ```python
-get_counter = client.GetCounter()
+get_counter = client.get_counter
 ```
 
 ### Fields
@@ -219,12 +218,12 @@ get_counter = client.GetCounter()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.GetCounter().load({"id": "get_counter_id"})
+result = client.get_counter.load({"id": "get_counter_id"})
 ```
 
 ### Common Methods
@@ -259,7 +258,7 @@ Return the entity name.
 ## IncrementCounterEntity
 
 ```python
-increment_counter = client.IncrementCounter()
+increment_counter = client.increment_counter
 ```
 
 ### Fields
@@ -275,12 +274,12 @@ increment_counter = client.IncrementCounter()
 
 ### Operations
 
-#### `update(reqdata, ctrl=None) -> tuple`
+#### `update(reqdata, ctrl=None) -> dict`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result, err = client.IncrementCounter().update({
+result = client.increment_counter.update({
     "id": "increment_counter_id",
     # Fields to update
 })

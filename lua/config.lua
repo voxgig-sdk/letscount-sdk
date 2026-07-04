@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://api.letscountapi.com",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },
@@ -89,6 +86,7 @@ local function make_config()
                       ["orig"] = "key",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -97,6 +95,7 @@ local function make_config()
                       ["orig"] = "namespace",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 1,
                     },
                   },
                 },
@@ -145,6 +144,7 @@ local function make_config()
                       ["orig"] = "key",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -153,6 +153,7 @@ local function make_config()
                       ["orig"] = "namespace",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 1,
                     },
                   },
                 },
@@ -237,6 +238,7 @@ local function make_config()
                       ["orig"] = "key",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -245,6 +247,7 @@ local function make_config()
                       ["orig"] = "namespace",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 1,
                     },
                   },
                 },
@@ -336,6 +339,7 @@ local function make_config()
                       ["orig"] = "key",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -344,6 +348,7 @@ local function make_config()
                       ["orig"] = "namespace",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 1,
                     },
                   },
                 },

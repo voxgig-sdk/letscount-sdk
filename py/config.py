@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://api.letscountapi.com",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -90,6 +87,7 @@ def make_config():
                       "orig": "key",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -98,6 +96,7 @@ def make_config():
                       "orig": "namespace",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -146,6 +145,7 @@ def make_config():
                       "orig": "key",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -154,6 +154,7 @@ def make_config():
                       "orig": "namespace",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -238,6 +239,7 @@ def make_config():
                       "orig": "key",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -246,6 +248,7 @@ def make_config():
                       "orig": "namespace",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -337,6 +340,7 @@ def make_config():
                       "orig": "key",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -345,6 +349,7 @@ def make_config():
                       "orig": "namespace",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 1,
                     },
                   ],
                 },

@@ -245,21 +245,33 @@ func (sdk *LetscountSDK) Direct(fetchargs map[string]any) (map[string]any, error
 }
 
 
+// CreateOrUpdateCounter returns a CreateOrUpdateCounter entity bound to this client.
+// Idiomatic usage: client.CreateOrUpdateCounter(nil).List(nil, nil) or
+// client.CreateOrUpdateCounter(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LetscountSDK) CreateOrUpdateCounter(data map[string]any) LetscountEntity {
 	return NewCreateOrUpdateCounterEntityFunc(sdk, data)
 }
 
 
+// DecrementCounter returns a DecrementCounter entity bound to this client.
+// Idiomatic usage: client.DecrementCounter(nil).List(nil, nil) or
+// client.DecrementCounter(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LetscountSDK) DecrementCounter(data map[string]any) LetscountEntity {
 	return NewDecrementCounterEntityFunc(sdk, data)
 }
 
 
+// GetCounter returns a GetCounter entity bound to this client.
+// Idiomatic usage: client.GetCounter(nil).List(nil, nil) or
+// client.GetCounter(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LetscountSDK) GetCounter(data map[string]any) LetscountEntity {
 	return NewGetCounterEntityFunc(sdk, data)
 }
 
 
+// IncrementCounter returns a IncrementCounter entity bound to this client.
+// Idiomatic usage: client.IncrementCounter(nil).List(nil, nil) or
+// client.IncrementCounter(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LetscountSDK) IncrementCounter(data map[string]any) LetscountEntity {
 	return NewIncrementCounterEntityFunc(sdk, data)
 }

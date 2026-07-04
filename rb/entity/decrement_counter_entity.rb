@@ -45,6 +45,7 @@ class DecrementCounterEntity
     end
   end
 
+  # @return [DecrementCounter, Hash] the current DecrementCounter data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class DecrementCounterEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of DecrementCounter fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -71,6 +73,11 @@ class DecrementCounterEntity
   
 
   
+  # Remove an DecrementCounter matching the given criteria.
+  #
+  # @param reqmatch [DecrementCounterRemoveMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [DecrementCounter, Hash] the removed DecrementCounter; raises LetscountError on failure
   def remove(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

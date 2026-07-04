@@ -244,24 +244,76 @@ end
 
 
 
+-- Idiomatic facade: client:create_or_update_counter():list() / client:create_or_update_counter():load({ id = ... })
+function LetscountSDK:create_or_update_counter(data)
+  local EntityMod = require("entity.create_or_update_counter_entity")
+  if data == nil then
+    if self._create_or_update_counter == nil then
+      self._create_or_update_counter = EntityMod.new(self, nil)
+    end
+    return self._create_or_update_counter
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:create_or_update_counter() instead.
 function LetscountSDK:CreateOrUpdateCounter(data)
   local EntityMod = require("entity.create_or_update_counter_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:decrement_counter():list() / client:decrement_counter():load({ id = ... })
+function LetscountSDK:decrement_counter(data)
+  local EntityMod = require("entity.decrement_counter_entity")
+  if data == nil then
+    if self._decrement_counter == nil then
+      self._decrement_counter = EntityMod.new(self, nil)
+    end
+    return self._decrement_counter
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:decrement_counter() instead.
 function LetscountSDK:DecrementCounter(data)
   local EntityMod = require("entity.decrement_counter_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:get_counter():list() / client:get_counter():load({ id = ... })
+function LetscountSDK:get_counter(data)
+  local EntityMod = require("entity.get_counter_entity")
+  if data == nil then
+    if self._get_counter == nil then
+      self._get_counter = EntityMod.new(self, nil)
+    end
+    return self._get_counter
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:get_counter() instead.
 function LetscountSDK:GetCounter(data)
   local EntityMod = require("entity.get_counter_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:increment_counter():list() / client:increment_counter():load({ id = ... })
+function LetscountSDK:increment_counter(data)
+  local EntityMod = require("entity.increment_counter_entity")
+  if data == nil then
+    if self._increment_counter == nil then
+      self._increment_counter = EntityMod.new(self, nil)
+    end
+    return self._increment_counter
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:increment_counter() instead.
 function LetscountSDK:IncrementCounter(data)
   local EntityMod = require("entity.increment_counter_entity")
   return EntityMod.new(self, data)

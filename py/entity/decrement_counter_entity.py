@@ -1,7 +1,13 @@
 # Letscount SDK DecrementCounter entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from letscount_types import (
+    DecrementCounter,
+    DecrementCounterRemoveMatch,
+)
 
 
 class DecrementCounterEntity:
@@ -44,7 +50,7 @@ class DecrementCounterEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> DecrementCounter:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,7 +59,7 @@ class DecrementCounterEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> DecrementCounter:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
@@ -66,7 +72,7 @@ class DecrementCounterEntity:
     
 
     
-    def remove(self, reqmatch, ctrl=None):
+    def remove(self, reqmatch: DecrementCounterRemoveMatch, ctrl=None) -> DecrementCounter:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "remove",

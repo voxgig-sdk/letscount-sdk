@@ -5,6 +5,8 @@ import { DecrementCounterEntity } from './entity/DecrementCounterEntity'
 import { GetCounterEntity } from './entity/GetCounterEntity'
 import { IncrementCounterEntity } from './entity/IncrementCounterEntity'
 
+export type * from './LetscountTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -205,24 +207,56 @@ class LetscountSDK {
 
 
 
+  _create_or_update_counter?: CreateOrUpdateCounterEntity
+
+  // Idiomatic facade: `client.create_or_update_counter.list()` / `client.create_or_update_counter.load({ id })`.
+  get create_or_update_counter(): CreateOrUpdateCounterEntity {
+    return (this._create_or_update_counter ??= new CreateOrUpdateCounterEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.create_or_update_counter` instead. */
   CreateOrUpdateCounter(data?: any) {
     const self = this
     return new CreateOrUpdateCounterEntity(self,data)
   }
 
 
+  _decrement_counter?: DecrementCounterEntity
+
+  // Idiomatic facade: `client.decrement_counter.list()` / `client.decrement_counter.load({ id })`.
+  get decrement_counter(): DecrementCounterEntity {
+    return (this._decrement_counter ??= new DecrementCounterEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.decrement_counter` instead. */
   DecrementCounter(data?: any) {
     const self = this
     return new DecrementCounterEntity(self,data)
   }
 
 
+  _get_counter?: GetCounterEntity
+
+  // Idiomatic facade: `client.get_counter.list()` / `client.get_counter.load({ id })`.
+  get get_counter(): GetCounterEntity {
+    return (this._get_counter ??= new GetCounterEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.get_counter` instead. */
   GetCounter(data?: any) {
     const self = this
     return new GetCounterEntity(self,data)
   }
 
 
+  _increment_counter?: IncrementCounterEntity
+
+  // Idiomatic facade: `client.increment_counter.list()` / `client.increment_counter.load({ id })`.
+  get increment_counter(): IncrementCounterEntity {
+    return (this._increment_counter ??= new IncrementCounterEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.increment_counter` instead. */
   IncrementCounter(data?: any) {
     const self = this
     return new IncrementCounterEntity(self,data)

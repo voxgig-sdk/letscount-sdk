@@ -100,7 +100,6 @@ function increment_counter_basic_setup(extra)
     ["LETSCOUNT_TEST_INCREMENT_COUNTER_ENTID"] = idmap,
     ["LETSCOUNT_TEST_LIVE"] = "FALSE",
     ["LETSCOUNT_TEST_EXPLAIN"] = "FALSE",
-    ["LETSCOUNT_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -115,7 +114,6 @@ function increment_counter_basic_setup(extra)
   if env["LETSCOUNT_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["LETSCOUNT_APIKEY"],
       },
       extra or {},
     })

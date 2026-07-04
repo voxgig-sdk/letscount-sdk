@@ -45,6 +45,7 @@ class CreateOrUpdateCounterEntity
     end
   end
 
+  # @return [CreateOrUpdateCounter, Hash] the current CreateOrUpdateCounter data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class CreateOrUpdateCounterEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of CreateOrUpdateCounter fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -67,6 +69,11 @@ class CreateOrUpdateCounterEntity
   
 
   
+  # Create a new CreateOrUpdateCounter.
+  #
+  # @param reqdata [CreateOrUpdateCounterCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [CreateOrUpdateCounter, Hash] the created CreateOrUpdateCounter; raises LetscountError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

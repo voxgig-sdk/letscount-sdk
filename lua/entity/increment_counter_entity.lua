@@ -85,6 +85,10 @@ end
 
 
 
+---@param reqdata IncrementCounterUpdateData
+---@param ctrl? table
+---@return IncrementCounter
+---@return string? err
 function IncrementCounterEntity:update(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

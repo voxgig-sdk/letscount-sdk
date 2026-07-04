@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.letscountapi.com',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -125,7 +121,8 @@ class Config {
                     "name": "key",
                     "orig": "key",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -133,7 +130,8 @@ class Config {
                     "name": "namespace",
                     "orig": "namespace",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 1
                   }
                 ]
               },
@@ -181,7 +179,8 @@ class Config {
                     "name": "key",
                     "orig": "key",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -189,7 +188,8 @@ class Config {
                     "name": "namespace",
                     "orig": "namespace",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 1
                   }
                 ]
               },
@@ -273,7 +273,8 @@ class Config {
                     "name": "key",
                     "orig": "key",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -281,7 +282,8 @@ class Config {
                     "name": "namespace",
                     "orig": "namespace",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 1
                   }
                 ]
               },
@@ -372,7 +374,8 @@ class Config {
                     "name": "key",
                     "orig": "key",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -380,7 +383,8 @@ class Config {
                     "name": "namespace",
                     "orig": "namespace",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 1
                   }
                 ]
               },

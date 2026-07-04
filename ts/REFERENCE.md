@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -146,7 +145,7 @@ Alias for `LetscountSDK.test()`.
 ## CreateOrUpdateCounterEntity
 
 ```ts
-const create_or_update_counter = client.CreateOrUpdateCounter()
+const create_or_update_counter = client.create_or_update_counter
 ```
 
 ### Fields
@@ -176,7 +175,7 @@ const create_or_update_counter = client.CreateOrUpdateCounter()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.CreateOrUpdateCounter().create({
+const result = await client.create_or_update_counter.create({
 })
 ```
 
@@ -211,7 +210,7 @@ Return a copy of the entity options.
 ## DecrementCounterEntity
 
 ```ts
-const decrement_counter = client.DecrementCounter()
+const decrement_counter = client.decrement_counter
 ```
 
 ### Operations
@@ -221,7 +220,7 @@ const decrement_counter = client.DecrementCounter()
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.DecrementCounter().remove({ id: 'decrement_counter_id' })
+const result = await client.decrement_counter.remove({ id: 'decrement_counter_id' })
 ```
 
 ### Common Methods
@@ -255,7 +254,7 @@ Return a copy of the entity options.
 ## GetCounterEntity
 
 ```ts
-const get_counter = client.GetCounter()
+const get_counter = client.get_counter
 ```
 
 ### Fields
@@ -275,7 +274,7 @@ const get_counter = client.GetCounter()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.GetCounter().load({ id: 'get_counter_id' })
+const result = await client.get_counter.load({ id: 'get_counter_id' })
 ```
 
 ### Common Methods
@@ -309,7 +308,7 @@ Return a copy of the entity options.
 ## IncrementCounterEntity
 
 ```ts
-const increment_counter = client.IncrementCounter()
+const increment_counter = client.increment_counter
 ```
 
 ### Fields
@@ -330,7 +329,7 @@ const increment_counter = client.IncrementCounter()
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.IncrementCounter().update({
+const result = await client.increment_counter.update({
   id: 'increment_counter_id',
   // Fields to update
 })

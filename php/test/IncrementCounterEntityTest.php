@@ -56,8 +56,7 @@ class IncrementCounterEntityTest extends TestCase
         $increment_counter_ref01_markdef_up0_value = "Mark01-increment_counter_ref01_" . $setup["now"];
         $increment_counter_ref01_data_up0_up[$increment_counter_ref01_markdef_up0_name] = $increment_counter_ref01_markdef_up0_value;
 
-        [$increment_counter_ref01_resdata_up0_result, $err] = $increment_counter_ref01_ent->update($increment_counter_ref01_data_up0_up, null);
-        $this->assertNull($err);
+        $increment_counter_ref01_resdata_up0_result = $increment_counter_ref01_ent->update($increment_counter_ref01_data_up0_up, null);
         $increment_counter_ref01_resdata_up0 = Helpers::to_map($increment_counter_ref01_resdata_up0_result);
         $this->assertNotNull($increment_counter_ref01_resdata_up0);
         $this->assertEquals($increment_counter_ref01_resdata_up0[$increment_counter_ref01_markdef_up0_name], $increment_counter_ref01_markdef_up0_value);
@@ -94,7 +93,6 @@ function increment_counter_basic_setup($extra)
         "LETSCOUNT_TEST_INCREMENT_COUNTER_ENTID" => $idmap,
         "LETSCOUNT_TEST_LIVE" => "FALSE",
         "LETSCOUNT_TEST_EXPLAIN" => "FALSE",
-        "LETSCOUNT_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -109,7 +107,6 @@ function increment_counter_basic_setup($extra)
     if ($env["LETSCOUNT_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LETSCOUNT_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -87,6 +87,10 @@ end
 
 
 
+---@param reqmatch DecrementCounterRemoveMatch
+---@param ctrl? table
+---@return DecrementCounter
+---@return string? err
 function DecrementCounterEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
