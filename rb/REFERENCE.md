@@ -8,7 +8,7 @@ Complete API reference for the Letscount Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'letscount_sdk'
+require_relative 'Letscount_sdk'
 
 client = LetscountSDK.new(options)
 ```
@@ -105,21 +105,21 @@ create_or_update_counter = client.CreateOrUpdateCounter
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `String` | No |  |
+| `key` | `String` | No |  |
+| `namespace` | `String` | No |  |
+| `updated_at` | `String` | No |  |
+| `value` | `Float` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `key` | - | - | - | - | - |
-| `namespace` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `value` | - | - | Yes | - | - |
+| Field | create |
+| --- | --- |
+| `created_at` | - |
+| `key` | - |
+| `namespace` | - |
+| `updated_at` | - |
+| `value` | Yes |
 
 ### Operations
 
@@ -175,7 +175,7 @@ decrement_counter = client.DecrementCounter
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.DecrementCounter.remove({ "id" => "decrement_counter_id" })
+result = client.DecrementCounter.remove()
 ```
 
 ### Common Methods
@@ -218,11 +218,11 @@ get_counter = client.GetCounter
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `String` | No |  |
+| `key` | `String` | No |  |
+| `namespace` | `String` | No |  |
+| `updated_at` | `String` | No |  |
+| `value` | `Float` | No |  |
 
 ### Operations
 
@@ -231,7 +231,7 @@ get_counter = client.GetCounter
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.GetCounter.load({ "id" => "get_counter_id" })
+result = client.GetCounter.load()
 ```
 
 ### Common Methods
@@ -274,12 +274,12 @@ increment_counter = client.IncrementCounter
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | ``$NUMBER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `amount` | `Float` | No |  |
+| `created_at` | `String` | No |  |
+| `key` | `String` | No |  |
+| `namespace` | `String` | No |  |
+| `updated_at` | `String` | No |  |
+| `value` | `Float` | No |  |
 
 ### Operations
 
@@ -289,7 +289,6 @@ Update an existing entity. The data must include the entity `id`. Raises on erro
 
 ```ruby
 result = client.IncrementCounter.update({
-  "id" => "increment_counter_id",
   # Fields to update
 })
 ```

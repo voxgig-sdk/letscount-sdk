@@ -102,21 +102,21 @@ local create_or_update_counter = client:CreateOrUpdateCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `number` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `key` | - | - | - | - | - |
-| `namespace` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `value` | - | - | Yes | - | - |
+| Field | create |
+| --- | --- |
+| `created_at` | - |
+| `key` | - |
+| `namespace` | - |
+| `updated_at` | - |
+| `value` | Yes |
 
 ### Operations
 
@@ -172,7 +172,7 @@ local decrement_counter = client:DecrementCounter(nil)
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:DecrementCounter():remove({ id = "decrement_counter_id" })
+local result, err = client:DecrementCounter():remove()
 ```
 
 ### Common Methods
@@ -215,11 +215,11 @@ local get_counter = client:GetCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `number` | No |  |
 
 ### Operations
 
@@ -228,7 +228,7 @@ local get_counter = client:GetCounter(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetCounter():load({ id = "get_counter_id" })
+local result, err = client:GetCounter():load()
 ```
 
 ### Common Methods
@@ -271,12 +271,12 @@ local increment_counter = client:IncrementCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | ``$NUMBER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `amount` | `number` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `number` | No |  |
 
 ### Operations
 
@@ -286,7 +286,6 @@ Update an existing entity. The data must include the entity `id`.
 
 ```lua
 local result, err = client:IncrementCounter():update({
-  id = "increment_counter_id",
   -- Fields to update
 })
 ```

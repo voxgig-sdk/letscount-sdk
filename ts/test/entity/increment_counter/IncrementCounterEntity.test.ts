@@ -65,12 +65,12 @@ describe('IncrementCounterEntity', async () => {
     increment_counter_ref01_data_up0 ['namespace'] = setup.idmap['namespace']
 
     const increment_counter_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-increment_counter_ref01_' + setup.now }
-    increment_counter_ref01_data_up0 [increment_counter_ref01_markdef_up0.name] = increment_counter_ref01_markdef_up0.value
+    ;(increment_counter_ref01_data_up0 as any)[increment_counter_ref01_markdef_up0.name] = increment_counter_ref01_markdef_up0.value
 
     const increment_counter_ref01_resdata_up0 = await increment_counter_ref01_ent.update(increment_counter_ref01_data_up0)
     assert(null != increment_counter_ref01_resdata_up0)
 
-    assert(increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0.name] === increment_counter_ref01_markdef_up0.value)
+    assert((increment_counter_ref01_resdata_up0 as any)[increment_counter_ref01_markdef_up0.name] === increment_counter_ref01_markdef_up0.value)
 
 
   })

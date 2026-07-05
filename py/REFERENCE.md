@@ -99,21 +99,21 @@ create_or_update_counter = client.CreateOrUpdateCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `str` | No |  |
+| `key` | `str` | No |  |
+| `namespace` | `str` | No |  |
+| `updated_at` | `str` | No |  |
+| `value` | `float` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `key` | - | - | - | - | - |
-| `namespace` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `value` | - | - | Yes | - | - |
+| Field | create |
+| --- | --- |
+| `created_at` | - |
+| `key` | - |
+| `namespace` | - |
+| `updated_at` | - |
+| `value` | Yes |
 
 ### Operations
 
@@ -168,7 +168,7 @@ decrement_counter = client.DecrementCounter()
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.DecrementCounter().remove({"id": "decrement_counter_id"})
+result = client.DecrementCounter().remove()
 ```
 
 ### Common Methods
@@ -210,11 +210,11 @@ get_counter = client.GetCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `str` | No |  |
+| `key` | `str` | No |  |
+| `namespace` | `str` | No |  |
+| `updated_at` | `str` | No |  |
+| `value` | `float` | No |  |
 
 ### Operations
 
@@ -223,7 +223,7 @@ get_counter = client.GetCounter()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.GetCounter().load({"id": "get_counter_id"})
+result = client.GetCounter().load()
 ```
 
 ### Common Methods
@@ -265,12 +265,12 @@ increment_counter = client.IncrementCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | ``$NUMBER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `amount` | `float` | No |  |
+| `created_at` | `str` | No |  |
+| `key` | `str` | No |  |
+| `namespace` | `str` | No |  |
+| `updated_at` | `str` | No |  |
+| `value` | `float` | No |  |
 
 ### Operations
 
@@ -280,7 +280,6 @@ Update an existing entity. The data must include the entity `id`. Returns the up
 
 ```python
 result = client.IncrementCounter().update({
-    "id": "increment_counter_id",
     # Fields to update
 })
 ```

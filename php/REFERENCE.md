@@ -57,11 +57,11 @@ Create a new `GetCounterEntity` instance. Pass `null` for no initial data.
 
 Create a new `IncrementCounterEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): LetscountUtility`
 
 Return a copy of the SDK utility object.
 
@@ -104,21 +104,21 @@ $create_or_update_counter = $client->CreateOrUpdateCounter();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `float` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `key` | - | - | - | - | - |
-| `namespace` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `value` | - | - | Yes | - | - |
+| Field | create |
+| --- | --- |
+| `created_at` | - |
+| `key` | - |
+| `namespace` | - |
+| `updated_at` | - |
+| `value` | Yes |
 
 ### Operations
 
@@ -133,19 +133,19 @@ $result = $client->CreateOrUpdateCounter()->create([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -154,7 +154,7 @@ Set the entity match criteria.
 Create a new `CreateOrUpdateCounterEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -174,24 +174,24 @@ $decrement_counter = $client->DecrementCounter();
 Remove the entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->DecrementCounter()->remove(["id" => "decrement_counter_id"]);
+$result = $client->DecrementCounter()->remove();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -200,7 +200,7 @@ Set the entity match criteria.
 Create a new `DecrementCounterEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -217,11 +217,11 @@ $get_counter = $client->GetCounter();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `float` | No |  |
 
 ### Operations
 
@@ -230,24 +230,24 @@ $get_counter = $client->GetCounter();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->GetCounter()->load(["id" => "get_counter_id"]);
+$result = $client->GetCounter()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -256,7 +256,7 @@ Set the entity match criteria.
 Create a new `GetCounterEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -273,12 +273,12 @@ $increment_counter = $client->IncrementCounter();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | ``$NUMBER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `amount` | `float` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `float` | No |  |
 
 ### Operations
 
@@ -288,26 +288,25 @@ Update an existing entity. The data must include the entity `id`. Throws on erro
 
 ```php
 $result = $client->IncrementCounter()->update([
-  "id" => "increment_counter_id",
   // Fields to update
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -316,7 +315,7 @@ Set the entity match criteria.
 Create a new `IncrementCounterEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

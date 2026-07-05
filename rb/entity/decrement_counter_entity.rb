@@ -78,7 +78,7 @@ class DecrementCounterEntity
   # @param reqmatch [DecrementCounterRemoveMatch, Hash, nil] match criteria (id/query fields)
   # @param ctrl [Object, nil] optional per-call control
   # @return [DecrementCounter, Hash] the removed DecrementCounter; raises LetscountError on failure
-  def remove(reqmatch, ctrl = nil)
+  def remove(reqmatch = nil, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
       "opname" => "remove",

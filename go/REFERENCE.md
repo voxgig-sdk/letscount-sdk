@@ -109,21 +109,21 @@ create_or_update_counter := client.CreateOrUpdateCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `float64` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `key` | - | - | - | - | - |
-| `namespace` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `value` | - | - | Yes | - | - |
+| Field | create |
+| --- | --- |
+| `created_at` | - |
+| `key` | - |
+| `namespace` | - |
+| `updated_at` | - |
+| `value` | Yes |
 
 ### Operations
 
@@ -173,7 +173,7 @@ decrement_counter := client.DecrementCounter(nil)
 Remove the entity matching the given criteria.
 
 ```go
-result, err := client.DecrementCounter(nil).Remove(map[string]any{"id": "decrement_counter_id"}, nil)
+result, err := client.DecrementCounter(nil).Remove(nil, nil)
 ```
 
 ### Common Methods
@@ -210,11 +210,11 @@ get_counter := client.GetCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `float64` | No |  |
 
 ### Operations
 
@@ -223,7 +223,7 @@ get_counter := client.GetCounter(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.GetCounter(nil).Load(map[string]any{"id": "get_counter_id"}, nil)
+result, err := client.GetCounter(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -260,12 +260,12 @@ increment_counter := client.IncrementCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | ``$NUMBER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `amount` | `float64` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `float64` | No |  |
 
 ### Operations
 
@@ -275,7 +275,6 @@ Update an existing entity. The data must include the entity `id`.
 
 ```go
 result, err := client.IncrementCounter(nil).Update(map[string]any{
-    "id": "increment_counter_id",
     // Fields to update
 }, nil)
 ```

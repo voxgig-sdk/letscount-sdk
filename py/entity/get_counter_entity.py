@@ -64,8 +64,13 @@ class GetCounterEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: GetCounterLoadMatch, ctrl=None) -> GetCounter:
+    def load(self, reqmatch=None, ctrl=None) -> GetCounter:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.GetCounter().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,

@@ -16,9 +16,6 @@ go build -o letscount-cli ./...
 
 ```sh
 # One-shot: arguments form a single AQL expression
-./letscount-cli list create_or_update_counter
-./letscount-cli load 1 create_or_update_counter
-./letscount-cli load '{id:1}' create_or_update_counter
 
 # REPL
 ./letscount-cli
@@ -28,7 +25,6 @@ go build -o letscount-cli ./...
 
 | Word     | Signatures                                   | Description                |
 |----------|----------------------------------------------|----------------------------|
-| `list`   | `[entity]` · `[query entity]`                | List records               |
 | `load`   | `[entity]` · `[query entity]`                | Load a single record       |
 | `update` | `[entity]` · `[query entity]`                | Update a record            |
 

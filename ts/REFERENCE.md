@@ -152,21 +152,21 @@ const create_or_update_counter = client.CreateOrUpdateCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `number` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `key` | - | - | - | - | - |
-| `namespace` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
-| `value` | - | - | Yes | - | - |
+| Field | create |
+| --- | --- |
+| `created_at` | - |
+| `key` | - |
+| `namespace` | - |
+| `updated_at` | - |
+| `value` | Yes |
 
 ### Operations
 
@@ -220,7 +220,7 @@ const decrement_counter = client.DecrementCounter()
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.DecrementCounter().remove({ id: 'decrement_counter_id' })
+const result = await client.DecrementCounter().remove()
 ```
 
 ### Common Methods
@@ -261,11 +261,11 @@ const get_counter = client.GetCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `number` | No |  |
 
 ### Operations
 
@@ -274,7 +274,7 @@ const get_counter = client.GetCounter()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.GetCounter().load({ id: 'get_counter_id' })
+const result = await client.GetCounter().load()
 ```
 
 ### Common Methods
@@ -315,12 +315,12 @@ const increment_counter = client.IncrementCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | ``$NUMBER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `namespace` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `value` | ``$NUMBER`` | No |  |
+| `amount` | `number` | No |  |
+| `created_at` | `string` | No |  |
+| `key` | `string` | No |  |
+| `namespace` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `value` | `number` | No |  |
 
 ### Operations
 
@@ -330,7 +330,6 @@ Update an existing entity. The data must include the entity `id`.
 
 ```ts
 const result = await client.IncrementCounter().update({
-  id: 'increment_counter_id',
   // Fields to update
 })
 ```

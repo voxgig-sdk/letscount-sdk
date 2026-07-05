@@ -221,25 +221,25 @@ class LetscountSDK:
 
 
     def CreateOrUpdateCounter(self, data=None) -> "CreateOrUpdateCounterEntity":
-        """Entity factory: client.CreateOrUpdateCounter().list({}) / client.CreateOrUpdateCounter().load({"id": ...})."""
+        """Entity factory: client.CreateOrUpdateCounter().list() / client.CreateOrUpdateCounter().load({"id": ...})."""
         from entity.create_or_update_counter_entity import CreateOrUpdateCounterEntity
         return CreateOrUpdateCounterEntity(self, data)
 
 
     def DecrementCounter(self, data=None) -> "DecrementCounterEntity":
-        """Entity factory: client.DecrementCounter().list({}) / client.DecrementCounter().load({"id": ...})."""
+        """Entity factory: client.DecrementCounter().list() / client.DecrementCounter().load({"id": ...})."""
         from entity.decrement_counter_entity import DecrementCounterEntity
         return DecrementCounterEntity(self, data)
 
 
     def GetCounter(self, data=None) -> "GetCounterEntity":
-        """Entity factory: client.GetCounter().list({}) / client.GetCounter().load({"id": ...})."""
+        """Entity factory: client.GetCounter().list() / client.GetCounter().load({"id": ...})."""
         from entity.get_counter_entity import GetCounterEntity
         return GetCounterEntity(self, data)
 
 
     def IncrementCounter(self, data=None) -> "IncrementCounterEntity":
-        """Entity factory: client.IncrementCounter().list({}) / client.IncrementCounter().load({"id": ...})."""
+        """Entity factory: client.IncrementCounter().list() / client.IncrementCounter().load({"id": ...})."""
         from entity.increment_counter_entity import IncrementCounterEntity
         return IncrementCounterEntity(self, data)
 
