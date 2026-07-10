@@ -40,7 +40,7 @@ client = LetscountSDK()
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.CreateOrUpdateCounter().create({"key": "example", "namespace": "example"})
+created = client.CreateOrUpdateCounter().create({"key": "example_key", "namespace": "example_namespace"})
 
 ```
 
@@ -51,10 +51,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    createorupdatecounter = client.CreateOrUpdateCounter().create({ "key": "example", "namespace": "example" })
-    print(createorupdatecounter)
+    getcounter = client.GetCounter().load()
+    print(getcounter)
 except Exception as err:
-    print(f"create failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -119,8 +119,8 @@ Create a mock client for unit testing — no server required:
 client = LetscountSDK.test()
 
 # Entity ops return the bare record and raise on error.
-createorupdatecounter = client.CreateOrUpdateCounter().create({"key": "example", "namespace": "example"})
-# createorupdatecounter contains the mock response record
+getcounter = client.GetCounter().load()
+# getcounter contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -319,6 +319,8 @@ Create an instance: `create_or_update_counter = client.CreateOrUpdateCounter()`
 
 ```python
 create_or_update_counter = client.CreateOrUpdateCounter().create({
+    "key": "example_key",  # str
+    "namespace": "example_namespace",  # str
 })
 ```
 
@@ -357,7 +359,7 @@ Create an instance: `get_counter = client.GetCounter()`
 #### Example: Load
 
 ```python
-get_counter = client.GetCounter().load()
+get_counter = client.GetCounter().load({"key": "key", "namespace": "namespace"})
 ```
 
 
@@ -454,15 +456,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-createorupdatecounter = client.CreateOrUpdateCounter()
-createorupdatecounter.create({ "key": "example", "namespace": "example" })
+getcounter = client.GetCounter()
+getcounter.load()
 
-# createorupdatecounter.data_get() now returns the createorupdatecounter data from the last create
-# createorupdatecounter.match_get() returns the last match criteria
+# getcounter.data_get() now returns the getcounter data from the last load
+# getcounter.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

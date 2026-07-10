@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -576,14 +573,17 @@
           "url": "https://letscountapi.com/"
         },
         "description": "The LetsCount API allows users to create, retrieve, update, increment, and decrement counters identified by a unique namespace and key. It is designed for easy tracking of numerical values in a completely free manner.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://api.letscountapi.com"
           }
         ],
+        "summary": "The LetsCount API allows users to create, retrieve, update, increment, and decrement counters identified by a unique namespace and key.",
         "title": "LetsCount API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://letscountapi.com/"
       },
       "option": {},
       "target": {
@@ -636,6 +636,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -686,6 +689,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

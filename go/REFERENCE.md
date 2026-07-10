@@ -102,7 +102,8 @@ same parameters as `Direct()`.
 ## CreateOrUpdateCounterEntity
 
 ```go
-create_or_update_counter := client.CreateOrUpdateCounter(nil)
+createOrUpdateCounter := client.CreateOrUpdateCounter(nil)
+fmt.Println(createOrUpdateCounter.GetName()) // "create_or_update_counter"
 ```
 
 ### Fields
@@ -133,7 +134,13 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{
+    "key": "example_key",
+    "namespace": "example_namespace",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -163,7 +170,8 @@ Return the entity name.
 ## DecrementCounterEntity
 
 ```go
-decrement_counter := client.DecrementCounter(nil)
+decrementCounter := client.DecrementCounter(nil)
+fmt.Println(decrementCounter.GetName()) // "decrement_counter"
 ```
 
 ### Operations
@@ -173,7 +181,11 @@ decrement_counter := client.DecrementCounter(nil)
 Remove the entity matching the given criteria.
 
 ```go
-result, err := client.DecrementCounter(nil).Remove(nil, nil)
+result, err := client.DecrementCounter(nil).Remove(map[string]any{"key": "key", "namespace": "namespace"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -203,7 +215,8 @@ Return the entity name.
 ## GetCounterEntity
 
 ```go
-get_counter := client.GetCounter(nil)
+getCounter := client.GetCounter(nil)
+fmt.Println(getCounter.GetName()) // "get_counter"
 ```
 
 ### Fields
@@ -223,7 +236,11 @@ get_counter := client.GetCounter(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.GetCounter(nil).Load(nil, nil)
+result, err := client.GetCounter(nil).Load(map[string]any{"key": "key", "namespace": "namespace"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -253,7 +270,8 @@ Return the entity name.
 ## IncrementCounterEntity
 
 ```go
-increment_counter := client.IncrementCounter(nil)
+incrementCounter := client.IncrementCounter(nil)
+fmt.Println(incrementCounter.GetName()) // "increment_counter"
 ```
 
 ### Fields
@@ -275,8 +293,14 @@ Update an existing entity. The data must include the entity `id`.
 
 ```go
 result, err := client.IncrementCounter(nil).Update(map[string]any{
+    "key": "key",
+    "namespace": "namespace",
     // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

@@ -176,6 +176,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.CreateOrUpdateCounter().create({
+  key: 'example_key',
+  namespace: 'example_namespace',
 })
 ```
 
@@ -220,7 +222,7 @@ const decrement_counter = client.DecrementCounter()
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.DecrementCounter().remove()
+const result = await client.DecrementCounter().remove({ key: 'key', namespace: 'namespace' })
 ```
 
 ### Common Methods
@@ -274,7 +276,7 @@ const get_counter = client.GetCounter()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.GetCounter().load()
+const result = await client.GetCounter().load({ key: 'key', namespace: 'namespace' })
 ```
 
 ### Common Methods
@@ -330,6 +332,8 @@ Update an existing entity. The data must include the entity `id`.
 
 ```ts
 const result = await client.IncrementCounter().update({
+  key: 'key',
+  namespace: 'namespace',
   // Fields to update
 })
 ```

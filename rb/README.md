@@ -34,7 +34,7 @@ client = LetscountSDK.new
 
 ```ruby
 # create returns the bare created CreateOrUpdateCounter record.
-created = client.CreateOrUpdateCounter.create({ "key" => "example", "namespace" => "example" })
+created = client.CreateOrUpdateCounter.create({ "key" => "example_key", "namespace" => "example_namespace" })
 
 ```
 
@@ -45,9 +45,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  createorupdatecounter = client.CreateOrUpdateCounter.create({ "key" => "example", "namespace" => "example" })
+  getcounter = client.GetCounter.load()
 rescue => err
-  warn "create failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -114,8 +114,8 @@ Create a mock client for unit testing — no server required:
 client = LetscountSDK.test
 
 # Entity ops return the bare mock record (raises on error).
-createorupdatecounter = client.CreateOrUpdateCounter.create({ "key" => "example", "namespace" => "example" })
-puts createorupdatecounter
+getcounter = client.GetCounter.load()
+puts getcounter
 ```
 
 ### Use a custom fetch function
@@ -313,6 +313,8 @@ Create an instance: `create_or_update_counter = client.CreateOrUpdateCounter`
 
 ```ruby
 create_or_update_counter = client.CreateOrUpdateCounter.create({
+  "key" => "example_key", # String
+  "namespace" => "example_namespace", # String
 })
 ```
 
@@ -352,7 +354,7 @@ Create an instance: `get_counter = client.GetCounter`
 
 ```ruby
 # load returns the bare GetCounter record (raises on error).
-get_counter = client.GetCounter.load()
+get_counter = client.GetCounter.load({ "key" => "key", "namespace" => "namespace" })
 ```
 
 
@@ -450,15 +452,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-createorupdatecounter = client.CreateOrUpdateCounter
-createorupdatecounter.create({ "key" => "example", "namespace" => "example" })
+getcounter = client.GetCounter
+getcounter.load()
 
-# createorupdatecounter.data_get now returns the createorupdatecounter data from the last create
-# createorupdatecounter.match_get returns the last match criteria
+# getcounter.data_get now returns the getcounter data from the last load
+# getcounter.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

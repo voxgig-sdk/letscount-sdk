@@ -123,6 +123,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.CreateOrUpdateCounter().create({
+    "key": "example_key",  # str
+    "namespace": "example_namespace",  # str
 })
 ```
 
@@ -168,7 +170,7 @@ decrement_counter = client.DecrementCounter()
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.DecrementCounter().remove()
+result = client.DecrementCounter().remove({"key": "key", "namespace": "namespace"})
 ```
 
 ### Common Methods
@@ -223,7 +225,7 @@ get_counter = client.GetCounter()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.GetCounter().load()
+result = client.GetCounter().load({"key": "key", "namespace": "namespace"})
 ```
 
 ### Common Methods
@@ -280,6 +282,8 @@ Update an existing entity. The data must include the entity `id`. Returns the up
 
 ```python
 result = client.IncrementCounter().update({
+    "key": "key",
+    "namespace": "namespace",
     # Fields to update
 })
 ```

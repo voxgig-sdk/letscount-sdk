@@ -50,8 +50,8 @@ import (
 func main() {
     client := sdk.New()
 
-    // Create a createorupdatecounter.
-    created, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{"key": "example", "namespace": "example"}, nil)
+    // Create a createOrUpdateCounter.
+    created, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{"key": "example_key", "namespace": "example_namespace"}, nil)
     if err != nil {
         panic(err)
     }
@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-createorupdatecounter, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{"key": "example", "namespace": "example"}, nil)
+getcounter, err := client.GetCounter(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = createorupdatecounter
+_ = getcounter
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-createorupdatecounter, err := client.CreateOrUpdateCounter(nil).Create(
-    map[string]any{"key": "example", "namespace": "example"}, nil,
+getCounter, err := client.GetCounter(nil).Load(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(createorupdatecounter) // the returned mock data
+fmt.Println(getCounter) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -251,9 +251,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    createorupdatecounter, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{/* fields */}, nil)
+    createOrUpdateCounter, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // createorupdatecounter is the returned record
+    // createOrUpdateCounter is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -319,7 +319,7 @@ API path: `/{namespace}/{key}`
 
 ### CreateOrUpdateCounter
 
-Create an instance: `create_or_update_counter := client.CreateOrUpdateCounter(nil)`
+Create an instance: `createOrUpdateCounter := client.CreateOrUpdateCounter(nil)`
 
 #### Operations
 
@@ -341,13 +341,19 @@ Create an instance: `create_or_update_counter := client.CreateOrUpdateCounter(ni
 
 ```go
 result, err := client.CreateOrUpdateCounter(nil).Create(map[string]any{
+    "key": "example_key",
+    "namespace": "example_namespace",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### DecrementCounter
 
-Create an instance: `decrement_counter := client.DecrementCounter(nil)`
+Create an instance: `decrementCounter := client.DecrementCounter(nil)`
 
 #### Operations
 
@@ -358,7 +364,7 @@ Create an instance: `decrement_counter := client.DecrementCounter(nil)`
 
 ### GetCounter
 
-Create an instance: `get_counter := client.GetCounter(nil)`
+Create an instance: `getCounter := client.GetCounter(nil)`
 
 #### Operations
 
@@ -379,17 +385,17 @@ Create an instance: `get_counter := client.GetCounter(nil)`
 #### Example: Load
 
 ```go
-get_counter, err := client.GetCounter(nil).Load(nil, nil)
+getCounter, err := client.GetCounter(nil).Load(map[string]any{"key": "key", "namespace": "namespace"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(get_counter) // the loaded record
+fmt.Println(getCounter) // the loaded record
 ```
 
 
 ### IncrementCounter
 
-Create an instance: `increment_counter := client.IncrementCounter(nil)`
+Create an instance: `incrementCounter := client.IncrementCounter(nil)`
 
 #### Operations
 
@@ -478,15 +484,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Create`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-createorupdatecounter := client.CreateOrUpdateCounter(nil)
-createorupdatecounter.Create(map[string]any{"key": "example", "namespace": "example"}, nil)
+getcounter := client.GetCounter(nil)
+getcounter.Load(nil, nil)
 
-// createorupdatecounter.Data() now returns the createorupdatecounter data from the last create
-// createorupdatecounter.Match() returns the last match criteria
+// getcounter.Data() now returns the getcounter data from the last load
+// getcounter.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

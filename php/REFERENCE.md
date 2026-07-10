@@ -128,6 +128,8 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->CreateOrUpdateCounter()->create([
+  "key" => null, // string
+  "namespace" => null, // string
 ]);
 ```
 
@@ -174,7 +176,7 @@ $decrement_counter = $client->DecrementCounter();
 Remove the entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->DecrementCounter()->remove();
+$result = $client->DecrementCounter()->remove(["key" => "key", "namespace" => "namespace"]);
 ```
 
 ### Common Methods
@@ -230,7 +232,7 @@ $get_counter = $client->GetCounter();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->GetCounter()->load();
+$result = $client->GetCounter()->load(["key" => "key", "namespace" => "namespace"]);
 ```
 
 ### Common Methods
@@ -288,6 +290,8 @@ Update an existing entity. The data must include the entity `id`. Throws on erro
 
 ```php
 $result = $client->IncrementCounter()->update([
+  "key" => "key",
+  "namespace" => "namespace",
   // Fields to update
 ]);
 ```

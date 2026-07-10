@@ -15,9 +15,9 @@ main: {
           url: "https://api.letscountapi.com"
         }
       ]
+      summary: "The LetsCount API allows users to create, retrieve, update, increment, and decrement counters identified by a unique namespace and key."
       title: "LetsCount API"
       version: "1.0.0"
+      website: "https://letscountapi.com/"
     }
   }
-}
-

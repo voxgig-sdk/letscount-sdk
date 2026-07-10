@@ -126,6 +126,8 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:CreateOrUpdateCounter():create({
+  key = --[[ string ]],
+  namespace = --[[ string ]],
 })
 ```
 
@@ -172,7 +174,7 @@ local decrement_counter = client:DecrementCounter(nil)
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:DecrementCounter():remove()
+local result, err = client:DecrementCounter():remove({ key = "key", namespace = "namespace" })
 ```
 
 ### Common Methods
@@ -228,7 +230,7 @@ local get_counter = client:GetCounter(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetCounter():load()
+local result, err = client:GetCounter():load({ key = "key", namespace = "namespace" })
 ```
 
 ### Common Methods
@@ -286,6 +288,8 @@ Update an existing entity. The data must include the entity `id`.
 
 ```lua
 local result, err = client:IncrementCounter():update({
+  key = "key",
+  namespace = "namespace",
   -- Fields to update
 })
 ```

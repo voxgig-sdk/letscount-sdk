@@ -51,10 +51,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const createorupdatecounter = await client.CreateOrUpdateCounter().create({ key: "example", namespace: "example" })
-  console.log(createorupdatecounter)
+  const getcounter = await client.GetCounter().load()
+  console.log(getcounter)
 } catch (err) {
-  console.error('create failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -118,9 +118,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LetscountSDK.test()
 
-const createorupdatecounter = await client.CreateOrUpdateCounter().create({ key: 'example_key', namespace: 'example_namespace' })
-// createorupdatecounter is a bare entity populated with mock response data
-console.log(createorupdatecounter)
+const getcounter = await client.GetCounter().load()
+// getcounter is a bare entity populated with mock response data
+console.log(getcounter)
 ```
 
 You can also use the instance method:
@@ -135,10 +135,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.CreateOrUpdateCounter()
+const entity = client.GetCounter()
 
 // First call runs the operation and stores its result
-await entity.create({ key: 'example_key', namespace: 'example_namespace' })
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -366,6 +366,8 @@ Create an instance: `const create_or_update_counter = client.CreateOrUpdateCount
 
 ```ts
 const create_or_update_counter = await client.CreateOrUpdateCounter().create({
+  key: 'example_key',
+  namespace: 'example_namespace',
 })
 ```
 
@@ -404,7 +406,7 @@ Create an instance: `const get_counter = client.GetCounter()`
 #### Example: Load
 
 ```ts
-const get_counter = await client.GetCounter().load()
+const get_counter = await client.GetCounter().load({ key: 'key', namespace: 'namespace' })
 ```
 
 
@@ -494,16 +496,16 @@ import { LetscountSDK } from '@voxgig-sdk/letscount'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const createorupdatecounter = client.CreateOrUpdateCounter()
-await createorupdatecounter.create({ key: "example", namespace: "example" })
+const getcounter = client.GetCounter()
+await getcounter.load()
 
-// createorupdatecounter.data() now returns the createorupdatecounter data from the last `create`
-// createorupdatecounter.match() returns the last match criteria
+// getcounter.data() now returns the getcounter data from the last `load`
+// getcounter.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

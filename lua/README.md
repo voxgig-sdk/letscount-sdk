@@ -37,7 +37,7 @@ local client = sdk.new()
 
 ```lua
 -- Create
-local created, err = client:CreateOrUpdateCounter():create({ key = "example", namespace = "example" })
+local created, err = client:CreateOrUpdateCounter():create({ key = "example_key", namespace = "example_namespace" })
 if err then error(err) end
 
 ```
@@ -49,7 +49,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local createorupdatecounter, err = client:CreateOrUpdateCounter():create({ key = "example", namespace = "example" })
+local getcounter, err = client:GetCounter():load()
 if err then error(err) end
 ```
 
@@ -107,7 +107,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:CreateOrUpdateCounter():create({ key = "example", namespace = "example" })
+local result, err = client:GetCounter():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -309,6 +309,8 @@ Create an instance: `local create_or_update_counter = client:CreateOrUpdateCount
 
 ```lua
 local create_or_update_counter, err = client:CreateOrUpdateCounter():create({
+  key = "example_key", -- string
+  namespace = "example_namespace", -- string
 })
 ```
 
@@ -347,7 +349,7 @@ Create an instance: `local get_counter = client:GetCounter(nil)`
 #### Example: Load
 
 ```lua
-local get_counter, err = client:GetCounter():load()
+local get_counter, err = client:GetCounter():load({ key = "key", namespace = "namespace" })
 ```
 
 
@@ -445,15 +447,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local createorupdatecounter = client:CreateOrUpdateCounter()
-createorupdatecounter:create({ key = "example", namespace = "example" })
+local getcounter = client:GetCounter()
+getcounter:load()
 
--- createorupdatecounter:data_get() now returns the createorupdatecounter data from the last create
--- createorupdatecounter:match_get() returns the last match criteria
+-- getcounter:data_get() now returns the getcounter data from the last load
+-- getcounter:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
