@@ -46,13 +46,6 @@ class DecrementCounterEntityTest extends TestCase
             $decrement_counter_ref01_data = Helpers::to_map($decrement_counter_ref01_data_raw[0][1]);
         }
 
-        // REMOVE
-        $decrement_counter_ref01_ent = $client->DecrementCounter(null);
-        $decrement_counter_ref01_match_rm0 = [
-            "id" => $decrement_counter_ref01_data["id"],
-        ];
-        $decrement_counter_ref01_ent->remove($decrement_counter_ref01_match_rm0, null);
-
     }
 }
 

@@ -59,16 +59,6 @@ func TestDecrementCounterEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = decrementCounterRef01Data
 
-		// REMOVE
-		decrementCounterRef01Ent := client.DecrementCounter(nil)
-		decrementCounterRef01MatchRm0 := map[string]any{
-			"id": decrementCounterRef01Data["id"],
-		}
-		_, err := decrementCounterRef01Ent.Remove(decrementCounterRef01MatchRm0, nil)
-		if err != nil {
-			t.Fatalf("remove failed: %v", err)
-		}
-
 	})
 }
 

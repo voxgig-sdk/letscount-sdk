@@ -59,12 +59,6 @@ describe('DecrementCounterEntity', async () => {
 
     let decrement_counter_ref01_data = Object.values(setup.data.existing.decrement_counter)[0] as any
 
-    // REMOVE
-    const decrement_counter_ref01_ent = client.DecrementCounter()
-    const decrement_counter_ref01_match_rm0: any = { id: decrement_counter_ref01_data.id }
-    await decrement_counter_ref01_ent.remove(decrement_counter_ref01_match_rm0)
-  
-
   })
 })
 

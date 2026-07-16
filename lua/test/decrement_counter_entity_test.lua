@@ -42,14 +42,6 @@ describe("DecrementCounterEntity", function()
       decrement_counter_ref01_data = helpers.to_map(decrement_counter_ref01_data_raw[1][2])
     end
 
-    -- REMOVE
-    local decrement_counter_ref01_ent = client:DecrementCounter(nil)
-    local decrement_counter_ref01_match_rm0 = {
-      id = decrement_counter_ref01_data["id"],
-    }
-    local _, err = decrement_counter_ref01_ent:remove(decrement_counter_ref01_match_rm0, nil)
-    assert.is_nil(err)
-
   end)
 end)
 

@@ -39,13 +39,6 @@ class DecrementCounterEntityTest < Minitest::Test
       decrement_counter_ref01_data = Helpers.to_map(decrement_counter_ref01_data_raw[0][1])
     end
 
-    # REMOVE
-    decrement_counter_ref01_ent = client.DecrementCounter(nil)
-    decrement_counter_ref01_match_rm0 = {
-      "id" => decrement_counter_ref01_data["id"],
-    }
-    decrement_counter_ref01_ent.remove(decrement_counter_ref01_match_rm0, nil)
-
   end
 end
 

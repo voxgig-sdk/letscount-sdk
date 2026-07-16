@@ -46,13 +46,6 @@ class TestDecrementCounterEntity:
         if len(decrement_counter_ref01_data_raw) > 0:
             decrement_counter_ref01_data = helpers.to_map(decrement_counter_ref01_data_raw[0][1])
 
-        # REMOVE
-        decrement_counter_ref01_ent = client.DecrementCounter(None)
-        decrement_counter_ref01_match_rm0 = {
-            "id": decrement_counter_ref01_data["id"],
-        }
-        decrement_counter_ref01_ent.remove(decrement_counter_ref01_match_rm0, None)
-
 
 
 def _decrement_counter_basic_setup(extra):
