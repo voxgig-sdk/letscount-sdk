@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Letscount SDK exists test
 
 local sdk = require("letscount_sdk")
 
