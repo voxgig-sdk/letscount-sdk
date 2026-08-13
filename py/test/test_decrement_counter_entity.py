@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from letscount_sdk.utility.voxgig_struct import voxgig_struct as vs
 from letscount_sdk import LetscountSDK
-from core import helpers
+from letscount_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -27,7 +27,7 @@ class TestDecrementCounterEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["remove"]:
+        for _op in []:
             _skip, _reason = runner.is_control_skipped("entityOp", "decrement_counter." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -64,7 +64,7 @@ def _decrement_counter_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["decrement_counter01", "decrement_counter02", "decrement_counter03", "namespace01"],
+        ["decrement_counter01", "decrement_counter02", "decrement_counter03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

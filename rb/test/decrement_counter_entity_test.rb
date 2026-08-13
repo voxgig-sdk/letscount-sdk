@@ -16,7 +16,7 @@ class DecrementCounterEntityTest < Minitest::Test
     setup = decrement_counter_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["remove"].each do |_op|
+    [].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "decrement_counter." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -56,7 +56,7 @@ def decrement_counter_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["decrement_counter01", "decrement_counter02", "decrement_counter03", "namespace01"],
+    ["decrement_counter01", "decrement_counter02", "decrement_counter03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

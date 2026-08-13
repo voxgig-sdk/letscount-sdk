@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Letscount SDK exists test
 
 import pytest
 from letscount_sdk import LetscountSDK

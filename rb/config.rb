@@ -100,6 +100,7 @@ module LetscountConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/{namespace}/{key}",
                   "parts" => [
@@ -158,6 +159,7 @@ module LetscountConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/{namespace}/{key}",
                   "parts" => [
@@ -252,6 +254,7 @@ module LetscountConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/{namespace}/{key}",
                   "parts" => [
@@ -353,6 +356,7 @@ module LetscountConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/{namespace}/{key}",
                   "parts" => [

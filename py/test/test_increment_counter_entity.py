@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from letscount_sdk.utility.voxgig_struct import voxgig_struct as vs
 from letscount_sdk import LetscountSDK
-from core import helpers
+from letscount_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -56,7 +56,7 @@ class TestIncrementCounterEntity:
         increment_counter_ref01_markdef_up0_value = "Mark01-increment_counter_ref01_" + str(setup["now"])
         increment_counter_ref01_data_up0_up[increment_counter_ref01_markdef_up0_name] = increment_counter_ref01_markdef_up0_value
 
-        increment_counter_ref01_resdata_up0 = helpers.to_map(increment_counter_ref01_ent.update(increment_counter_ref01_data_up0_up, None))
+        increment_counter_ref01_resdata_up0 = helpers.to_map(runner.entity_data(increment_counter_ref01_ent.update(increment_counter_ref01_data_up0_up, None)))
         assert increment_counter_ref01_resdata_up0 is not None
         assert increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0_name] == increment_counter_ref01_markdef_up0_value
 

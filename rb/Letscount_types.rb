@@ -40,9 +40,21 @@ CreateOrUpdateCounter = Struct.new(
 #
 # @!attribute [rw] namespace
 #   @return [String]
+#
+# @!attribute [rw] created_at
+#   @return [String, nil]
+#
+# @!attribute [rw] updated_at
+#   @return [String, nil]
+#
+# @!attribute [rw] value
+#   @return [Float, nil]
 CreateOrUpdateCounterCreateData = Struct.new(
   :key,
   :namespace,
+  :created_at,
+  :updated_at,
+  :value,
   keyword_init: true
 )
 
@@ -137,9 +149,25 @@ IncrementCounter = Struct.new(
 #
 # @!attribute [rw] namespace
 #   @return [String]
+#
+# @!attribute [rw] amount
+#   @return [Float, nil]
+#
+# @!attribute [rw] created_at
+#   @return [String, nil]
+#
+# @!attribute [rw] updated_at
+#   @return [String, nil]
+#
+# @!attribute [rw] value
+#   @return [Float, nil]
 IncrementCounterUpdateData = Struct.new(
   :key,
   :namespace,
+  :amount,
+  :created_at,
+  :updated_at,
+  :value,
   keyword_init: true
 )
 

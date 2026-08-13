@@ -49,7 +49,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local getcounter, err = client:GetCounter():load()
+local getcounter, err = client:GetCounter():load({ key = "example", namespace = "example" })
 if err then error(err) end
 ```
 
@@ -107,7 +107,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:GetCounter():load()
+local result, err = client:GetCounter():load({ key = "example", namespace = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -219,9 +219,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local create_or_update_counter, err = client:CreateOrUpdateCounter():load()
+    local get_counter, err = client:GetCounter():load()
     if err then error(err) end
-    -- create_or_update_counter is the loaded record
+    -- get_counter is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -452,7 +452,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local getcounter = client:GetCounter()
-getcounter:load()
+getcounter:load({ key = "example", namespace = "example" })
 
 -- getcounter:data_get() now returns the getcounter data from the last load
 -- getcounter:match_get() returns the last match criteria

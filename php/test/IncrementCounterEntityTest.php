@@ -57,7 +57,7 @@ class IncrementCounterEntityTest extends TestCase
         $increment_counter_ref01_data_up0_up[$increment_counter_ref01_markdef_up0_name] = $increment_counter_ref01_markdef_up0_value;
 
         $increment_counter_ref01_resdata_up0_result = $increment_counter_ref01_ent->update($increment_counter_ref01_data_up0_up, null);
-        $increment_counter_ref01_resdata_up0 = Helpers::to_map($increment_counter_ref01_resdata_up0_result);
+        $increment_counter_ref01_resdata_up0 = Helpers::to_map(is_object($increment_counter_ref01_resdata_up0_result) && method_exists($increment_counter_ref01_resdata_up0_result, 'data_get') ? $increment_counter_ref01_resdata_up0_result->data_get() : $increment_counter_ref01_resdata_up0_result);
         $this->assertNotNull($increment_counter_ref01_resdata_up0);
         $this->assertEquals($increment_counter_ref01_resdata_up0[$increment_counter_ref01_markdef_up0_name], $increment_counter_ref01_markdef_up0_value);
 

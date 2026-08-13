@@ -74,7 +74,7 @@ func TestIncrementCounterEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		incrementCounterRef01ResdataUp0 := core.ToMapAny(incrementCounterRef01ResdataUp0Result)
+		incrementCounterRef01ResdataUp0 := core.ToMapAny(entityData(incrementCounterRef01ResdataUp0Result))
 		if incrementCounterRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}

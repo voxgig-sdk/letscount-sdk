@@ -60,7 +60,7 @@ func TestCreateOrUpdateCounterEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		createOrUpdateCounterRef01Data = core.ToMapAny(createOrUpdateCounterRef01DataResult)
+		createOrUpdateCounterRef01Data = core.ToMapAny(entityData(createOrUpdateCounterRef01DataResult))
 		if createOrUpdateCounterRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}

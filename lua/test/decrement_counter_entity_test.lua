@@ -19,7 +19,7 @@ describe("DecrementCounterEntity", function()
     local setup = decrement_counter_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"remove"}) do
+    for _, _op in ipairs({}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "decrement_counter." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -65,7 +65,7 @@ function decrement_counter_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "decrement_counter01", "decrement_counter02", "decrement_counter03", "namespace01" },
+    { "decrement_counter01", "decrement_counter02", "decrement_counter03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

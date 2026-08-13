@@ -32,7 +32,7 @@ func TestDecrementCounterEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"remove"} {
+		for _, _op := range []string{} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "decrement_counter." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -47,8 +47,6 @@ func TestDecrementCounterEntity(t *testing.T) {
 			t.Skip("live entity test uses synthetic IDs from fixture — set LETSCOUNT_TEST_DECREMENT_COUNTER_ENTID JSON to run live")
 			return
 		}
-		client := setup.client
-
 		// Bootstrap entity data from existing test data (no create step in flow).
 		decrementCounterRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.decrement_counter", setup.data)))
 		var decrementCounterRef01Data map[string]any
@@ -87,7 +85,7 @@ func decrement_counterBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap := vs.Transform(
-		[]any{"decrement_counter01", "decrement_counter02", "decrement_counter03", "namespace01"},
+		[]any{"decrement_counter01", "decrement_counter02", "decrement_counter03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

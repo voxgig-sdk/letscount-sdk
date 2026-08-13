@@ -39,7 +39,7 @@ describe('DecrementCounterEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.LETSCOUNT_TEST_LIVE
-    for (const op of ['remove']) {
+    for (const op of []) {
       if (maybeSkipControl(t, 'entityOp', 'decrement_counter.' + op, live)) return
     }
 

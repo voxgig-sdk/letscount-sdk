@@ -66,7 +66,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-getcounter, err := client.GetCounter(nil).Load(nil, nil)
+getcounter, err := client.GetCounter(nil).Load(map[string]any{"key": "example", "namespace": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -136,7 +136,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 getCounter, err := client.GetCounter(nil).Load(
-    nil, nil,
+    map[string]any{"key": "example", "namespace": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -489,7 +489,7 @@ stores the returned data and match criteria internally.
 
 ```go
 getcounter := client.GetCounter(nil)
-getcounter.Load(nil, nil)
+getcounter.Load(map[string]any{"key": "example", "namespace": "example"}, nil)
 
 // getcounter.Data() now returns the getcounter data from the last load
 // getcounter.Match() returns the last match criteria

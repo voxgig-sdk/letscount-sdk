@@ -34,7 +34,7 @@ $client = new LetscountSDK();
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created CreateOrUpdateCounter record.
+// create() returns the ENTITY — call data_get() for the created CreateOrUpdateCounter record.
 $created = $client->CreateOrUpdateCounter()->create(["key" => "example_key", "namespace" => "example_namespace"]);
 
 ```
@@ -47,7 +47,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $getcounter = $client->GetCounter()->load();
+    $getcounter = $client->GetCounter()->load(["key" => "example", "namespace" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -119,8 +119,9 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = LetscountSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$getcounter = $client->GetCounter()->load();
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$getcounter = $client->GetCounter()->load(["key" => "example", "namespace" => "example"]);
 print_r($getcounter);
 ```
 
@@ -224,7 +225,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -363,7 +364,7 @@ Create an instance: `$get_counter = $client->GetCounter();`
 #### Example: Load
 
 ```php
-// load() returns the bare GetCounter record (throws on error).
+// load() returns the ENTITY — call data_get() for the GetCounter record (throws on error).
 $get_counter = $client->GetCounter()->load(["key" => "key", "namespace" => "namespace"]);
 ```
 
@@ -467,7 +468,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $getcounter = $client->GetCounter();
-$getcounter->load();
+$getcounter->load(["key" => "example", "namespace" => "example"]);
 
 // $getcounter->data_get() now returns the getcounter data from the last load
 // $getcounter->match_get() returns the last match criteria

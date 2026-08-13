@@ -23,7 +23,7 @@ class DecrementCounterEntityTest extends TestCase
         $setup = decrement_counter_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["remove"] as $_op) {
+        foreach ([] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "decrement_counter." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -64,7 +64,7 @@ function decrement_counter_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["decrement_counter01", "decrement_counter02", "decrement_counter03", "namespace01"] as $k) {
+    foreach (["decrement_counter01", "decrement_counter02", "decrement_counter03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

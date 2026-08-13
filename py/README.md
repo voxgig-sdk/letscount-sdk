@@ -39,7 +39,7 @@ client = LetscountSDK()
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
+# Create — returns the ENTITY (call data_get() for the record)
 created = client.CreateOrUpdateCounter().create({"key": "example_key", "namespace": "example_namespace"})
 
 ```
@@ -51,7 +51,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    getcounter = client.GetCounter().load()
+    getcounter = client.GetCounter().load({"key": "example", "namespace": "example"})
     print(getcounter)
 except Exception as err:
     print(f"load failed: {err}")
@@ -118,8 +118,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = LetscountSDK.test()
 
-# Entity ops return the bare record and raise on error.
-getcounter = client.GetCounter().load()
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+getcounter = client.GetCounter().load({"key": "example", "namespace": "example"})
 # getcounter contains the mock response record
 ```
 
@@ -220,7 +221,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -461,7 +462,7 @@ stores the returned data and match criteria internally.
 
 ```python
 getcounter = client.GetCounter()
-getcounter.load()
+getcounter.load({"key": "example", "namespace": "example"})
 
 # getcounter.data_get() now returns the getcounter data from the last load
 # getcounter.match_get() returns the last match criteria

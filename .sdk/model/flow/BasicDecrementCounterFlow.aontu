@@ -5,20 +5,5 @@ main: kit: flow: BasicDecrementCounterFlow:
   entity: "decrement_counter",
   kind: "basic",
   name: "BasicDecrementCounterFlow",
-  step: [
-    {
-      input: {
-        ref: "decrement_counter_ref01",
-        suffix: "_rm0"
-      }
-
-      match: {
-        id: "decrement_counter01",
-        namespace: "namespace01"
-      }
-
-      op: "remove"
-    }
-  ],
   "key$": "BasicDecrementCounterFlow"
 }

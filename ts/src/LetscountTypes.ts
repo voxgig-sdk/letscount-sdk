@@ -16,6 +16,9 @@ export interface CreateOrUpdateCounter {
 export interface CreateOrUpdateCounterCreateData {
   key: string
   namespace: string
+  created_at?: string
+  updated_at?: string
+  value?: number
 }
 
 export interface DecrementCounter {
@@ -51,5 +54,9 @@ export interface IncrementCounter {
 export interface IncrementCounterUpdateData {
   key: string
   namespace: string
+  amount?: number
+  created_at?: string
+  updated_at?: string
+  value?: number
 }
 

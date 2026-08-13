@@ -39,7 +39,7 @@ class CreateOrUpdateCounterEntityTest < Minitest::Test
     create_or_update_counter_ref01_data["namespace"] = setup[:idmap]["namespace01"]
 
     create_or_update_counter_ref01_data_result = create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, nil)
-    create_or_update_counter_ref01_data = Helpers.to_map(create_or_update_counter_ref01_data_result)
+    create_or_update_counter_ref01_data = Helpers.to_map(create_or_update_counter_ref01_data_result.respond_to?(:data_get) ? create_or_update_counter_ref01_data_result.data_get : create_or_update_counter_ref01_data_result)
     assert !create_or_update_counter_ref01_data.nil?
 
   end

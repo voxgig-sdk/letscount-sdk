@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ LetscountUtility.registrar = ->(u) {
   u.prepare_params = LetscountUtilities::PrepareParams
   u.prepare_path = LetscountUtilities::PreparePath
   u.prepare_query = LetscountUtilities::PrepareQuery
+  u.graphql_body = LetscountUtilities::GraphqlBody
+  u.graphql_errors = LetscountUtilities::GraphqlErrors
   u.result_basic = LetscountUtilities::ResultBasic
   u.result_body = LetscountUtilities::ResultBody
   u.result_headers = LetscountUtilities::ResultHeaders

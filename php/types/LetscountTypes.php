@@ -27,6 +27,9 @@ class CreateOrUpdateCounterCreateData
 {
     public string $key;
     public string $namespace;
+    public ?string $created_at = null;
+    public ?string $updated_at = null;
+    public ?float $value = null;
 }
 
 /** DecrementCounter entity data model. */
@@ -74,5 +77,9 @@ class IncrementCounterUpdateData
 {
     public string $key;
     public string $namespace;
+    public ?float $amount = null;
+    public ?string $created_at = null;
+    public ?string $updated_at = null;
+    public ?float $value = null;
 }
 

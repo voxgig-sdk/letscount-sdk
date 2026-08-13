@@ -33,7 +33,7 @@ client = LetscountSDK.new
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created CreateOrUpdateCounter record.
+# create returns the ENTITY — call data_get for the created CreateOrUpdateCounter record.
 created = client.CreateOrUpdateCounter.create({ "key" => "example_key", "namespace" => "example_namespace" })
 
 ```
@@ -45,7 +45,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  getcounter = client.GetCounter.load()
+  getcounter = client.GetCounter.load({ "key" => "example", "namespace" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -113,8 +113,9 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = LetscountSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-getcounter = client.GetCounter.load()
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+getcounter = client.GetCounter.load({ "key" => "example", "namespace" => "example" })
 puts getcounter
 ```
 
@@ -353,7 +354,7 @@ Create an instance: `get_counter = client.GetCounter`
 #### Example: Load
 
 ```ruby
-# load returns the bare GetCounter record (raises on error).
+# load returns the ENTITY — call data_get for the GetCounter record (raises on error).
 get_counter = client.GetCounter.load({ "key" => "key", "namespace" => "namespace" })
 ```
 
@@ -457,7 +458,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 getcounter = client.GetCounter
-getcounter.load()
+getcounter.load({ "key" => "example", "namespace" => "example" })
 
 # getcounter.data_get now returns the getcounter data from the last load
 # getcounter.match_get returns the last match criteria

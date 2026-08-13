@@ -36,7 +36,7 @@ const client = new LetscountSDK()
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created CreateOrUpdateCounter
+// Create — returns the created CreateOrUpdateCounter ENTITY (.data() for the record)
 const created = await client.CreateOrUpdateCounter().create({
   key: 'example_key',
   namespace: 'example_namespace',
@@ -51,7 +51,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const getcounter = await client.GetCounter().load()
+  const getcounter = await client.GetCounter().load({ key: "example", namespace: "example" })
   console.log(getcounter)
 } catch (err) {
   console.error('load failed:', err)
@@ -118,8 +118,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LetscountSDK.test()
 
-const getcounter = await client.GetCounter().load()
-// getcounter is a bare entity populated with mock response data
+const getcounter = await client.GetCounter().load({ key: 'example_key', namespace: 'example_namespace' })
+// getcounter is the entity, populated with mock response data
+// — call getcounter.data() for the record itself
 console.log(getcounter)
 ```
 
@@ -138,7 +139,7 @@ Entity instances remember their last match and data:
 const entity = client.GetCounter()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ key: 'example_key', namespace: 'example_namespace' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -502,7 +503,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const getcounter = client.GetCounter()
-await getcounter.load()
+await getcounter.load({ key: "example", namespace: "example" })
 
 // getcounter.data() now returns the getcounter data from the last `load`
 // getcounter.match() returns the last match criteria

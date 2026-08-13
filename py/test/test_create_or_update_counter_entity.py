@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from letscount_sdk.utility.voxgig_struct import voxgig_struct as vs
 from letscount_sdk import LetscountSDK
-from core import helpers
+from letscount_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -46,7 +46,7 @@ class TestCreateOrUpdateCounterEntity:
         create_or_update_counter_ref01_data["key"] = setup["idmap"]["key01"]
         create_or_update_counter_ref01_data["namespace"] = setup["idmap"]["namespace01"]
 
-        create_or_update_counter_ref01_data = helpers.to_map(create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, None))
+        create_or_update_counter_ref01_data = helpers.to_map(runner.entity_data(create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data, None)))
         assert create_or_update_counter_ref01_data is not None
 
 

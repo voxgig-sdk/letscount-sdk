@@ -16,6 +16,9 @@
 ---@class CreateOrUpdateCounterCreateData
 ---@field key string
 ---@field namespace string
+---@field created_at? string
+---@field updated_at? string
+---@field value? number
 
 ---@class DecrementCounter
 
@@ -45,6 +48,10 @@
 ---@class IncrementCounterUpdateData
 ---@field key string
 ---@field namespace string
+---@field amount? number
+---@field created_at? string
+---@field updated_at? string
+---@field value? number
 
 local M = {}
 

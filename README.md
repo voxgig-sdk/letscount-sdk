@@ -41,9 +41,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = LetscountSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = LetscountSDK.test({
+  entity: {
+    get_counter: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const getcounter = await client.GetCounter().load({ key: 'example_key', namespace: 'example_namespace' })
-// getcounter is a bare GetCounter populated with mock data
+// getcounter is the GetCounter entity, populated with mock data
+// — call getcounter.data() for the record itself
 console.log(getcounter)
 ```
 
@@ -325,6 +334,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://letscountapi.com/](https://letscountapi.com/)
 

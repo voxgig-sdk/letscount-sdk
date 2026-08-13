@@ -54,7 +54,7 @@ describe("IncrementCounterEntity", function()
 
     local increment_counter_ref01_resdata_up0_result, err = increment_counter_ref01_ent:update(increment_counter_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local increment_counter_ref01_resdata_up0 = helpers.to_map(increment_counter_ref01_resdata_up0_result)
+    local increment_counter_ref01_resdata_up0 = helpers.to_map(type(increment_counter_ref01_resdata_up0_result) == 'table' and increment_counter_ref01_resdata_up0_result.data_get and increment_counter_ref01_resdata_up0_result:data_get() or increment_counter_ref01_resdata_up0_result)
     assert.is_not_nil(increment_counter_ref01_resdata_up0)
     assert.are.equal(increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0_name], increment_counter_ref01_markdef_up0_value)
 

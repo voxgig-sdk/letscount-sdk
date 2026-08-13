@@ -46,7 +46,7 @@ class CreateOrUpdateCounterEntityTest extends TestCase
         $create_or_update_counter_ref01_data["namespace"] = $setup["idmap"]["namespace01"];
 
         $create_or_update_counter_ref01_data_result = $create_or_update_counter_ref01_ent->create($create_or_update_counter_ref01_data, null);
-        $create_or_update_counter_ref01_data = Helpers::to_map($create_or_update_counter_ref01_data_result);
+        $create_or_update_counter_ref01_data = Helpers::to_map(is_object($create_or_update_counter_ref01_data_result) && method_exists($create_or_update_counter_ref01_data_result, 'data_get') ? $create_or_update_counter_ref01_data_result->data_get() : $create_or_update_counter_ref01_data_result);
         $this->assertNotNull($create_or_update_counter_ref01_data);
 
     }

@@ -64,7 +64,7 @@ describe('CreateOrUpdateCounterEntity', async () => {
     create_or_update_counter_ref01_data['key'] = setup.idmap['key01']
     create_or_update_counter_ref01_data['namespace'] = setup.idmap['namespace01']
 
-    create_or_update_counter_ref01_data = await create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data)
+    create_or_update_counter_ref01_data = (await create_or_update_counter_ref01_ent.create(create_or_update_counter_ref01_data)).data()
     assert(null != create_or_update_counter_ref01_data)
 
 

@@ -16,11 +16,11 @@
 import pytest
 
 from letscount_sdk import LetscountSDK
-from core.error import LetscountError
-from core.result import LetscountResult
-from core.response import LetscountResponse
-from core.spec import LetscountSpec
-from feature.base_feature import LetscountBaseFeature
+from letscount_sdk.core.error import LetscountError
+from letscount_sdk.core.result import LetscountResult
+from letscount_sdk.core.response import LetscountResponse
+from letscount_sdk.core.spec import LetscountSpec
+from letscount_sdk.feature.base_feature import LetscountBaseFeature
 
 
 def _client():

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import LetscountControl
-from core.error import LetscountError
-from core.result import LetscountResult
-from core.spec import LetscountSpec
+from letscount_sdk.config import make_config
+from letscount_sdk.features import _make_feature
+from letscount_sdk.core.control import LetscountControl
+from letscount_sdk.core.error import LetscountError
+from letscount_sdk.core.result import LetscountResult
+from letscount_sdk.core.spec import LetscountSpec
 
 
 # True when this SDK was generated with the named feature.

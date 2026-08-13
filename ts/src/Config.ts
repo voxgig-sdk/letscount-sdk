@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'Letscount',
   }
 
 
@@ -135,6 +135,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "POST",
               "orig": "/{namespace}/{key}",
               "parts": [
@@ -193,6 +194,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/{namespace}/{key}",
               "parts": [
@@ -287,6 +289,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/{namespace}/{key}",
               "parts": [
@@ -388,6 +391,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "PUT",
               "orig": "/{namespace}/{key}",
               "parts": [
