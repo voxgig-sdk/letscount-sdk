@@ -40,7 +40,7 @@ class LetscountSDK
         $utility = new LetscountUtility();
         $this->_utility = $utility;
 
-        $config = LetscountConfig::make_config();
+        $config = LetscountConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

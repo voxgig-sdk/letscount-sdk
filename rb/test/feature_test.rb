@@ -15,7 +15,7 @@ require_relative "../Letscount_sdk"
 module LetscountFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = LetscountConfig.make_config["feature"]
+    f = LetscountConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

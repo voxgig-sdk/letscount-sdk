@@ -28,7 +28,7 @@ class LetscountSDK
     utility = LetscountUtility.new
     @_utility = utility
 
-    config = LetscountConfig.make_config
+    config = LetscountConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
