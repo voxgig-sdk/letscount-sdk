@@ -110,11 +110,11 @@ fmt.Println(createOrUpdateCounter.GetName()) // "create_or_update_counter"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `key` | `string` | No |  |
-| `namespace` | `string` | No |  |
-| `updated_at` | `string` | No |  |
-| `value` | `float64` | No |  |
+| `created_at` | `string` | No | Timestamp when the counter was created |
+| `key` | `string` | No | The key of the counter |
+| `namespace` | `string` | No | The namespace of the counter |
+| `updated_at` | `string` | No | Timestamp when the counter was last updated |
+| `value` | `float64` | No | The current value of the counter |
 
 ### Field Usage by Operation
 
@@ -223,11 +223,11 @@ fmt.Println(getCounter.GetName()) // "get_counter"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `key` | `string` | No |  |
-| `namespace` | `string` | No |  |
-| `updated_at` | `string` | No |  |
-| `value` | `float64` | No |  |
+| `created_at` | `string` | No | Timestamp when the counter was created |
+| `key` | `string` | No | The key of the counter |
+| `namespace` | `string` | No | The namespace of the counter |
+| `updated_at` | `string` | No | Timestamp when the counter was last updated |
+| `value` | `float64` | No | The current value of the counter |
 
 ### Operations
 
@@ -278,12 +278,12 @@ fmt.Println(incrementCounter.GetName()) // "increment_counter"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | `float64` | No |  |
-| `created_at` | `string` | No |  |
-| `key` | `string` | No |  |
-| `namespace` | `string` | No |  |
-| `updated_at` | `string` | No |  |
-| `value` | `float64` | No |  |
+| `amount` | `float64` | No | The amount to increment the counter by |
+| `created_at` | `string` | No | Timestamp when the counter was created |
+| `key` | `string` | No | The key of the counter |
+| `namespace` | `string` | No | The namespace of the counter |
+| `updated_at` | `string` | No | Timestamp when the counter was last updated |
+| `value` | `float64` | No | The current value of the counter |
 
 ### Operations
 

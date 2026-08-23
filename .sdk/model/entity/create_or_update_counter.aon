@@ -1,46 +1,52 @@
-# Entity: increment_counter
+# Entity: create_or_update_counter
 
-main: kit: entity: increment_counter: {
+main: kit: entity: create_or_update_counter: {
 
   alias: field: {}
 
   fields: [
     {
-      name: "amount"
-      req: false
-      type: "`$NUMBER`"
-    }
-    {
       name: "created_at"
       req: false
+      short: "Timestamp when the counter was created"
       type: "`$STRING`"
     }
     {
       name: "key"
       req: false
+      short: "The key of the counter"
       type: "`$STRING`"
     }
     {
       name: "namespace"
       req: false
+      short: "The namespace of the counter"
       type: "`$STRING`"
     }
     {
       name: "updated_at"
       req: false
+      short: "Timestamp when the counter was last updated"
       type: "`$STRING`"
     }
     {
       name: "value"
+      op: {
+        create: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
       req: false
+      short: "The current value of the counter"
       type: "`$NUMBER`"
     }
   ]
 
-  name: "increment_counter"
+  name: "create_or_update_counter"
   op: {
-    update: {
-      name: "update"
+    create: {
+      name: "create"
       points: [
         {
           args: {
@@ -61,7 +67,7 @@ main: kit: entity: increment_counter: {
               }
             ]
           }
-          method: "PUT"
+          method: "POST"
           orig: "/{namespace}/{key}"
           parts: [
             "{namespace}"

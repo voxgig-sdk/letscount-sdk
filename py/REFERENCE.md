@@ -99,11 +99,11 @@ create_or_update_counter = client.CreateOrUpdateCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `str` | No |  |
-| `key` | `str` | No |  |
-| `namespace` | `str` | No |  |
-| `updated_at` | `str` | No |  |
-| `value` | `float` | No |  |
+| `created_at` | `str` | No | Timestamp when the counter was created |
+| `key` | `str` | No | The key of the counter |
+| `namespace` | `str` | No | The namespace of the counter |
+| `updated_at` | `str` | No | Timestamp when the counter was last updated |
+| `value` | `float` | No | The current value of the counter |
 
 ### Field Usage by Operation
 
@@ -212,11 +212,11 @@ get_counter = client.GetCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `str` | No |  |
-| `key` | `str` | No |  |
-| `namespace` | `str` | No |  |
-| `updated_at` | `str` | No |  |
-| `value` | `float` | No |  |
+| `created_at` | `str` | No | Timestamp when the counter was created |
+| `key` | `str` | No | The key of the counter |
+| `namespace` | `str` | No | The namespace of the counter |
+| `updated_at` | `str` | No | Timestamp when the counter was last updated |
+| `value` | `float` | No | The current value of the counter |
 
 ### Operations
 
@@ -267,12 +267,12 @@ increment_counter = client.IncrementCounter()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | `float` | No |  |
-| `created_at` | `str` | No |  |
-| `key` | `str` | No |  |
-| `namespace` | `str` | No |  |
-| `updated_at` | `str` | No |  |
-| `value` | `float` | No |  |
+| `amount` | `float` | No | The amount to increment the counter by |
+| `created_at` | `str` | No | Timestamp when the counter was created |
+| `key` | `str` | No | The key of the counter |
+| `namespace` | `str` | No | The namespace of the counter |
+| `updated_at` | `str` | No | Timestamp when the counter was last updated |
+| `value` | `float` | No | The current value of the counter |
 
 ### Operations
 

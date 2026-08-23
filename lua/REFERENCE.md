@@ -102,11 +102,11 @@ local create_or_update_counter = client:CreateOrUpdateCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `key` | `string` | No |  |
-| `namespace` | `string` | No |  |
-| `updated_at` | `string` | No |  |
-| `value` | `number` | No |  |
+| `created_at` | `string` | No | Timestamp when the counter was created |
+| `key` | `string` | No | The key of the counter |
+| `namespace` | `string` | No | The namespace of the counter |
+| `updated_at` | `string` | No | Timestamp when the counter was last updated |
+| `value` | `number` | No | The current value of the counter |
 
 ### Field Usage by Operation
 
@@ -217,11 +217,11 @@ local get_counter = client:GetCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `key` | `string` | No |  |
-| `namespace` | `string` | No |  |
-| `updated_at` | `string` | No |  |
-| `value` | `number` | No |  |
+| `created_at` | `string` | No | Timestamp when the counter was created |
+| `key` | `string` | No | The key of the counter |
+| `namespace` | `string` | No | The namespace of the counter |
+| `updated_at` | `string` | No | Timestamp when the counter was last updated |
+| `value` | `number` | No | The current value of the counter |
 
 ### Operations
 
@@ -273,12 +273,12 @@ local increment_counter = client:IncrementCounter(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | `number` | No |  |
-| `created_at` | `string` | No |  |
-| `key` | `string` | No |  |
-| `namespace` | `string` | No |  |
-| `updated_at` | `string` | No |  |
-| `value` | `number` | No |  |
+| `amount` | `number` | No | The amount to increment the counter by |
+| `created_at` | `string` | No | Timestamp when the counter was created |
+| `key` | `string` | No | The key of the counter |
+| `namespace` | `string` | No | The namespace of the counter |
+| `updated_at` | `string` | No | Timestamp when the counter was last updated |
+| `value` | `number` | No | The current value of the counter |
 
 ### Operations
 

@@ -6,7 +6,7 @@ The Golang SDK for the Letscount API — an entity-oriented client using standar
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.CreateOrUpdateCounter(nil)` — each with the same small set of operations (`Load`, `Create`, `Update`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -264,11 +264,11 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
-| `"key"` |  |
-| `"namespace"` |  |
-| `"updated_at"` |  |
-| `"value"` |  |
+| `"created_at"` | Timestamp when the counter was created |
+| `"key"` | The key of the counter |
+| `"namespace"` | The namespace of the counter |
+| `"updated_at"` | Timestamp when the counter was last updated |
+| `"value"` | The current value of the counter |
 
 Operations: Create.
 
@@ -287,11 +287,11 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
-| `"key"` |  |
-| `"namespace"` |  |
-| `"updated_at"` |  |
-| `"value"` |  |
+| `"created_at"` | Timestamp when the counter was created |
+| `"key"` | The key of the counter |
+| `"namespace"` | The namespace of the counter |
+| `"updated_at"` | Timestamp when the counter was last updated |
+| `"value"` | The current value of the counter |
 
 Operations: Load.
 
@@ -301,12 +301,12 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `"amount"` |  |
-| `"created_at"` |  |
-| `"key"` |  |
-| `"namespace"` |  |
-| `"updated_at"` |  |
-| `"value"` |  |
+| `"amount"` | The amount to increment the counter by |
+| `"created_at"` | Timestamp when the counter was created |
+| `"key"` | The key of the counter |
+| `"namespace"` | The namespace of the counter |
+| `"updated_at"` | Timestamp when the counter was last updated |
+| `"value"` | The current value of the counter |
 
 Operations: Update.
 
@@ -331,11 +331,11 @@ Create an instance: `createOrUpdateCounter := client.CreateOrUpdateCounter(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `float64` |  |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `float64` | The current value of the counter |
 
 #### Example: Create
 
@@ -376,11 +376,11 @@ Create an instance: `getCounter := client.GetCounter(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `float64` |  |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `float64` | The current value of the counter |
 
 #### Example: Load
 
@@ -407,12 +407,12 @@ Create an instance: `incrementCounter := client.IncrementCounter(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `float64` |  |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `float64` |  |
+| `amount` | `float64` | The amount to increment the counter by |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `float64` | The current value of the counter |
 
 
 ## Advanced

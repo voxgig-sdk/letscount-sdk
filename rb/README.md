@@ -237,11 +237,11 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Create.
 
@@ -260,11 +260,11 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Load.
 
@@ -274,12 +274,12 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `amount` |  |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `amount` | The amount to increment the counter by |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Update.
 
@@ -304,11 +304,11 @@ Create an instance: `create_or_update_counter = client.CreateOrUpdateCounter`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `String` |  |
-| `key` | `String` |  |
-| `namespace` | `String` |  |
-| `updated_at` | `String` |  |
-| `value` | `Float` |  |
+| `created_at` | `String` | Timestamp when the counter was created |
+| `key` | `String` | The key of the counter |
+| `namespace` | `String` | The namespace of the counter |
+| `updated_at` | `String` | Timestamp when the counter was last updated |
+| `value` | `Float` | The current value of the counter |
 
 #### Example: Create
 
@@ -345,11 +345,11 @@ Create an instance: `get_counter = client.GetCounter`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `String` |  |
-| `key` | `String` |  |
-| `namespace` | `String` |  |
-| `updated_at` | `String` |  |
-| `value` | `Float` |  |
+| `created_at` | `String` | Timestamp when the counter was created |
+| `key` | `String` | The key of the counter |
+| `namespace` | `String` | The namespace of the counter |
+| `updated_at` | `String` | Timestamp when the counter was last updated |
+| `value` | `Float` | The current value of the counter |
 
 #### Example: Load
 
@@ -373,12 +373,12 @@ Create an instance: `increment_counter = client.IncrementCounter`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `Float` |  |
-| `created_at` | `String` |  |
-| `key` | `String` |  |
-| `namespace` | `String` |  |
-| `updated_at` | `String` |  |
-| `value` | `Float` |  |
+| `amount` | `Float` | The amount to increment the counter by |
+| `created_at` | `String` | Timestamp when the counter was created |
+| `key` | `String` | The key of the counter |
+| `namespace` | `String` | The namespace of the counter |
+| `updated_at` | `String` | Timestamp when the counter was last updated |
+| `value` | `Float` | The current value of the counter |
 
 
 ## Advanced

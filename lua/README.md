@@ -232,11 +232,11 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Create.
 
@@ -255,11 +255,11 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Load.
 
@@ -269,12 +269,12 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `amount` |  |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `amount` | The amount to increment the counter by |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Update.
 
@@ -299,11 +299,11 @@ Create an instance: `local create_or_update_counter = client:CreateOrUpdateCount
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `number` |  |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `number` | The current value of the counter |
 
 #### Example: Create
 
@@ -340,11 +340,11 @@ Create an instance: `local get_counter = client:GetCounter(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `number` |  |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `number` | The current value of the counter |
 
 #### Example: Load
 
@@ -367,12 +367,12 @@ Create an instance: `local increment_counter = client:IncrementCounter(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `number` |  |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `number` |  |
+| `amount` | `number` | The amount to increment the counter by |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `number` | The current value of the counter |
 
 
 ## Advanced

@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -290,11 +290,11 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: create.
 
@@ -313,11 +313,11 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: load.
 
@@ -327,12 +327,12 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `amount` |  |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `amount` | The amount to increment the counter by |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: update.
 
@@ -357,11 +357,11 @@ Create an instance: `const create_or_update_counter = client.CreateOrUpdateCount
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `number` |  |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `number` | The current value of the counter |
 
 #### Example: Create
 
@@ -398,11 +398,11 @@ Create an instance: `const get_counter = client.GetCounter()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `number` |  |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `number` | The current value of the counter |
 
 #### Example: Load
 
@@ -425,12 +425,12 @@ Create an instance: `const increment_counter = client.IncrementCounter()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `number` |  |
-| `created_at` | `string` |  |
-| `key` | `string` |  |
-| `namespace` | `string` |  |
-| `updated_at` | `string` |  |
-| `value` | `number` |  |
+| `amount` | `number` | The amount to increment the counter by |
+| `created_at` | `string` | Timestamp when the counter was created |
+| `key` | `string` | The key of the counter |
+| `namespace` | `string` | The namespace of the counter |
+| `updated_at` | `string` | Timestamp when the counter was last updated |
+| `value` | `number` | The current value of the counter |
 
 
 ## Advanced

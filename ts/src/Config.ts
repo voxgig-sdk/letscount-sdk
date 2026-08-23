@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'Letscount',
+        slug: "letscount",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -65,18 +76,22 @@ class Config {
       "fields": [
         {
           "name": "created_at",
+          "short": "Timestamp when the counter was created",
           "type": "`$STRING`"
         },
         {
           "name": "key",
+          "short": "The key of the counter",
           "type": "`$STRING`"
         },
         {
           "name": "namespace",
+          "short": "The namespace of the counter",
           "type": "`$STRING`"
         },
         {
           "name": "updated_at",
+          "short": "Timestamp when the counter was last updated",
           "type": "`$STRING`"
         },
         {
@@ -87,6 +102,7 @@ class Config {
               "type": "`$NUMBER`"
             }
           },
+          "short": "The current value of the counter",
           "type": "`$NUMBER`"
         }
       ],
@@ -196,22 +212,27 @@ class Config {
       "fields": [
         {
           "name": "created_at",
+          "short": "Timestamp when the counter was created",
           "type": "`$STRING`"
         },
         {
           "name": "key",
+          "short": "The key of the counter",
           "type": "`$STRING`"
         },
         {
           "name": "namespace",
+          "short": "The namespace of the counter",
           "type": "`$STRING`"
         },
         {
           "name": "updated_at",
+          "short": "Timestamp when the counter was last updated",
           "type": "`$STRING`"
         },
         {
           "name": "value",
+          "short": "The current value of the counter",
           "type": "`$NUMBER`"
         }
       ],
@@ -269,26 +290,32 @@ class Config {
       "fields": [
         {
           "name": "amount",
+          "short": "The amount to increment the counter by",
           "type": "`$NUMBER`"
         },
         {
           "name": "created_at",
+          "short": "Timestamp when the counter was created",
           "type": "`$STRING`"
         },
         {
           "name": "key",
+          "short": "The key of the counter",
           "type": "`$STRING`"
         },
         {
           "name": "namespace",
+          "short": "The namespace of the counter",
           "type": "`$STRING`"
         },
         {
           "name": "updated_at",
+          "short": "Timestamp when the counter was last updated",
           "type": "`$STRING`"
         },
         {
           "name": "value",
+          "short": "The current value of the counter",
           "type": "`$NUMBER`"
         }
       ],

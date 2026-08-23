@@ -105,11 +105,11 @@ create_or_update_counter = client.CreateOrUpdateCounter
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | No |  |
-| `key` | `String` | No |  |
-| `namespace` | `String` | No |  |
-| `updated_at` | `String` | No |  |
-| `value` | `Float` | No |  |
+| `created_at` | `String` | No | Timestamp when the counter was created |
+| `key` | `String` | No | The key of the counter |
+| `namespace` | `String` | No | The namespace of the counter |
+| `updated_at` | `String` | No | Timestamp when the counter was last updated |
+| `value` | `Float` | No | The current value of the counter |
 
 ### Field Usage by Operation
 
@@ -220,11 +220,11 @@ get_counter = client.GetCounter
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | No |  |
-| `key` | `String` | No |  |
-| `namespace` | `String` | No |  |
-| `updated_at` | `String` | No |  |
-| `value` | `Float` | No |  |
+| `created_at` | `String` | No | Timestamp when the counter was created |
+| `key` | `String` | No | The key of the counter |
+| `namespace` | `String` | No | The namespace of the counter |
+| `updated_at` | `String` | No | Timestamp when the counter was last updated |
+| `value` | `Float` | No | The current value of the counter |
 
 ### Operations
 
@@ -276,12 +276,12 @@ increment_counter = client.IncrementCounter
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | `Float` | No |  |
-| `created_at` | `String` | No |  |
-| `key` | `String` | No |  |
-| `namespace` | `String` | No |  |
-| `updated_at` | `String` | No |  |
-| `value` | `Float` | No |  |
+| `amount` | `Float` | No | The amount to increment the counter by |
+| `created_at` | `String` | No | Timestamp when the counter was created |
+| `key` | `String` | No | The key of the counter |
+| `namespace` | `String` | No | The namespace of the counter |
+| `updated_at` | `String` | No | Timestamp when the counter was last updated |
+| `value` | `Float` | No | The current value of the counter |
 
 ### Operations
 

@@ -243,11 +243,11 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Create.
 
@@ -266,11 +266,11 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Load.
 
@@ -280,12 +280,12 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
-| `amount` |  |
-| `created_at` |  |
-| `key` |  |
-| `namespace` |  |
-| `updated_at` |  |
-| `value` |  |
+| `amount` | The amount to increment the counter by |
+| `created_at` | Timestamp when the counter was created |
+| `key` | The key of the counter |
+| `namespace` | The namespace of the counter |
+| `updated_at` | Timestamp when the counter was last updated |
+| `value` | The current value of the counter |
 
 Operations: Update.
 
@@ -310,11 +310,11 @@ Create an instance: `create_or_update_counter = client.CreateOrUpdateCounter()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
-| `key` | `str` |  |
-| `namespace` | `str` |  |
-| `updated_at` | `str` |  |
-| `value` | `float` |  |
+| `created_at` | `str` | Timestamp when the counter was created |
+| `key` | `str` | The key of the counter |
+| `namespace` | `str` | The namespace of the counter |
+| `updated_at` | `str` | Timestamp when the counter was last updated |
+| `value` | `float` | The current value of the counter |
 
 #### Example: Create
 
@@ -351,11 +351,11 @@ Create an instance: `get_counter = client.GetCounter()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
-| `key` | `str` |  |
-| `namespace` | `str` |  |
-| `updated_at` | `str` |  |
-| `value` | `float` |  |
+| `created_at` | `str` | Timestamp when the counter was created |
+| `key` | `str` | The key of the counter |
+| `namespace` | `str` | The namespace of the counter |
+| `updated_at` | `str` | Timestamp when the counter was last updated |
+| `value` | `float` | The current value of the counter |
 
 #### Example: Load
 
@@ -378,12 +378,12 @@ Create an instance: `increment_counter = client.IncrementCounter()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `float` |  |
-| `created_at` | `str` |  |
-| `key` | `str` |  |
-| `namespace` | `str` |  |
-| `updated_at` | `str` |  |
-| `value` | `float` |  |
+| `amount` | `float` | The amount to increment the counter by |
+| `created_at` | `str` | Timestamp when the counter was created |
+| `key` | `str` | The key of the counter |
+| `namespace` | `str` | The namespace of the counter |
+| `updated_at` | `str` | Timestamp when the counter was last updated |
+| `value` | `float` | The current value of the counter |
 
 
 ## Advanced
