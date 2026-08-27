@@ -28,6 +28,7 @@ module LetscountConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
