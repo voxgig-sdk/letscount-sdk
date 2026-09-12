@@ -49,6 +49,7 @@ class IncrementCounterEntityTest extends TestCase
         // UPDATE
         $increment_counter_ref01_ent = $client->IncrementCounter(null);
         $increment_counter_ref01_data_up0_up = [
+            "id" => $increment_counter_ref01_data["id"],
             "namespace" => $setup["idmap"]["namespace"],
         ];
 
@@ -59,6 +60,7 @@ class IncrementCounterEntityTest extends TestCase
         $increment_counter_ref01_resdata_up0_result = $increment_counter_ref01_ent->update($increment_counter_ref01_data_up0_up, null);
         $increment_counter_ref01_resdata_up0 = Helpers::to_map(is_object($increment_counter_ref01_resdata_up0_result) && method_exists($increment_counter_ref01_resdata_up0_result, 'data_get') ? $increment_counter_ref01_resdata_up0_result->data_get() : $increment_counter_ref01_resdata_up0_result);
         $this->assertNotNull($increment_counter_ref01_resdata_up0);
+        $this->assertEquals($increment_counter_ref01_resdata_up0["id"], $increment_counter_ref01_data_up0_up["id"]);
         $this->assertEquals($increment_counter_ref01_resdata_up0[$increment_counter_ref01_markdef_up0_name], $increment_counter_ref01_markdef_up0_value);
 
     }
@@ -106,9 +108,16 @@ function increment_counter_basic_setup($extra)
 
     if ($env["LETSCOUNT_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
+            // FIRST, so the generated fields below win: sdk-test-control.json's
+            // test.client.options adds to the live client, it does not redirect it.
+            Runner::live_client_options(),
             [
             ],
-            $extra ?? [],
+            // ismap, not a plain "?? []" default: an empty PHP array is a
+            // LIST, and a non-map later entry REPLACES the accumulated map in
+            // merge - so the no-extras call discarded live_client_options()
+            // and the apikey/server map above it.
+            Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
         $client = new LetscountSDK(Helpers::to_map($merged_opts));
     }

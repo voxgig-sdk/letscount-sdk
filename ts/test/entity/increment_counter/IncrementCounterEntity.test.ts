@@ -1,6 +1,4 @@
 
-const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
 
 import Path from 'node:path'
 import * as Fs from 'node:fs'
@@ -13,7 +11,9 @@ import { LetscountSDK, BaseFeature, stdutil } from '../../..'
 
 import {
   envOverride,
+  liveClientOptions,
   liveDelay,
+  loadEnvLocal,
   makeCtrl,
   makeMatch,
   makeReqdata,
@@ -21,6 +21,13 @@ import {
   makeValid,
   maybeSkipControl,
 } from '../../utility'
+
+
+// AFTER the imports on purpose: TypeScript hoists `import` above any
+// statement in the emitted CommonJS, so a loader placed above them would
+// run only after every imported module had already been evaluated - and
+// anything reading process.env at module scope would miss these values.
+loadEnvLocal(__dirname + '/../../../.env.local')
 
 
 describe('IncrementCounterEntity', async () => {
@@ -62,13 +69,14 @@ describe('IncrementCounterEntity', async () => {
     // UPDATE
     const increment_counter_ref01_ent = client.IncrementCounter()
     const increment_counter_ref01_data_up0: any = {}
+    increment_counter_ref01_data_up0.id = increment_counter_ref01_data.id
     increment_counter_ref01_data_up0 ['namespace'] = setup.idmap['namespace']
 
     const increment_counter_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-increment_counter_ref01_' + setup.now }
     ;(increment_counter_ref01_data_up0 as any)[increment_counter_ref01_markdef_up0.name] = increment_counter_ref01_markdef_up0.value
 
     const increment_counter_ref01_resdata_up0 = (await increment_counter_ref01_ent.update(increment_counter_ref01_data_up0)).data()
-    assert(null != increment_counter_ref01_resdata_up0)
+    assert(increment_counter_ref01_resdata_up0.id === increment_counter_ref01_data_up0.id)
 
     assert((increment_counter_ref01_resdata_up0 as any)[increment_counter_ref01_markdef_up0.name] === increment_counter_ref01_markdef_up0.value)
 
@@ -128,9 +136,17 @@ function basicSetup(extra?: any) {
 
   if (live) {
     client = new LetscountSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
       {
       },
-      extra
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {}
     ]))
   }
 

@@ -45,6 +45,7 @@ describe("IncrementCounterEntity", function()
     -- UPDATE
     local increment_counter_ref01_ent = client:IncrementCounter(nil)
     local increment_counter_ref01_data_up0_up = {
+      id = increment_counter_ref01_data["id"],
       ["namespace"] = setup.idmap["namespace"],
     }
 
@@ -56,6 +57,7 @@ describe("IncrementCounterEntity", function()
     assert.is_nil(err)
     local increment_counter_ref01_resdata_up0 = helpers.to_map(type(increment_counter_ref01_resdata_up0_result) == 'table' and increment_counter_ref01_resdata_up0_result.data_get and increment_counter_ref01_resdata_up0_result:data_get() or increment_counter_ref01_resdata_up0_result)
     assert.is_not_nil(increment_counter_ref01_resdata_up0)
+    assert.are.equal(increment_counter_ref01_resdata_up0["id"], increment_counter_ref01_data_up0_up["id"])
     assert.are.equal(increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0_name], increment_counter_ref01_markdef_up0_value)
 
   end)
@@ -113,6 +115,9 @@ function increment_counter_basic_setup(extra)
 
   if env["LETSCOUNT_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
       },
       extra or {},

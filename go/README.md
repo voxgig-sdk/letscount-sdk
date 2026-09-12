@@ -278,6 +278,7 @@ API path: `/{namespace}/{key}`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 
 Operations: Remove.
 
@@ -288,6 +289,7 @@ API path: `/{namespace}/{key}`
 | Field | Description |
 | --- | --- |
 | `"created_at"` | Timestamp when the counter was created |
+| `"id"` |  |
 | `"key"` | The key of the counter |
 | `"namespace"` | The namespace of the counter |
 | `"updated_at"` | Timestamp when the counter was last updated |
@@ -303,6 +305,7 @@ API path: `/{namespace}/{key}`
 | --- | --- |
 | `"amount"` | The amount to increment the counter by |
 | `"created_at"` | Timestamp when the counter was created |
+| `"id"` |  |
 | `"key"` | The key of the counter |
 | `"namespace"` | The namespace of the counter |
 | `"updated_at"` | Timestamp when the counter was last updated |
@@ -361,6 +364,12 @@ Create an instance: `decrementCounter := client.DecrementCounter(nil)`
 | --- | --- |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+
 
 ### GetCounter
 
@@ -377,6 +386,7 @@ Create an instance: `getCounter := client.GetCounter(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `created_at` | `string` | Timestamp when the counter was created |
+| `id` | `string` |  |
 | `key` | `string` | The key of the counter |
 | `namespace` | `string` | The namespace of the counter |
 | `updated_at` | `string` | Timestamp when the counter was last updated |
@@ -409,6 +419,7 @@ Create an instance: `incrementCounter := client.IncrementCounter(nil)`
 | --- | --- | --- |
 | `amount` | `float64` | The amount to increment the counter by |
 | `created_at` | `string` | Timestamp when the counter was created |
+| `id` | `string` |  |
 | `key` | `string` | The key of the counter |
 | `namespace` | `string` | The namespace of the counter |
 | `updated_at` | `string` | Timestamp when the counter was last updated |

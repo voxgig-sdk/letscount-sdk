@@ -48,9 +48,13 @@ class TestGetCounterEntity:
 
         # LOAD
         get_counter_ref01_ent = client.GetCounter(None)
-        get_counter_ref01_match_dt0 = {}
+        get_counter_ref01_match_dt0 = {
+            "id": get_counter_ref01_data["id"],
+        }
         get_counter_ref01_data_dt0_loaded = get_counter_ref01_ent.load(get_counter_ref01_match_dt0, None)
-        assert get_counter_ref01_data_dt0_loaded is not None
+        get_counter_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(get_counter_ref01_data_dt0_loaded))
+        assert get_counter_ref01_data_dt0_load_result is not None
+        assert get_counter_ref01_data_dt0_load_result["id"] == get_counter_ref01_data["id"]
 
 
 
@@ -99,6 +103,10 @@ def _get_counter_basic_setup(extra):
 
     if env.get("LETSCOUNT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
             },
             extra or {},

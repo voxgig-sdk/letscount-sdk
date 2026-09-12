@@ -1,6 +1,14 @@
 # Letscount SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -56,6 +64,7 @@ def make_config():
       "create_or_update_counter": {
         "fields": [
           {
+            "format": "date-time",
             "name": "created_at",
             "short": "Timestamp when the counter was created",
             "type": "`$STRING`",
@@ -71,6 +80,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "short": "Timestamp when the counter was last updated",
             "type": "`$STRING`",
@@ -115,9 +125,13 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/{namespace}/{key}",
-                "parts": [
-                  "{namespace}",
-                  "{key}",
+                "segments": [
+                  {
+                    "var": "namespace",
+                  },
+                  {
+                    "var": "key",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -129,6 +143,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
               },
             ],
           },
@@ -138,7 +156,21 @@ def make_config():
         },
       },
       "decrement_counter": {
-        "fields": [],
+        "fields": [
+          {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+        ],
+        "id": {
+          "field": "id",
+          "name": "id",
+          "parts": [
+            "namespace",
+            "key",
+          ],
+          "sep": "/",
+        },
         "name": "decrement_counter",
         "op": {
           "remove": {
@@ -167,9 +199,13 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/{namespace}/{key}",
-                "parts": [
-                  "{namespace}",
-                  "{key}",
+                "segments": [
+                  {
+                    "var": "namespace",
+                  },
+                  {
+                    "var": "key",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -181,6 +217,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
               },
             ],
           },
@@ -192,8 +232,13 @@ def make_config():
       "get_counter": {
         "fields": [
           {
+            "format": "date-time",
             "name": "created_at",
             "short": "Timestamp when the counter was created",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "id",
             "type": "`$STRING`",
           },
           {
@@ -207,6 +252,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "short": "Timestamp when the counter was last updated",
             "type": "`$STRING`",
@@ -217,6 +263,19 @@ def make_config():
             "type": "`$NUMBER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "from": {
+            "key": "key",
+            "namespace": "namespace",
+          },
+          "name": "id",
+          "parts": [
+            "namespace",
+            "key",
+          ],
+          "sep": "/",
+        },
         "name": "get_counter",
         "op": {
           "load": {
@@ -245,9 +304,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/{namespace}/{key}",
-                "parts": [
-                  "{namespace}",
-                  "{key}",
+                "segments": [
+                  {
+                    "var": "namespace",
+                  },
+                  {
+                    "var": "key",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -259,6 +322,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
               },
             ],
           },
@@ -275,8 +342,13 @@ def make_config():
             "type": "`$NUMBER`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "short": "Timestamp when the counter was created",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "id",
             "type": "`$STRING`",
           },
           {
@@ -290,6 +362,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "short": "Timestamp when the counter was last updated",
             "type": "`$STRING`",
@@ -300,6 +373,19 @@ def make_config():
             "type": "`$NUMBER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "from": {
+            "key": "key",
+            "namespace": "namespace",
+          },
+          "name": "id",
+          "parts": [
+            "namespace",
+            "key",
+          ],
+          "sep": "/",
+        },
         "name": "increment_counter",
         "op": {
           "update": {
@@ -328,9 +414,13 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/{namespace}/{key}",
-                "parts": [
-                  "{namespace}",
-                  "{key}",
+                "segments": [
+                  {
+                    "var": "namespace",
+                  },
+                  {
+                    "var": "key",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -342,6 +432,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
               },
             ],
           },

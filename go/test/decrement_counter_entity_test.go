@@ -48,7 +48,7 @@ func TestDecrementCounterEntity(t *testing.T) {
 			return
 		}
 		// Bootstrap entity data from existing test data (no create step in flow).
-		decrementCounterRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.decrement_counter", setup.data)))
+		decrementCounterRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.decrement_counter")))
 		var decrementCounterRef01Data map[string]any
 		if len(decrementCounterRef01DataRaw) > 0 {
 			decrementCounterRef01Data = core.ToMapAny(decrementCounterRef01DataRaw[0][1])
@@ -84,7 +84,7 @@ func decrement_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"decrement_counter01", "decrement_counter02", "decrement_counter03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -112,10 +112,22 @@ func decrement_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["LETSCOUNT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLetscountSDK(core.ToMapAny(mergedOpts))
 	}

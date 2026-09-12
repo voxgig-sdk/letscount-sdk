@@ -170,6 +170,12 @@ Return the entity name.
 decrement_counter = client.DecrementCounter
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -221,6 +227,7 @@ get_counter = client.GetCounter
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `created_at` | `String` | No | Timestamp when the counter was created |
+| `id` | `String` | No |  |
 | `key` | `String` | No | The key of the counter |
 | `namespace` | `String` | No | The namespace of the counter |
 | `updated_at` | `String` | No | Timestamp when the counter was last updated |
@@ -278,6 +285,7 @@ increment_counter = client.IncrementCounter
 | --- | --- | --- | --- |
 | `amount` | `Float` | No | The amount to increment the counter by |
 | `created_at` | `String` | No | Timestamp when the counter was created |
+| `id` | `String` | No |  |
 | `key` | `String` | No | The key of the counter |
 | `namespace` | `String` | No | The namespace of the counter |
 | `updated_at` | `String` | No | Timestamp when the counter was last updated |

@@ -42,6 +42,7 @@ class IncrementCounterEntityTest < Minitest::Test
     # UPDATE
     increment_counter_ref01_ent = client.IncrementCounter(nil)
     increment_counter_ref01_data_up0_up = {
+      "id" => increment_counter_ref01_data["id"],
       "namespace" => setup[:idmap]["namespace"],
     }
 
@@ -52,6 +53,7 @@ class IncrementCounterEntityTest < Minitest::Test
     increment_counter_ref01_resdata_up0_result = increment_counter_ref01_ent.update(increment_counter_ref01_data_up0_up, nil)
     increment_counter_ref01_resdata_up0 = Helpers.to_map(increment_counter_ref01_resdata_up0_result.respond_to?(:data_get) ? increment_counter_ref01_resdata_up0_result.data_get : increment_counter_ref01_resdata_up0_result)
     assert !increment_counter_ref01_resdata_up0.nil?
+    assert_equal increment_counter_ref01_resdata_up0["id"], increment_counter_ref01_data_up0_up["id"]
     assert_equal increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0_name], increment_counter_ref01_markdef_up0_value
 
   end
@@ -103,6 +105,9 @@ def increment_counter_basic_setup(extra)
 
   if env["LETSCOUNT_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
       },
       extra || {},

@@ -2,43 +2,43 @@
   "existing": {
     "increment_counter": {
       "INCREMENT_COUNTER00": {
-        "amount": 60,
-        "created_at": "s3d",
-        "key": "s3e",
-        "namespace": "s3f",
-        "updated_at": "s40",
-        "value": 65,
-        "id": "INCREMENT_COUNTER00"
+        "amount": 70,
+        "created_at": "s47",
+        "id": "INCREMENT_COUNTER00",
+        "key": "s49",
+        "namespace": "s4a",
+        "updated_at": "s4b",
+        "value": 76
       },
       "INCREMENT_COUNTER01": {
-        "amount": 120,
-        "created_at": "s79",
-        "key": "s7a",
-        "namespace": "s7b",
-        "updated_at": "s7c",
-        "value": 125,
-        "id": "INCREMENT_COUNTER01"
+        "amount": 140,
+        "created_at": "s8d",
+        "id": "INCREMENT_COUNTER01",
+        "key": "s8f",
+        "namespace": "s90",
+        "updated_at": "s91",
+        "value": 146
       },
       "INCREMENT_COUNTER02": {
-        "amount": 180,
-        "created_at": "sb5",
-        "key": "sb6",
-        "namespace": "sb7",
-        "updated_at": "sb8",
-        "value": 185,
-        "id": "INCREMENT_COUNTER02"
+        "amount": 210,
+        "created_at": "sd3",
+        "id": "INCREMENT_COUNTER02",
+        "key": "sd5",
+        "namespace": "sd6",
+        "updated_at": "sd7",
+        "value": 216
       }
     }
   },
   "new": {
     "increment_counter": {
       "increment_counter_ref01": {
-        "amount": 240,
-        "created_at": "sf1",
-        "key": "sf2",
-        "namespace": "sf3",
-        "updated_at": "sf4",
-        "value": 245
+        "amount": 280,
+        "created_at": "s119",
+        "key": "s11b",
+        "namespace": "s11c",
+        "updated_at": "s11d",
+        "value": 286
       }
     }
   }

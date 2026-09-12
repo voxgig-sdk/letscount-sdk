@@ -12,9 +12,15 @@ main: kit: entity: increment_counter: {
       type: "`$NUMBER`"
     }
     {
+      format: "date-time"
       name: "created_at"
       req: false
       short: "Timestamp when the counter was created"
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
       type: "`$STRING`"
     }
     {
@@ -30,6 +36,7 @@ main: kit: entity: increment_counter: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updated_at"
       req: false
       short: "Timestamp when the counter was last updated"
@@ -42,6 +49,20 @@ main: kit: entity: increment_counter: {
       type: "`$NUMBER`"
     }
   ]
+
+  id: {
+    field: "id"
+    from: {
+      key: "key"
+      namespace: "namespace"
+    }
+    name: "id"
+    parts: [
+      "namespace"
+      "key"
+    ]
+    sep: "/"
+  }
 
   name: "increment_counter"
   op: {
@@ -69,9 +90,13 @@ main: kit: entity: increment_counter: {
           }
           method: "PUT"
           orig: "/{namespace}/{key}"
-          parts: [
-            "{namespace}"
-            "{key}"
+          segments: [
+            {
+              var: "namespace"
+            }
+            {
+              var: "key"
+            }
           ]
           select: {
             exist: [

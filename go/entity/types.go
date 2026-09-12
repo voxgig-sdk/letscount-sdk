@@ -32,6 +32,7 @@ type CreateOrUpdateCounterCreateData struct {
 
 // DecrementCounter is the typed data model for the decrement_counter entity.
 type DecrementCounter struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // DecrementCounterRemoveMatch is the typed request payload for DecrementCounter.RemoveTyped.
@@ -43,6 +44,7 @@ type DecrementCounterRemoveMatch struct {
 // GetCounter is the typed data model for the get_counter entity.
 type GetCounter struct {
 	CreatedAt *string `json:"created_at,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Key *string `json:"key,omitempty"`
 	Namespace *string `json:"namespace,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
@@ -59,6 +61,7 @@ type GetCounterLoadMatch struct {
 type IncrementCounter struct {
 	Amount *float64 `json:"amount,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Key *string `json:"key,omitempty"`
 	Namespace *string `json:"namespace,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
@@ -71,6 +74,7 @@ type IncrementCounterUpdateData struct {
 	Namespace string `json:"namespace"`
 	Amount *float64 `json:"amount,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
+	Id *string `json:"id,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	Value *float64 `json:"value,omitempty"`
 }

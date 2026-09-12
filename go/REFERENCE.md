@@ -174,6 +174,12 @@ decrementCounter := client.DecrementCounter(nil)
 fmt.Println(decrementCounter.GetName()) // "decrement_counter"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
@@ -224,6 +230,7 @@ fmt.Println(getCounter.GetName()) // "get_counter"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |
@@ -280,6 +287,7 @@ fmt.Println(incrementCounter.GetName()) // "increment_counter"
 | --- | --- | --- | --- |
 | `amount` | `float64` | No | The amount to increment the counter by |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |

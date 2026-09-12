@@ -35,8 +35,8 @@ class CreateOrUpdateCounterCreateData(CreateOrUpdateCounterCreateDataRequired, t
     value: float
 
 
-class DecrementCounter(TypedDict):
-    pass
+class DecrementCounter(TypedDict, total=False):
+    id: str
 
 
 class DecrementCounterRemoveMatch(TypedDict):
@@ -46,6 +46,7 @@ class DecrementCounterRemoveMatch(TypedDict):
 
 class GetCounter(TypedDict, total=False):
     created_at: str
+    id: str
     key: str
     namespace: str
     updated_at: str
@@ -60,6 +61,7 @@ class GetCounterLoadMatch(TypedDict):
 class IncrementCounter(TypedDict, total=False):
     amount: float
     created_at: str
+    id: str
     key: str
     namespace: str
     updated_at: str
@@ -74,5 +76,6 @@ class IncrementCounterUpdateDataRequired(TypedDict):
 class IncrementCounterUpdateData(IncrementCounterUpdateDataRequired, total=False):
     amount: float
     created_at: str
+    id: str
     updated_at: str
     value: float

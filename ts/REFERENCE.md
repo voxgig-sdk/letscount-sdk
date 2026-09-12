@@ -215,6 +215,12 @@ Return a copy of the entity options.
 const decrement_counter = client.DecrementCounter()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(match: object, ctrl?: object)`
@@ -264,6 +270,7 @@ const get_counter = client.GetCounter()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |
@@ -319,6 +326,7 @@ const increment_counter = client.IncrementCounter()
 | --- | --- | --- | --- |
 | `amount` | `number` | No | The amount to increment the counter by |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |

@@ -61,6 +61,7 @@ class LetscountConfig
         'create_or_update_counter' => [
           'fields' => [
             [
+              'format' => 'date-time',
               'name' => 'created_at',
               'short' => 'Timestamp when the counter was created',
               'type' => '`$STRING`',
@@ -76,6 +77,7 @@ class LetscountConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updated_at',
               'short' => 'Timestamp when the counter was last updated',
               'type' => '`$STRING`',
@@ -120,9 +122,13 @@ class LetscountConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/{namespace}/{key}',
-                  'parts' => [
-                    '{namespace}',
-                    '{key}',
+                  'segments' => [
+                    [
+                      'var' => 'namespace',
+                    ],
+                    [
+                      'var' => 'key',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -134,6 +140,10 @@ class LetscountConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    '{namespace}',
+                    '{key}',
+                  ],
                 ],
               ],
             ],
@@ -143,7 +153,21 @@ class LetscountConfig
           ],
         ],
         'decrement_counter' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+            'parts' => [
+              'namespace',
+              'key',
+            ],
+            'sep' => '/',
+          ],
           'name' => 'decrement_counter',
           'op' => [
             'remove' => [
@@ -172,9 +196,13 @@ class LetscountConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/{namespace}/{key}',
-                  'parts' => [
-                    '{namespace}',
-                    '{key}',
+                  'segments' => [
+                    [
+                      'var' => 'namespace',
+                    ],
+                    [
+                      'var' => 'key',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -185,6 +213,10 @@ class LetscountConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    '{namespace}',
+                    '{key}',
                   ],
                 ],
               ],
@@ -197,8 +229,13 @@ class LetscountConfig
         'get_counter' => [
           'fields' => [
             [
+              'format' => 'date-time',
               'name' => 'created_at',
               'short' => 'Timestamp when the counter was created',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [
@@ -212,6 +249,7 @@ class LetscountConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updated_at',
               'short' => 'Timestamp when the counter was last updated',
               'type' => '`$STRING`',
@@ -221,6 +259,19 @@ class LetscountConfig
               'short' => 'The current value of the counter',
               'type' => '`$NUMBER`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'from' => [
+              'key' => 'key',
+              'namespace' => 'namespace',
+            ],
+            'name' => 'id',
+            'parts' => [
+              'namespace',
+              'key',
+            ],
+            'sep' => '/',
           ],
           'name' => 'get_counter',
           'op' => [
@@ -250,9 +301,13 @@ class LetscountConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/{namespace}/{key}',
-                  'parts' => [
-                    '{namespace}',
-                    '{key}',
+                  'segments' => [
+                    [
+                      'var' => 'namespace',
+                    ],
+                    [
+                      'var' => 'key',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -263,6 +318,10 @@ class LetscountConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    '{namespace}',
+                    '{key}',
                   ],
                 ],
               ],
@@ -280,8 +339,13 @@ class LetscountConfig
               'type' => '`$NUMBER`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'created_at',
               'short' => 'Timestamp when the counter was created',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [
@@ -295,6 +359,7 @@ class LetscountConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updated_at',
               'short' => 'Timestamp when the counter was last updated',
               'type' => '`$STRING`',
@@ -304,6 +369,19 @@ class LetscountConfig
               'short' => 'The current value of the counter',
               'type' => '`$NUMBER`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'from' => [
+              'key' => 'key',
+              'namespace' => 'namespace',
+            ],
+            'name' => 'id',
+            'parts' => [
+              'namespace',
+              'key',
+            ],
+            'sep' => '/',
           ],
           'name' => 'increment_counter',
           'op' => [
@@ -333,9 +411,13 @@ class LetscountConfig
                   'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/{namespace}/{key}',
-                  'parts' => [
-                    '{namespace}',
-                    '{key}',
+                  'segments' => [
+                    [
+                      'var' => 'namespace',
+                    ],
+                    [
+                      'var' => 'key',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -346,6 +428,10 @@ class LetscountConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    '{namespace}',
+                    '{key}',
                   ],
                 ],
               ],

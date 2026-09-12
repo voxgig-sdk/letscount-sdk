@@ -2,39 +2,39 @@
   "existing": {
     "get_counter": {
       "GET_COUNTER00": {
-        "created_at": "s32",
-        "key": "s33",
-        "namespace": "s34",
-        "updated_at": "s35",
-        "value": 54,
-        "id": "GET_COUNTER00"
+        "created_at": "s3c",
+        "id": "GET_COUNTER00",
+        "key": "s3e",
+        "namespace": "s3f",
+        "updated_at": "s40",
+        "value": 65
       },
       "GET_COUNTER01": {
-        "created_at": "s64",
-        "key": "s65",
-        "namespace": "s66",
-        "updated_at": "s67",
-        "value": 104,
-        "id": "GET_COUNTER01"
+        "created_at": "s78",
+        "id": "GET_COUNTER01",
+        "key": "s7a",
+        "namespace": "s7b",
+        "updated_at": "s7c",
+        "value": 125
       },
       "GET_COUNTER02": {
-        "created_at": "s96",
-        "key": "s97",
-        "namespace": "s98",
-        "updated_at": "s99",
-        "value": 154,
-        "id": "GET_COUNTER02"
+        "created_at": "sb4",
+        "id": "GET_COUNTER02",
+        "key": "sb6",
+        "namespace": "sb7",
+        "updated_at": "sb8",
+        "value": 185
       }
     }
   },
   "new": {
     "get_counter": {
       "get_counter_ref01": {
-        "created_at": "sc8",
-        "key": "sc9",
-        "namespace": "sca",
-        "updated_at": "scb",
-        "value": 204
+        "created_at": "sf0",
+        "key": "sf2",
+        "namespace": "sf3",
+        "updated_at": "sf4",
+        "value": 245
       }
     }
   }

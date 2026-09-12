@@ -1,0 +1,51 @@
+export interface CreateOrUpdateCounter {
+    created_at?: string;
+    key?: string;
+    namespace?: string;
+    updated_at?: string;
+    value?: number;
+}
+export interface CreateOrUpdateCounterCreateData {
+    key: string;
+    namespace: string;
+    created_at?: string;
+    updated_at?: string;
+    value?: number;
+}
+export interface DecrementCounter {
+    id?: string;
+}
+export interface DecrementCounterRemoveMatch {
+    key: string;
+    namespace: string;
+}
+export interface GetCounter {
+    created_at?: string;
+    id?: string;
+    key?: string;
+    namespace?: string;
+    updated_at?: string;
+    value?: number;
+}
+export interface GetCounterLoadMatch {
+    key: string;
+    namespace: string;
+}
+export interface IncrementCounter {
+    amount?: number;
+    created_at?: string;
+    id?: string;
+    key?: string;
+    namespace?: string;
+    updated_at?: string;
+    value?: number;
+}
+export interface IncrementCounterUpdateData {
+    key: string;
+    namespace: string;
+    amount?: number;
+    created_at?: string;
+    id?: string;
+    updated_at?: string;
+    value?: number;
+}

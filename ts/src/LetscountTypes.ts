@@ -22,6 +22,7 @@ export interface CreateOrUpdateCounterCreateData {
 }
 
 export interface DecrementCounter {
+  id?: string
 }
 
 export interface DecrementCounterRemoveMatch {
@@ -31,6 +32,7 @@ export interface DecrementCounterRemoveMatch {
 
 export interface GetCounter {
   created_at?: string
+  id?: string
   key?: string
   namespace?: string
   updated_at?: string
@@ -45,6 +47,7 @@ export interface GetCounterLoadMatch {
 export interface IncrementCounter {
   amount?: number
   created_at?: string
+  id?: string
   key?: string
   namespace?: string
   updated_at?: string
@@ -56,6 +59,7 @@ export interface IncrementCounterUpdateData {
   namespace: string
   amount?: number
   created_at?: string
+  id?: string
   updated_at?: string
   value?: number
 }

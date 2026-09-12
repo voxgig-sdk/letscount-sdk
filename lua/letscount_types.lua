@@ -21,6 +21,7 @@
 ---@field value? number
 
 ---@class DecrementCounter
+---@field id? string
 
 ---@class DecrementCounterRemoveMatch
 ---@field key string
@@ -28,6 +29,7 @@
 
 ---@class GetCounter
 ---@field created_at? string
+---@field id? string
 ---@field key? string
 ---@field namespace? string
 ---@field updated_at? string
@@ -40,6 +42,7 @@
 ---@class IncrementCounter
 ---@field amount? number
 ---@field created_at? string
+---@field id? string
 ---@field key? string
 ---@field namespace? string
 ---@field updated_at? string
@@ -50,6 +53,7 @@
 ---@field namespace string
 ---@field amount? number
 ---@field created_at? string
+---@field id? string
 ---@field updated_at? string
 ---@field value? number
 

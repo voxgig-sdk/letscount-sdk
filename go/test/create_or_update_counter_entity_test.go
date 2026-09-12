@@ -52,7 +52,7 @@ func TestCreateOrUpdateCounterEntity(t *testing.T) {
 		// CREATE
 		createOrUpdateCounterRef01Ent := client.CreateOrUpdateCounter(nil)
 		createOrUpdateCounterRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "create_or_update_counter"}, setup.data), "create_or_update_counter_ref01"))
+			vs.GetPath(setup.data, []any{"new", "create_or_update_counter"}), "create_or_update_counter_ref01"))
 		createOrUpdateCounterRef01Data["key"] = setup.idmap["key01"]
 		createOrUpdateCounterRef01Data["namespace"] = setup.idmap["namespace01"]
 
@@ -92,7 +92,7 @@ func create_or_update_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"create_or_update_counter01", "create_or_update_counter02", "create_or_update_counter03", "key01", "namespace01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -120,10 +120,22 @@ func create_or_update_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["LETSCOUNT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLetscountSDK(core.ToMapAny(mergedOpts))
 	}

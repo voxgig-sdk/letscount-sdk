@@ -51,7 +51,7 @@ func TestIncrementCounterEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		incrementCounterRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.increment_counter", setup.data)))
+		incrementCounterRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.increment_counter")))
 		var incrementCounterRef01Data map[string]any
 		if len(incrementCounterRef01DataRaw) > 0 {
 			incrementCounterRef01Data = core.ToMapAny(incrementCounterRef01DataRaw[0][1])
@@ -63,6 +63,7 @@ func TestIncrementCounterEntity(t *testing.T) {
 		// UPDATE
 		incrementCounterRef01Ent := client.IncrementCounter(nil)
 		incrementCounterRef01DataUp0Up := map[string]any{
+			"id": incrementCounterRef01Data["id"],
 			"namespace": setup.idmap["namespace"],
 		}
 
@@ -77,6 +78,9 @@ func TestIncrementCounterEntity(t *testing.T) {
 		incrementCounterRef01ResdataUp0 := core.ToMapAny(entityData(incrementCounterRef01ResdataUp0Result))
 		if incrementCounterRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
+		}
+		if incrementCounterRef01ResdataUp0["id"] != incrementCounterRef01DataUp0Up["id"] {
+			t.Fatal("expected update result id to match")
 		}
 		if incrementCounterRef01ResdataUp0[incrementCounterRef01MarkdefUp0Name] != incrementCounterRef01MarkdefUp0Value {
 			t.Fatalf("expected %s to be updated, got %v", incrementCounterRef01MarkdefUp0Name, incrementCounterRef01ResdataUp0[incrementCounterRef01MarkdefUp0Name])
@@ -109,7 +113,7 @@ func increment_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"increment_counter01", "increment_counter02", "increment_counter03", "namespace01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -141,10 +145,22 @@ func increment_counterBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["LETSCOUNT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLetscountSDK(core.ToMapAny(mergedOpts))
 	}

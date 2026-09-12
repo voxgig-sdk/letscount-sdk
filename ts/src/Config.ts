@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -76,6 +87,7 @@ class Config {
     "create_or_update_counter": {
       "fields": [
         {
+          "format": "date-time",
           "name": "created_at",
           "short": "Timestamp when the counter was created",
           "type": "`$STRING`"
@@ -91,6 +103,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "short": "Timestamp when the counter was last updated",
           "type": "`$STRING`"
@@ -135,9 +148,13 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/{namespace}/{key}",
-              "parts": [
-                "{namespace}",
-                "{key}"
+              "segments": [
+                {
+                  "var": "namespace"
+                },
+                {
+                  "var": "key"
+                }
               ],
               "select": {
                 "exist": [
@@ -148,7 +165,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ]
             }
           ]
         }
@@ -158,7 +179,21 @@ class Config {
       }
     },
     "decrement_counter": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
+      "id": {
+        "field": "id",
+        "name": "id",
+        "parts": [
+          "namespace",
+          "key"
+        ],
+        "sep": "/"
+      },
       "name": "decrement_counter",
       "op": {
         "remove": {
@@ -187,9 +222,13 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/{namespace}/{key}",
-              "parts": [
-                "{namespace}",
-                "{key}"
+              "segments": [
+                {
+                  "var": "namespace"
+                },
+                {
+                  "var": "key"
+                }
               ],
               "select": {
                 "exist": [
@@ -200,7 +239,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ]
             }
           ]
         }
@@ -212,8 +255,13 @@ class Config {
     "get_counter": {
       "fields": [
         {
+          "format": "date-time",
           "name": "created_at",
           "short": "Timestamp when the counter was created",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "id",
           "type": "`$STRING`"
         },
         {
@@ -227,6 +275,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "short": "Timestamp when the counter was last updated",
           "type": "`$STRING`"
@@ -237,6 +286,19 @@ class Config {
           "type": "`$NUMBER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "from": {
+          "key": "key",
+          "namespace": "namespace"
+        },
+        "name": "id",
+        "parts": [
+          "namespace",
+          "key"
+        ],
+        "sep": "/"
+      },
       "name": "get_counter",
       "op": {
         "load": {
@@ -265,9 +327,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/{namespace}/{key}",
-              "parts": [
-                "{namespace}",
-                "{key}"
+              "segments": [
+                {
+                  "var": "namespace"
+                },
+                {
+                  "var": "key"
+                }
               ],
               "select": {
                 "exist": [
@@ -278,7 +344,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ]
             }
           ]
         }
@@ -295,8 +365,13 @@ class Config {
           "type": "`$NUMBER`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "short": "Timestamp when the counter was created",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "id",
           "type": "`$STRING`"
         },
         {
@@ -310,6 +385,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "short": "Timestamp when the counter was last updated",
           "type": "`$STRING`"
@@ -320,6 +396,19 @@ class Config {
           "type": "`$NUMBER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "from": {
+          "key": "key",
+          "namespace": "namespace"
+        },
+        "name": "id",
+        "parts": [
+          "namespace",
+          "key"
+        ],
+        "sep": "/"
+      },
       "name": "increment_counter",
       "op": {
         "update": {
@@ -348,9 +437,13 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/{namespace}/{key}",
-              "parts": [
-                "{namespace}",
-                "{key}"
+              "segments": [
+                {
+                  "var": "namespace"
+                },
+                {
+                  "var": "key"
+                }
               ],
               "select": {
                 "exist": [
@@ -361,7 +454,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ]
             }
           ]
         }
@@ -377,6 +474,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

@@ -6,6 +6,7 @@ main: kit: entity: create_or_update_counter: {
 
   fields: [
     {
+      format: "date-time"
       name: "created_at"
       req: false
       short: "Timestamp when the counter was created"
@@ -24,6 +25,7 @@ main: kit: entity: create_or_update_counter: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updated_at"
       req: false
       short: "Timestamp when the counter was last updated"
@@ -69,9 +71,13 @@ main: kit: entity: create_or_update_counter: {
           }
           method: "POST"
           orig: "/{namespace}/{key}"
-          parts: [
-            "{namespace}"
-            "{key}"
+          segments: [
+            {
+              var: "namespace"
+            }
+            {
+              var: "key"
+            }
           ]
           select: {
             exist: [

@@ -4,6 +4,24 @@ main: kit: entity: decrement_counter: {
 
   alias: field: {}
 
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+    parts: [
+      "namespace"
+      "key"
+    ]
+    sep: "/"
+  }
+
   name: "decrement_counter"
   op: {
     remove: {
@@ -30,9 +48,13 @@ main: kit: entity: decrement_counter: {
           }
           method: "DELETE"
           orig: "/{namespace}/{key}"
-          parts: [
-            "{namespace}"
-            "{key}"
+          segments: [
+            {
+              var: "namespace"
+            }
+            {
+              var: "key"
+            }
           ]
           select: {
             exist: [

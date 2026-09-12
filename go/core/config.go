@@ -39,6 +39,7 @@ func MakeConfig() map[string]any {
 			"create_or_update_counter": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"format": "date-time",
 						"name": "created_at",
 						"short": "Timestamp when the counter was created",
 						"type": "`$STRING`",
@@ -54,6 +55,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updated_at",
 						"short": "Timestamp when the counter was last updated",
 						"type": "`$STRING`",
@@ -98,9 +100,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/{namespace}/{key}",
-								"parts": []any{
-									"{namespace}",
-									"{key}",
+								"segments": []any{
+									map[string]any{
+										"var": "namespace",
+									},
+									map[string]any{
+										"var": "key",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -112,6 +118,10 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
+								},
 							},
 						},
 					},
@@ -121,7 +131,21 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"decrement_counter": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
+					"parts": []any{
+						"namespace",
+						"key",
+					},
+					"sep": "/",
+				},
 				"name": "decrement_counter",
 				"op": map[string]any{
 					"remove": map[string]any{
@@ -150,9 +174,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/{namespace}/{key}",
-								"parts": []any{
-									"{namespace}",
-									"{key}",
+								"segments": []any{
+									map[string]any{
+										"var": "namespace",
+									},
+									map[string]any{
+										"var": "key",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -163,6 +191,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
 								},
 							},
 						},
@@ -175,8 +207,13 @@ func MakeConfig() map[string]any {
 			"get_counter": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"format": "date-time",
 						"name": "created_at",
 						"short": "Timestamp when the counter was created",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -190,6 +227,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updated_at",
 						"short": "Timestamp when the counter was last updated",
 						"type": "`$STRING`",
@@ -199,6 +237,19 @@ func MakeConfig() map[string]any {
 						"short": "The current value of the counter",
 						"type": "`$NUMBER`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"from": map[string]any{
+						"key": "key",
+						"namespace": "namespace",
+					},
+					"name": "id",
+					"parts": []any{
+						"namespace",
+						"key",
+					},
+					"sep": "/",
 				},
 				"name": "get_counter",
 				"op": map[string]any{
@@ -228,9 +279,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/{namespace}/{key}",
-								"parts": []any{
-									"{namespace}",
-									"{key}",
+								"segments": []any{
+									map[string]any{
+										"var": "namespace",
+									},
+									map[string]any{
+										"var": "key",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -241,6 +296,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
 								},
 							},
 						},
@@ -258,8 +317,13 @@ func MakeConfig() map[string]any {
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "created_at",
 						"short": "Timestamp when the counter was created",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -273,6 +337,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updated_at",
 						"short": "Timestamp when the counter was last updated",
 						"type": "`$STRING`",
@@ -282,6 +347,19 @@ func MakeConfig() map[string]any {
 						"short": "The current value of the counter",
 						"type": "`$NUMBER`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"from": map[string]any{
+						"key": "key",
+						"namespace": "namespace",
+					},
+					"name": "id",
+					"parts": []any{
+						"namespace",
+						"key",
+					},
+					"sep": "/",
 				},
 				"name": "increment_counter",
 				"op": map[string]any{
@@ -311,9 +389,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "PUT",
 								"orig": "/{namespace}/{key}",
-								"parts": []any{
-									"{namespace}",
-									"{key}",
+								"segments": []any{
+									map[string]any{
+										"var": "namespace",
+									},
+									map[string]any{
+										"var": "key",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -325,6 +407,10 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
+								},
 							},
 						},
 					},
@@ -335,6 +421,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

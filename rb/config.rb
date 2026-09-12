@@ -47,6 +47,7 @@ module LetscountConfig
         "create_or_update_counter" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "created_at",
               "short" => "Timestamp when the counter was created",
               "type" => "`$STRING`",
@@ -62,6 +63,7 @@ module LetscountConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "short" => "Timestamp when the counter was last updated",
               "type" => "`$STRING`",
@@ -106,9 +108,13 @@ module LetscountConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/{namespace}/{key}",
-                  "parts" => [
-                    "{namespace}",
-                    "{key}",
+                  "segments" => [
+                    {
+                      "var" => "namespace",
+                    },
+                    {
+                      "var" => "key",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -120,6 +126,10 @@ module LetscountConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "{namespace}",
+                    "{key}",
+                  ],
                 },
               ],
             },
@@ -129,7 +139,21 @@ module LetscountConfig
           },
         },
         "decrement_counter" => {
-          "fields" => [],
+          "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+          ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+            "parts" => [
+              "namespace",
+              "key",
+            ],
+            "sep" => "/",
+          },
           "name" => "decrement_counter",
           "op" => {
             "remove" => {
@@ -158,9 +182,13 @@ module LetscountConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/{namespace}/{key}",
-                  "parts" => [
-                    "{namespace}",
-                    "{key}",
+                  "segments" => [
+                    {
+                      "var" => "namespace",
+                    },
+                    {
+                      "var" => "key",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -172,6 +200,10 @@ module LetscountConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "{namespace}",
+                    "{key}",
+                  ],
                 },
               ],
             },
@@ -183,8 +215,13 @@ module LetscountConfig
         "get_counter" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "created_at",
               "short" => "Timestamp when the counter was created",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {
@@ -198,6 +235,7 @@ module LetscountConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "short" => "Timestamp when the counter was last updated",
               "type" => "`$STRING`",
@@ -208,6 +246,19 @@ module LetscountConfig
               "type" => "`$NUMBER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "from" => {
+              "key" => "key",
+              "namespace" => "namespace",
+            },
+            "name" => "id",
+            "parts" => [
+              "namespace",
+              "key",
+            ],
+            "sep" => "/",
+          },
           "name" => "get_counter",
           "op" => {
             "load" => {
@@ -236,9 +287,13 @@ module LetscountConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/{namespace}/{key}",
-                  "parts" => [
-                    "{namespace}",
-                    "{key}",
+                  "segments" => [
+                    {
+                      "var" => "namespace",
+                    },
+                    {
+                      "var" => "key",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -250,6 +305,10 @@ module LetscountConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "{namespace}",
+                    "{key}",
+                  ],
                 },
               ],
             },
@@ -266,8 +325,13 @@ module LetscountConfig
               "type" => "`$NUMBER`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "short" => "Timestamp when the counter was created",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {
@@ -281,6 +345,7 @@ module LetscountConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "short" => "Timestamp when the counter was last updated",
               "type" => "`$STRING`",
@@ -291,6 +356,19 @@ module LetscountConfig
               "type" => "`$NUMBER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "from" => {
+              "key" => "key",
+              "namespace" => "namespace",
+            },
+            "name" => "id",
+            "parts" => [
+              "namespace",
+              "key",
+            ],
+            "sep" => "/",
+          },
           "name" => "increment_counter",
           "op" => {
             "update" => {
@@ -319,9 +397,13 @@ module LetscountConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/{namespace}/{key}",
-                  "parts" => [
-                    "{namespace}",
-                    "{key}",
+                  "segments" => [
+                    {
+                      "var" => "namespace",
+                    },
+                    {
+                      "var" => "key",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -333,6 +415,10 @@ module LetscountConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "{namespace}",
+                    "{key}",
+                  ],
                 },
               ],
             },

@@ -48,9 +48,13 @@ class GetCounterEntityTest extends TestCase
 
         // LOAD
         $get_counter_ref01_ent = $client->GetCounter(null);
-        $get_counter_ref01_match_dt0 = [];
+        $get_counter_ref01_match_dt0 = [
+            "id" => $get_counter_ref01_data["id"],
+        ];
         $get_counter_ref01_data_dt0_loaded = $get_counter_ref01_ent->load($get_counter_ref01_match_dt0, null);
-        $this->assertNotNull($get_counter_ref01_data_dt0_loaded);
+        $get_counter_ref01_data_dt0_load_result = Helpers::to_map(is_object($get_counter_ref01_data_dt0_loaded) && method_exists($get_counter_ref01_data_dt0_loaded, 'data_get') ? $get_counter_ref01_data_dt0_loaded->data_get() : $get_counter_ref01_data_dt0_loaded);
+        $this->assertNotNull($get_counter_ref01_data_dt0_load_result);
+        $this->assertEquals($get_counter_ref01_data_dt0_load_result["id"], $get_counter_ref01_data["id"]);
 
     }
 }
@@ -94,9 +98,16 @@ function get_counter_basic_setup($extra)
 
     if ($env["LETSCOUNT_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
+            // FIRST, so the generated fields below win: sdk-test-control.json's
+            // test.client.options adds to the live client, it does not redirect it.
+            Runner::live_client_options(),
             [
             ],
-            $extra ?? [],
+            // ismap, not a plain "?? []" default: an empty PHP array is a
+            // LIST, and a non-map later entry REPLACES the accumulated map in
+            // merge - so the no-extras call discarded live_client_options()
+            // and the apikey/server map above it.
+            Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
         $client = new LetscountSDK(Helpers::to_map($merged_opts));
     }

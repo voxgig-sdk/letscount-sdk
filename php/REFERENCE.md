@@ -169,6 +169,12 @@ Return the entity name.
 $decrement_counter = $client->DecrementCounter();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -220,6 +226,7 @@ $get_counter = $client->GetCounter();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |
@@ -277,6 +284,7 @@ $increment_counter = $client->IncrementCounter();
 | --- | --- | --- | --- |
 | `amount` | `float` | No | The amount to increment the counter by |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |

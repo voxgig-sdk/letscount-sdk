@@ -167,6 +167,12 @@ Return the entity name.
 local decrement_counter = client:DecrementCounter(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -218,6 +224,7 @@ local get_counter = client:GetCounter(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |
@@ -275,6 +282,7 @@ local increment_counter = client:IncrementCounter(nil)
 | --- | --- | --- | --- |
 | `amount` | `number` | No | The amount to increment the counter by |
 | `created_at` | `string` | No | Timestamp when the counter was created |
+| `id` | `string` | No |  |
 | `key` | `string` | No | The key of the counter |
 | `namespace` | `string` | No | The namespace of the counter |
 | `updated_at` | `string` | No | Timestamp when the counter was last updated |

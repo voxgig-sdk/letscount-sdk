@@ -35,6 +35,7 @@ class CreateOrUpdateCounterCreateData
 /** DecrementCounter entity data model. */
 class DecrementCounter
 {
+    public ?string $id = null;
 }
 
 /** Request payload for DecrementCounter#remove. */
@@ -48,6 +49,7 @@ class DecrementCounterRemoveMatch
 class GetCounter
 {
     public ?string $created_at = null;
+    public ?string $id = null;
     public ?string $key = null;
     public ?string $namespace = null;
     public ?string $updated_at = null;
@@ -66,6 +68,7 @@ class IncrementCounter
 {
     public ?float $amount = null;
     public ?string $created_at = null;
+    public ?string $id = null;
     public ?string $key = null;
     public ?string $namespace = null;
     public ?string $updated_at = null;
@@ -79,6 +82,7 @@ class IncrementCounterUpdateData
     public string $namespace;
     public ?float $amount = null;
     public ?string $created_at = null;
+    public ?string $id = null;
     public ?string $updated_at = null;
     public ?float $value = null;
 }

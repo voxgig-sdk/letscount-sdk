@@ -49,6 +49,7 @@ class TestIncrementCounterEntity:
         # UPDATE
         increment_counter_ref01_ent = client.IncrementCounter(None)
         increment_counter_ref01_data_up0_up = {
+            "id": increment_counter_ref01_data["id"],
             "namespace": setup["idmap"]["namespace"],
         }
 
@@ -58,6 +59,7 @@ class TestIncrementCounterEntity:
 
         increment_counter_ref01_resdata_up0 = helpers.to_map(runner.entity_data(increment_counter_ref01_ent.update(increment_counter_ref01_data_up0_up, None)))
         assert increment_counter_ref01_resdata_up0 is not None
+        assert increment_counter_ref01_resdata_up0["id"] == increment_counter_ref01_data_up0_up["id"]
         assert increment_counter_ref01_resdata_up0[increment_counter_ref01_markdef_up0_name] == increment_counter_ref01_markdef_up0_value
 
 
@@ -109,6 +111,10 @@ def _increment_counter_basic_setup(extra):
 
     if env.get("LETSCOUNT_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
             },
             extra or {},

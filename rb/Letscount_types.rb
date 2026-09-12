@@ -59,8 +59,13 @@ CreateOrUpdateCounterCreateData = Struct.new(
 )
 
 # DecrementCounter entity data model.
-class DecrementCounter
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+DecrementCounter = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for DecrementCounter#remove.
 #
@@ -80,6 +85,9 @@ DecrementCounterRemoveMatch = Struct.new(
 # @!attribute [rw] created_at
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] key
 #   @return [String, nil]
 #
@@ -93,6 +101,7 @@ DecrementCounterRemoveMatch = Struct.new(
 #   @return [Float, nil]
 GetCounter = Struct.new(
   :created_at,
+  :id,
   :key,
   :namespace,
   :updated_at,
@@ -121,6 +130,9 @@ GetCounterLoadMatch = Struct.new(
 # @!attribute [rw] created_at
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] key
 #   @return [String, nil]
 #
@@ -135,6 +147,7 @@ GetCounterLoadMatch = Struct.new(
 IncrementCounter = Struct.new(
   :amount,
   :created_at,
+  :id,
   :key,
   :namespace,
   :updated_at,
@@ -156,6 +169,9 @@ IncrementCounter = Struct.new(
 # @!attribute [rw] created_at
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] updated_at
 #   @return [String, nil]
 #
@@ -166,6 +182,7 @@ IncrementCounterUpdateData = Struct.new(
   :namespace,
   :amount,
   :created_at,
+  :id,
   :updated_at,
   :value,
   keyword_init: true
