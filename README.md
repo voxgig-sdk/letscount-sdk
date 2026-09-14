@@ -108,7 +108,7 @@ local result, err = client:GetCounter():load({ key = "example", namespace = "exa
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
+| TypeScript | `@voxgig-sdk/letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
 | Python | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
 | PHP | `voxgig-sdk/letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/letscount-sdk/go` | `go get github.com/voxgig-sdk/letscount-sdk/go@latest` |
@@ -122,7 +122,7 @@ local result, err = client:GetCounter():load({ key = "example", namespace = "exa
 ### TypeScript
 
 ```ts
-import { LetscountSDK } from '@voxgig-sdk/letscount'
+import { LetscountSDK } from '@voxgig-sdk/letscount-sdk'
 
 const client = new LetscountSDK()
 

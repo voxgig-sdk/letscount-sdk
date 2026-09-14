@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { LetscountSDK } from '@voxgig-sdk/letscount'
+import { LetscountSDK } from '@voxgig-sdk/letscount-sdk'
 
 const client = new LetscountSDK()
 ```
@@ -526,7 +526,7 @@ letscount/
 Import the SDK from the package root:
 
 ```ts
-import { LetscountSDK } from '@voxgig-sdk/letscount'
+import { LetscountSDK } from '@voxgig-sdk/letscount-sdk'
 ```
 
 ### Entity state
