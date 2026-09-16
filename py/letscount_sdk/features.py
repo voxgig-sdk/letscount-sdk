@@ -1,12 +1,18 @@
 # Letscount SDK feature factory
 
 from letscount_sdk.feature.base_feature import LetscountBaseFeature
+from letscount_sdk.feature.ratelimit_feature import LetscountRatelimitFeature
+from letscount_sdk.feature.retry_feature import LetscountRetryFeature
 from letscount_sdk.feature.test_feature import LetscountTestFeature
+from letscount_sdk.feature.timeout_feature import LetscountTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: LetscountBaseFeature(),
+    "ratelimit": lambda: LetscountRatelimitFeature(),
+    "retry": lambda: LetscountRetryFeature(),
     "test": lambda: LetscountTestFeature(),
+    "timeout": lambda: LetscountTimeoutFeature(),
 }
 
 

@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { LetscountSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('CreateOrUpdateCounterEntity', async () => {
 
     const live = 'TRUE' === process.env.LETSCOUNT_TEST_LIVE
     for (const op of ['create']) {
-      if (maybeSkipControl(t, 'entityOp', 'create_or_update_counter.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'create_or_update_counter.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"format":"date-time","name":"created_at","req":false,"short":"Timestamp when the counter was created","type":"`$STRING`","index$":0},{"active":true,"name":"key","req":false,"short":"The key of the counter","type":"`$STRING`","index$":1},{"active":true,"name":"namespace","req":false,"short":"The namespace of the counter","type":"`$STRING`","index$":2},{"active":true,"format":"date-time","name":"updated_at","req":false,"short":"Timestamp when the counter was last updated","type":"`$STRING`","index$":3},{"active":true,"name":"value","op":{"create":{"req":true,"type":"`$NUMBER`"}},"req":false,"short":"The current value of the counter","type":"`$NUMBER`","index$":4}],"name":"create_or_update_counter","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"key","orig":"key","reqd":true,"type":"`$STRING`","index$":0},{"active":true,"kind":"param","name":"namespace","orig":"namespace","reqd":true,"type":"`$STRING`","index$":1}]},"contract":{"id":"POST /{namespace}/{key}","json":"{\"operationId\":\"createOrUpdateCounter\",\"parameters\":[{\"description\":\"The unique namespace identifier for the counter\",\"in\":\"path\",\"name\":\"namespace\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The unique key identifier for the counter within the namespace\",\"in\":\"path\",\"name\":\"key\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"value\":{\"description\":\"The value to set for the counter\",\"type\":\"number\"}},\"required\":[\"value\"],\"type\":\"object\"}}},\"description\":\"Counter value to set\",\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"created_at\":{\"description\":\"Timestamp when the counter was created\",\"format\":\"date-time\",\"type\":\"string\"},\"key\":{\"description\":\"The key of the counter\",\"type\":\"string\"},\"namespace\":{\"description\":\"The namespace of the counter\",\"type\":\"string\"},\"updated_at\":{\"description\":\"Timestamp when the counter was last updated\",\"format\":\"date-time\",\"type\":\"string\"},\"value\":{\"description\":\"The current value of the counter\",\"type\":\"number\"}},\"type\":\"object\"}}},\"description\":\"Counter successfully created or updated\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error description\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/{namespace}/{key}","segments":[{"var":"namespace"},{"var":"key"}],"select":{"exist":["key","namespace"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"create_or_update_counter","name__orig":"create_or_update_counter","Name":"CreateOrUpdateCounter","name_":"create_or_update_counter","name-":"create-or-update-counter","NAME":"CREATE_OR_UPDATE_COUNTER","index$":0}, {"active":true,"entity":"create_or_update_counter","key$":"BasicCreateOrUpdateCounterFlow","kind":"basic","name":"BasicCreateOrUpdateCounterFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"create_or_update_counter_ref01"},"match":{"key":"key01","namespace":"namespace01"},"op":"create","spec":[],"valid":[],"index$":0}]}, 'CreateOrUpdateCounter')
     }
     const client = setup.client
     const struct = setup.struct
@@ -111,13 +110,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID': idmap,
     'LETSCOUNT_TEST_LIVE': 'FALSE',
@@ -128,7 +120,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.LETSCOUNT_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['LETSCOUNT_TEST_CREATE_OR_UPDATE_COUNTER_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new LetscountSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.LETSCOUNT_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

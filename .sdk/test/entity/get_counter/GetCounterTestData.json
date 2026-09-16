@@ -37,5 +37,91 @@
         "value": 245
       }
     }
+  },
+  "requests": {
+    "GET /{namespace}/{key}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCounter",
+        "parameters": [
+          {
+            "description": "The unique namespace identifier for the counter",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique key identifier for the counter within the namespace",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "created_at": {
+                      "description": "Timestamp when the counter was created",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "key": {
+                      "description": "The key of the counter",
+                      "type": "string"
+                    },
+                    "namespace": {
+                      "description": "The namespace of the counter",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "description": "Timestamp when the counter was last updated",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "The current value of the counter",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successfully retrieved counter value"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error message",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error description",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Counter not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }
