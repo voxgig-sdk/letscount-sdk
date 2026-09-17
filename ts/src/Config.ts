@@ -127,18 +127,18 @@ class Config {
 
     entity: {
       
-      create_or_update_counter: {
-      },
-
-      decrement_counter: {
-      },
-
-      get_counter: {
-      },
-
-      increment_counter: {
-      },
-
+        create_or_update_counter: {
+        },
+  
+        decrement_counter: {
+        },
+  
+        get_counter: {
+        },
+  
+        increment_counter: {
+        },
+  
     }
   }
 

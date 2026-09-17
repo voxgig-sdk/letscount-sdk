@@ -108,12 +108,12 @@ local result, err = client:GetCounter():load({ key = "example", namespace = "exa
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
-| Python | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
-| PHP | `voxgig-sdk/letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
+| TypeScript | `@voxgig-sdk/letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| Python | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| PHP | `voxgig-sdk/letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/letscount-sdk/go` | `go get github.com/voxgig-sdk/letscount-sdk/go@latest` |
-| Ruby | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
-| Lua | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/releases) |
+| Ruby | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| Lua | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/letscount-sdk/go-cli` | `go install github.com/voxgig-sdk/letscount-sdk/go-cli/cmd/letscount@latest` |
 | Go MCP server | `github.com/voxgig-sdk/letscount-sdk/go-mcp` | `go get github.com/voxgig-sdk/letscount-sdk/go-mcp@latest` |
 
