@@ -118,29 +118,35 @@ def make_config():
       "create_or_update_counter": {
         "fields": [
           {
-            "format": "date-time",
             "name": "created_at",
-            "short": "Timestamp when the counter was created",
+            "title": "Created At",
             "type": "`$STRING`",
+            "short": "Timestamp when the counter was created",
+            "format": "date-time",
           },
           {
             "name": "key",
-            "short": "The key of the counter",
+            "title": "Key",
             "type": "`$STRING`",
+            "short": "The key of the counter",
           },
           {
             "name": "namespace",
-            "short": "The namespace of the counter",
+            "title": "Namespace",
             "type": "`$STRING`",
+            "short": "The namespace of the counter",
           },
           {
-            "format": "date-time",
             "name": "updated_at",
-            "short": "Timestamp when the counter was last updated",
+            "title": "Updated At",
             "type": "`$STRING`",
+            "short": "Timestamp when the counter was last updated",
+            "format": "date-time",
           },
           {
             "name": "value",
+            "title": "Value",
+            "type": "`$NUMBER`",
             "op": {
               "create": {
                 "req": True,
@@ -148,7 +154,6 @@ def make_config():
               },
             },
             "short": "The current value of the counter",
-            "type": "`$NUMBER`",
           },
         ],
         "name": "create_or_update_counter",
@@ -158,24 +163,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "key",
-                      "orig": "key",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "param",
-                      "name": "namespace",
-                      "orig": "namespace",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "POST",
                 "orig": "/{namespace}/{key}",
@@ -187,20 +174,39 @@ def make_config():
                     "var": "key",
                   },
                 ],
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "key",
+                      "orig": "key",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "namespace",
+                      "orig": "namespace",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "key",
                     "namespace",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "{namespace}",
-                  "{key}",
-                ],
               },
             ],
           },
@@ -213,6 +219,7 @@ def make_config():
         "fields": [
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
         ],
@@ -232,24 +239,6 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "key",
-                      "orig": "key",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "param",
-                      "name": "namespace",
-                      "orig": "namespace",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/{namespace}/{key}",
@@ -261,20 +250,39 @@ def make_config():
                     "var": "key",
                   },
                 ],
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "key",
+                      "orig": "key",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "namespace",
+                      "orig": "namespace",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "key",
                     "namespace",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "{namespace}",
-                  "{key}",
-                ],
               },
             ],
           },
@@ -286,35 +294,41 @@ def make_config():
       "get_counter": {
         "fields": [
           {
-            "format": "date-time",
             "name": "created_at",
-            "short": "Timestamp when the counter was created",
+            "title": "Created At",
             "type": "`$STRING`",
+            "short": "Timestamp when the counter was created",
+            "format": "date-time",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "key",
-            "short": "The key of the counter",
+            "title": "Key",
             "type": "`$STRING`",
+            "short": "The key of the counter",
           },
           {
             "name": "namespace",
-            "short": "The namespace of the counter",
+            "title": "Namespace",
             "type": "`$STRING`",
+            "short": "The namespace of the counter",
           },
           {
-            "format": "date-time",
             "name": "updated_at",
-            "short": "Timestamp when the counter was last updated",
+            "title": "Updated At",
             "type": "`$STRING`",
+            "short": "Timestamp when the counter was last updated",
+            "format": "date-time",
           },
           {
             "name": "value",
-            "short": "The current value of the counter",
+            "title": "Value",
             "type": "`$NUMBER`",
+            "short": "The current value of the counter",
           },
         ],
         "id": {
@@ -337,24 +351,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "key",
-                      "orig": "key",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "param",
-                      "name": "namespace",
-                      "orig": "namespace",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/{namespace}/{key}",
@@ -366,20 +362,39 @@ def make_config():
                     "var": "key",
                   },
                 ],
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "key",
+                      "orig": "key",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "namespace",
+                      "orig": "namespace",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "key",
                     "namespace",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "{namespace}",
-                  "{key}",
-                ],
               },
             ],
           },
@@ -392,39 +407,46 @@ def make_config():
         "fields": [
           {
             "name": "amount",
-            "short": "The amount to increment the counter by",
+            "title": "Amount",
             "type": "`$NUMBER`",
+            "short": "The amount to increment the counter by",
           },
           {
-            "format": "date-time",
             "name": "created_at",
-            "short": "Timestamp when the counter was created",
+            "title": "Created At",
             "type": "`$STRING`",
+            "short": "Timestamp when the counter was created",
+            "format": "date-time",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "key",
-            "short": "The key of the counter",
+            "title": "Key",
             "type": "`$STRING`",
+            "short": "The key of the counter",
           },
           {
             "name": "namespace",
-            "short": "The namespace of the counter",
+            "title": "Namespace",
             "type": "`$STRING`",
+            "short": "The namespace of the counter",
           },
           {
-            "format": "date-time",
             "name": "updated_at",
-            "short": "Timestamp when the counter was last updated",
+            "title": "Updated At",
             "type": "`$STRING`",
+            "short": "Timestamp when the counter was last updated",
+            "format": "date-time",
           },
           {
             "name": "value",
-            "short": "The current value of the counter",
+            "title": "Value",
             "type": "`$NUMBER`",
+            "short": "The current value of the counter",
           },
         ],
         "id": {
@@ -447,24 +469,6 @@ def make_config():
             "name": "update",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "key",
-                      "orig": "key",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "param",
-                      "name": "namespace",
-                      "orig": "namespace",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/{namespace}/{key}",
@@ -476,20 +480,39 @@ def make_config():
                     "var": "key",
                   },
                 ],
+                "parts": [
+                  "{namespace}",
+                  "{key}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "key",
+                      "orig": "key",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "namespace",
+                      "orig": "namespace",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "key",
                     "namespace",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "{namespace}",
-                  "{key}",
-                ],
               },
             ],
           },

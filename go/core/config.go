@@ -93,29 +93,35 @@ func MakeConfig() map[string]any {
 			"create_or_update_counter": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "date-time",
 						"name": "created_at",
-						"short": "Timestamp when the counter was created",
+						"title": "Created At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the counter was created",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "key",
-						"short": "The key of the counter",
+						"title": "Key",
 						"type": "`$STRING`",
+						"short": "The key of the counter",
 					},
 					map[string]any{
 						"name": "namespace",
-						"short": "The namespace of the counter",
+						"title": "Namespace",
 						"type": "`$STRING`",
+						"short": "The namespace of the counter",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updated_at",
-						"short": "Timestamp when the counter was last updated",
+						"title": "Updated At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the counter was last updated",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "value",
+						"title": "Value",
+						"type": "`$NUMBER`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -123,7 +129,6 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"short": "The current value of the counter",
-						"type": "`$NUMBER`",
 					},
 				},
 				"name": "create_or_update_counter",
@@ -133,24 +138,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "key",
-											"orig": "key",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "param",
-											"name": "namespace",
-											"orig": "namespace",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/{namespace}/{key}",
@@ -162,19 +149,38 @@ func MakeConfig() map[string]any {
 										"var": "key",
 									},
 								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "key",
+											"orig": "key",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "namespace",
+											"orig": "namespace",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"key",
 										"namespace",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"{namespace}",
-									"{key}",
 								},
 							},
 						},
@@ -188,6 +194,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 				},
@@ -207,24 +214,6 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "key",
-											"orig": "key",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "param",
-											"name": "namespace",
-											"orig": "namespace",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/{namespace}/{key}",
@@ -236,19 +225,38 @@ func MakeConfig() map[string]any {
 										"var": "key",
 									},
 								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "key",
+											"orig": "key",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "namespace",
+											"orig": "namespace",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"key",
 										"namespace",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"{namespace}",
-									"{key}",
 								},
 							},
 						},
@@ -261,35 +269,41 @@ func MakeConfig() map[string]any {
 			"get_counter": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "date-time",
 						"name": "created_at",
-						"short": "Timestamp when the counter was created",
+						"title": "Created At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the counter was created",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "key",
-						"short": "The key of the counter",
+						"title": "Key",
 						"type": "`$STRING`",
+						"short": "The key of the counter",
 					},
 					map[string]any{
 						"name": "namespace",
-						"short": "The namespace of the counter",
+						"title": "Namespace",
 						"type": "`$STRING`",
+						"short": "The namespace of the counter",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updated_at",
-						"short": "Timestamp when the counter was last updated",
+						"title": "Updated At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the counter was last updated",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "value",
-						"short": "The current value of the counter",
+						"title": "Value",
 						"type": "`$NUMBER`",
+						"short": "The current value of the counter",
 					},
 				},
 				"id": map[string]any{
@@ -312,24 +326,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "key",
-											"orig": "key",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "param",
-											"name": "namespace",
-											"orig": "namespace",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/{namespace}/{key}",
@@ -341,19 +337,38 @@ func MakeConfig() map[string]any {
 										"var": "key",
 									},
 								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "key",
+											"orig": "key",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "namespace",
+											"orig": "namespace",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"key",
 										"namespace",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"{namespace}",
-									"{key}",
 								},
 							},
 						},
@@ -367,39 +382,46 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "amount",
-						"short": "The amount to increment the counter by",
+						"title": "Amount",
 						"type": "`$NUMBER`",
+						"short": "The amount to increment the counter by",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "created_at",
-						"short": "Timestamp when the counter was created",
+						"title": "Created At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the counter was created",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "key",
-						"short": "The key of the counter",
+						"title": "Key",
 						"type": "`$STRING`",
+						"short": "The key of the counter",
 					},
 					map[string]any{
 						"name": "namespace",
-						"short": "The namespace of the counter",
+						"title": "Namespace",
 						"type": "`$STRING`",
+						"short": "The namespace of the counter",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updated_at",
-						"short": "Timestamp when the counter was last updated",
+						"title": "Updated At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the counter was last updated",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "value",
-						"short": "The current value of the counter",
+						"title": "Value",
 						"type": "`$NUMBER`",
+						"short": "The current value of the counter",
 					},
 				},
 				"id": map[string]any{
@@ -422,24 +444,6 @@ func MakeConfig() map[string]any {
 						"name": "update",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "key",
-											"orig": "key",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "param",
-											"name": "namespace",
-											"orig": "namespace",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "PUT",
 								"orig": "/{namespace}/{key}",
@@ -451,19 +455,38 @@ func MakeConfig() map[string]any {
 										"var": "key",
 									},
 								},
+								"parts": []any{
+									"{namespace}",
+									"{key}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "key",
+											"orig": "key",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "namespace",
+											"orig": "namespace",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"key",
 										"namespace",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"{namespace}",
-									"{key}",
 								},
 							},
 						},

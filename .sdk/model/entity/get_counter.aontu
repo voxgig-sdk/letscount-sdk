@@ -1,0 +1,123 @@
+# Entity: get_counter
+
+main: kit: entity: get_counter: {
+
+  alias: field: {}
+
+  fields: {
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: false
+      sh: "Timestamp when the counter was created"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    key: {
+      h: "Key"
+      n: "key"
+      r: false
+      sh: "The key of the counter"
+      t: "`$STRING`"
+    }
+    namespace: {
+      h: "Namespace"
+      n: "namespace"
+      r: false
+      sh: "The namespace of the counter"
+      t: "`$STRING`"
+    }
+    updated_at: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updated_at"
+      r: false
+      sh: "Timestamp when the counter was last updated"
+      t: "`$STRING`"
+    }
+    value: {
+      h: "Value"
+      n: "value"
+      r: false
+      sh: "The current value of the counter"
+      t: "`$NUMBER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      key: "key"
+      namespace: "namespace"
+    }
+    name: "id"
+    parts: [
+      "namespace"
+      "key"
+    ]
+    sep: "/"
+  }
+
+  name: "get_counter"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /{namespace}/{key}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "key"
+                or: "key"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "namespace"
+                or: "namespace"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/{namespace}/{key}"
+          q: {
+            exist: [
+              "key"
+              "namespace"
+            ]
+          }
+          s: [
+            {
+              var: "namespace"
+            }
+            {
+              var: "key"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

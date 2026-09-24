@@ -1,0 +1,109 @@
+# Entity: create_or_update_counter
+
+main: kit: entity: create_or_update_counter: {
+
+  alias: field: {}
+
+  fields: {
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: false
+      sh: "Timestamp when the counter was created"
+      t: "`$STRING`"
+    }
+    key: {
+      h: "Key"
+      n: "key"
+      r: false
+      sh: "The key of the counter"
+      t: "`$STRING`"
+    }
+    namespace: {
+      h: "Namespace"
+      n: "namespace"
+      r: false
+      sh: "The namespace of the counter"
+      t: "`$STRING`"
+    }
+    updated_at: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updated_at"
+      r: false
+      sh: "Timestamp when the counter was last updated"
+      t: "`$STRING`"
+    }
+    value: {
+      h: "Value"
+      n: "value"
+      op: {
+        create: {
+          req: true
+          type: "`$NUMBER`"
+        }
+      }
+      r: false
+      sh: "The current value of the counter"
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "create_or_update_counter"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /{namespace}/{key}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "key"
+                or: "key"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "namespace"
+                or: "namespace"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/{namespace}/{key}"
+          q: {
+            exist: [
+              "key"
+              "namespace"
+            ]
+          }
+          s: [
+            {
+              var: "namespace"
+            }
+            {
+              var: "key"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

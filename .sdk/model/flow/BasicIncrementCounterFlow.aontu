@@ -1,0 +1,33 @@
+# BasicIncrementCounterFlow
+
+main: kit: flow: BasicIncrementCounterFlow:
+{
+  entity: "increment_counter",
+  kind: "basic",
+  name: "BasicIncrementCounterFlow",
+  step: [
+    {
+      d: {
+        namespace: "namespace01"
+      }
+
+      i: {
+        ref: "increment_counter_ref01",
+        srcdatavar: "increment_counter_ref01_data",
+        suffix: "_up0",
+        textfield: "created_at"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-increment_counter_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIncrementCounterFlow"
+}

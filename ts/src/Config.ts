@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -147,37 +140,42 @@ class Config {
     "create_or_update_counter": {
       "fields": [
         {
-          "format": "date-time",
           "name": "created_at",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the counter was created",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "key",
-          "short": "The key of the counter",
-          "type": "`$STRING`"
+          "title": "Key",
+          "type": "`$STRING`",
+          "short": "The key of the counter"
         },
         {
           "name": "namespace",
-          "short": "The namespace of the counter",
-          "type": "`$STRING`"
+          "title": "Namespace",
+          "type": "`$STRING`",
+          "short": "The namespace of the counter"
         },
         {
-          "format": "date-time",
           "name": "updated_at",
+          "title": "Updated At",
+          "type": "`$STRING`",
           "short": "Timestamp when the counter was last updated",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "value",
+          "title": "Value",
+          "type": "`$NUMBER`",
           "op": {
             "create": {
               "req": true,
               "type": "`$NUMBER`"
             }
           },
-          "short": "The current value of the counter",
-          "type": "`$NUMBER`"
+          "short": "The current value of the counter"
         }
       ],
       "name": "create_or_update_counter",
@@ -187,24 +185,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "key",
-                    "orig": "key",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "param",
-                    "name": "namespace",
-                    "orig": "namespace",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "POST",
               "orig": "/{namespace}/{key}",
@@ -216,20 +196,39 @@ class Config {
                   "var": "key"
                 }
               ],
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "key",
+                    "orig": "key",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  },
+                  {
+                    "name": "namespace",
+                    "orig": "namespace",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "key",
                   "namespace"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "{namespace}",
-                "{key}"
-              ]
+              }
             }
           ]
         }
@@ -242,6 +241,7 @@ class Config {
       "fields": [
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         }
       ],
@@ -261,24 +261,6 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "key",
-                    "orig": "key",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "param",
-                    "name": "namespace",
-                    "orig": "namespace",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "DELETE",
               "orig": "/{namespace}/{key}",
@@ -290,20 +272,39 @@ class Config {
                   "var": "key"
                 }
               ],
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "key",
+                    "orig": "key",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  },
+                  {
+                    "name": "namespace",
+                    "orig": "namespace",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "key",
                   "namespace"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "{namespace}",
-                "{key}"
-              ]
+              }
             }
           ]
         }
@@ -315,35 +316,41 @@ class Config {
     "get_counter": {
       "fields": [
         {
-          "format": "date-time",
           "name": "created_at",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the counter was created",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "key",
-          "short": "The key of the counter",
-          "type": "`$STRING`"
+          "title": "Key",
+          "type": "`$STRING`",
+          "short": "The key of the counter"
         },
         {
           "name": "namespace",
-          "short": "The namespace of the counter",
-          "type": "`$STRING`"
+          "title": "Namespace",
+          "type": "`$STRING`",
+          "short": "The namespace of the counter"
         },
         {
-          "format": "date-time",
           "name": "updated_at",
+          "title": "Updated At",
+          "type": "`$STRING`",
           "short": "Timestamp when the counter was last updated",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "value",
-          "short": "The current value of the counter",
-          "type": "`$NUMBER`"
+          "title": "Value",
+          "type": "`$NUMBER`",
+          "short": "The current value of the counter"
         }
       ],
       "id": {
@@ -366,24 +373,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "key",
-                    "orig": "key",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "param",
-                    "name": "namespace",
-                    "orig": "namespace",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/{namespace}/{key}",
@@ -395,20 +384,39 @@ class Config {
                   "var": "key"
                 }
               ],
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "key",
+                    "orig": "key",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  },
+                  {
+                    "name": "namespace",
+                    "orig": "namespace",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "key",
                   "namespace"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "{namespace}",
-                "{key}"
-              ]
+              }
             }
           ]
         }
@@ -421,39 +429,46 @@ class Config {
       "fields": [
         {
           "name": "amount",
-          "short": "The amount to increment the counter by",
-          "type": "`$NUMBER`"
+          "title": "Amount",
+          "type": "`$NUMBER`",
+          "short": "The amount to increment the counter by"
         },
         {
-          "format": "date-time",
           "name": "created_at",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the counter was created",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "key",
-          "short": "The key of the counter",
-          "type": "`$STRING`"
+          "title": "Key",
+          "type": "`$STRING`",
+          "short": "The key of the counter"
         },
         {
           "name": "namespace",
-          "short": "The namespace of the counter",
-          "type": "`$STRING`"
+          "title": "Namespace",
+          "type": "`$STRING`",
+          "short": "The namespace of the counter"
         },
         {
-          "format": "date-time",
           "name": "updated_at",
+          "title": "Updated At",
+          "type": "`$STRING`",
           "short": "Timestamp when the counter was last updated",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "value",
-          "short": "The current value of the counter",
-          "type": "`$NUMBER`"
+          "title": "Value",
+          "type": "`$NUMBER`",
+          "short": "The current value of the counter"
         }
       ],
       "id": {
@@ -476,24 +491,6 @@ class Config {
           "name": "update",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "key",
-                    "orig": "key",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "param",
-                    "name": "namespace",
-                    "orig": "namespace",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "PUT",
               "orig": "/{namespace}/{key}",
@@ -505,20 +502,39 @@ class Config {
                   "var": "key"
                 }
               ],
+              "parts": [
+                "{namespace}",
+                "{key}"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "key",
+                    "orig": "key",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  },
+                  {
+                    "name": "namespace",
+                    "orig": "namespace",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "key",
                   "namespace"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "{namespace}",
-                "{key}"
-              ]
+              }
             }
           ]
         }

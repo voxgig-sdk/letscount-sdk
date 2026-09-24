@@ -1,7 +1,7 @@
 // Typed models for the Letscount SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,11 +14,6 @@ import (
 
 // CreateOrUpdateCounter is the typed data model for the create_or_update_counter entity.
 type CreateOrUpdateCounter struct {
-	CreatedAt *string `json:"created_at,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Namespace *string `json:"namespace,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	Value *float64 `json:"value,omitempty"`
 }
 
 // CreateOrUpdateCounterCreateData is the typed request payload for CreateOrUpdateCounter.CreateTyped.
@@ -32,7 +27,6 @@ type CreateOrUpdateCounterCreateData struct {
 
 // DecrementCounter is the typed data model for the decrement_counter entity.
 type DecrementCounter struct {
-	Id *string `json:"id,omitempty"`
 }
 
 // DecrementCounterRemoveMatch is the typed request payload for DecrementCounter.RemoveTyped.
@@ -43,12 +37,6 @@ type DecrementCounterRemoveMatch struct {
 
 // GetCounter is the typed data model for the get_counter entity.
 type GetCounter struct {
-	CreatedAt *string `json:"created_at,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Namespace *string `json:"namespace,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	Value *float64 `json:"value,omitempty"`
 }
 
 // GetCounterLoadMatch is the typed request payload for GetCounter.LoadTyped.
@@ -59,13 +47,6 @@ type GetCounterLoadMatch struct {
 
 // IncrementCounter is the typed data model for the increment_counter entity.
 type IncrementCounter struct {
-	Amount *float64 `json:"amount,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Namespace *string `json:"namespace,omitempty"`
-	UpdatedAt *string `json:"updated_at,omitempty"`
-	Value *float64 `json:"value,omitempty"`
 }
 
 // IncrementCounterUpdateData is the typed request payload for IncrementCounter.UpdateTyped.
