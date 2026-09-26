@@ -109,11 +109,11 @@ local result, err = client:GetCounter():load({ key = "example", namespace = "exa
 | Language | Package | Install |
 | --- | --- | --- |
 | TypeScript | `@voxgig-sdk/letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
-| Python | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
-| PHP | `voxgig-sdk/letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| Python | `voxgig-sdk-letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| PHP | `voxgig-sdk/letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/letscount-sdk/go` | `go get github.com/voxgig-sdk/letscount-sdk/go@latest` |
-| Ruby | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
-| Lua | `voxgig-sdk-letscount` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| Ruby | `voxgig-sdk-letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
+| Lua | `voxgig-sdk-letscount-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/letscount-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/letscount-sdk/go-cli` | `go install github.com/voxgig-sdk/letscount-sdk/go-cli/cmd/letscount@latest` |
 | Go MCP server | `github.com/voxgig-sdk/letscount-sdk/go-mcp` | `go get github.com/voxgig-sdk/letscount-sdk/go-mcp@latest` |
 
@@ -321,10 +321,10 @@ forking the SDK.
 
 | Feature | Purpose |
 | --- | --- |
-| **RatelimitFeature** | Client-side rate limiting via a token bucket |
-| **RetryFeature** | Automatic retry of transient failures with exponential backoff |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-| **TimeoutFeature** | Per-request timeout with transport abort |
+| **RatelimitFeature** | Rate limiting |
+| **RetryFeature** | Retry |
+| **TestFeature** | Test transport |
+| **TimeoutFeature** | Timeout |
 
 Pass custom features via the `extend` option at construction time.
 
